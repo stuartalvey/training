@@ -1,6 +1,6 @@
 <!--
 ================================================================================
-  STUART TRAINING OS — DATA-DRIVEN v6
+  PROTEIN SOCIAL — DATA-DRIVEN WORKOUT OS
 ================================================================================
 
   This is a PERMANENT single-file workout app. Save it to your phone once.
@@ -29,14 +29,14 @@
 
     "blocks": [                                     // required, 1..N entries
       {
-        "emoji": "🔥",                              // required
+        "emoji": "🔥",                              // optional, cosmetic
         "name": "Warmup",                           // required
-        "roundLabel": "1 round",                    // required, display label
+        "roundLabel": "1 round",                    // optional, cosmetic display label
         "restCue": "Move briskly, no long breaks",  // optional
         "exercises": [                              // required, 1..N entries
           {
             "name": "90/90 Hip Flow",               // required
-            "detail": "1 x 45 sec / side",          // required
+            "detail": "1 x 45 sec / side",          // optional, prescription text
             "rounds": 1,                            // optional, default 1
             "youtubeQuery": "90/90 hip flow form"   // optional, auto-derived
           }
@@ -48,7 +48,7 @@
   OUTPUT RULES FOR THE LLM GENERATING THIS JSON:
     - Return ONLY valid JSON. No markdown fences, no commentary.
     - date must be YYYY-MM-DD.
-    - slug must be lowercase, hyphen-separated, url-safe.
+    - slug must be lowercase alphanumeric with hyphens only (a-z, 0-9, -).
     - rounds defaults to 1 if omitted.
     - youtubeQuery defaults to "{name} proper form" if omitted.
     - Each exercise's round count can differ from its block's roundLabel
@@ -60,9 +60,9 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#000000">
-<title>Protein Social OS</title>
+<title>Protein Social</title>
 <style>
 /* ============ DESIGN TOKENS — DARK (iOS-inspired) ============ */
 :root, [data-theme="dark"]{
@@ -309,6 +309,7 @@ button{font:inherit;letter-spacing:-0.01em}
   transition:background .15s ease, border-color .15s ease, transform .06s ease, color .15s ease
 }
 .cb:active{transform:scale(.94)}
+.cb:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .cb input{
   -webkit-appearance:none;appearance:none;
   width:0;height:0;margin:0;padding:0;opacity:0;position:absolute;pointer-events:none
@@ -410,7 +411,13 @@ button{font:inherit;letter-spacing:-0.01em}
         </svg>
       </button>
       <button class="btn" onclick="openImportModal()">Import</button>
-      <button class="btn" onclick="openExportModal()">Export</button>
+      <button class="icon-btn" onclick="shareWorkout()" aria-label="Share workout" title="Share workout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v13"/>
+          <polyline points="7 8 12 3 17 8"/>
+          <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>
+        </svg>
+      </button>
     </div>
   </div>
   <div class="progress-wrap">
@@ -464,6 +471,10 @@ button{font:inherit;letter-spacing:-0.01em}
 
 <div class="footer-space"></div>
 
+<div style="text-align:center;font-size:11px;color:var(--muted);letter-spacing:-0.01em;padding:4px 0 16px 0">
+  © Alvey Health · Protein Social
+</div>
+
 <!-- ============ IMPORT MODAL ============ -->
 <div class="modal-backdrop" id="importModal" onclick="if(event.target===this) closeImportModal()">
   <div class="modal">
@@ -472,11 +483,8 @@ button{font:inherit;letter-spacing:-0.01em}
       <button class="modal-close" onclick="closeImportModal()" aria-label="Close">×</button>
     </div>
     <div class="modal-help">
-      Paste a workout JSON object below. Required fields: <code>headerTitle</code>,
-      <code>date</code>, <code>slug</code>, <code>blocks</code>.
-      <br>
-      <a href="#" onclick="copyTemplate(event)" id="templateLink" style="color:var(--accent);font-weight:700">Copy blank template</a>
-      to paste into ChatGPT or edit by hand.
+      Paste a workout JSON object below, or
+      <a href="#" onclick="openHelpModalFromImport(event)" style="color:var(--accent);font-weight:700">get one from AI</a>.
     </div>
     <textarea id="importTextarea" placeholder='{\n  "headerTitle": "...",\n  "date": "2026-04-17",\n  "slug": "...",\n  "blocks": [ ... ]\n}'></textarea>
     <div class="modal-error" id="importError"></div>
@@ -487,21 +495,42 @@ button{font:inherit;letter-spacing:-0.01em}
   </div>
 </div>
 
-<!-- ============ EXPORT MODAL ============ -->
-<div class="modal-backdrop" id="exportModal" onclick="if(event.target===this) closeExportModal()">
+<!-- ============ SHARE MODAL (fallback for browsers without navigator.share) ============ -->
+<div class="modal-backdrop" id="shareModal" onclick="if(event.target===this) closeShareModal()">
   <div class="modal">
     <div class="modal-head">
-      <h3>Export Workout</h3>
-      <button class="modal-close" onclick="closeExportModal()" aria-label="Close">×</button>
+      <h3>Share Workout</h3>
+      <button class="modal-close" onclick="closeShareModal()" aria-label="Close">×</button>
     </div>
     <div class="modal-help">
-      Copy this JSON to save the workout or share it. Progress/notes are NOT included
-      (those are per-device). This is the workout definition only.
+      Anyone with this link will see the workout preloaded. Progress and notes
+      are not included — only the workout definition.
     </div>
-    <textarea id="exportTextarea" readonly></textarea>
+    <textarea id="shareTextarea" readonly></textarea>
     <div class="modal-actions">
-      <button class="btn" onclick="closeExportModal()">Close</button>
-      <button class="btn primary" id="exportCopyBtn" onclick="copyExport()">Copy JSON</button>
+      <button class="btn" onclick="closeShareModal()">Close</button>
+      <button class="btn primary" id="shareCopyBtn" onclick="copyShareLink()">Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HELP MODAL (LLM prompt for building a new workout) ============ -->
+<div class="modal-backdrop" id="helpModal" onclick="if(event.target===this) closeHelpModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Get a Workout from AI</h3>
+      <button class="modal-close" onclick="closeHelpModal()" aria-label="Close">×</button>
+    </div>
+    <div class="modal-help">
+      <strong>1.</strong> Copy the prompt below.<br>
+      <strong>2.</strong> Paste it into ChatGPT, Claude, Gemini, or any AI chat.<br>
+      <strong>3.</strong> Edit the last line to describe the workout you want.<br>
+      <strong>4.</strong> Copy the AI's JSON response and tap <em>Import</em> here.
+    </div>
+    <textarea id="helpPromptTextarea" readonly></textarea>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeHelpModal()">Close</button>
+      <button class="btn primary" id="helpCopyBtn" onclick="copyHelpPrompt()">Copy Prompt</button>
     </div>
   </div>
 </div>
@@ -524,12 +553,12 @@ button{font:inherit;letter-spacing:-0.01em}
 /* ================================================================
    STATE — theme, workout, timer
    ================================================================ */
-const THEME_KEY = "stuart-training-os-theme";
-const WORKOUT_KEY = "stuart-training-os-current-workout";  /* stores last imported JSON */
+const THEME_KEY = "protein-social-theme";
+const WORKOUT_KEY = "protein-social-current-workout";  /* stores last imported JSON */
 
 let WORKOUT = null;          /* current workout object */
 let STORAGE_KEY = null;      /* derived from WORKOUT.date + WORKOUT.slug */
-let TIMER_KEY = "stuart-training-os-timer";  /* timer persists across workouts */
+const TIMER_KEY = "protein-social-timer";  /* timer persists across workouts */
 
 /* ================================================================
    HELPERS
@@ -554,7 +583,7 @@ function renderWorkout(workout){
   if(!workout){
     renderEmptyState();
     STORAGE_KEY = null;
-    document.getElementById('headerTitle').textContent = 'Stuart Training OS';
+    document.getElementById('headerTitle').textContent = 'Protein Social';
     document.getElementById('headerSub').textContent = 'No workout loaded — tap Import';
     if(footer) footer.style.display = 'none';
     updateProgress();
@@ -564,8 +593,8 @@ function renderWorkout(workout){
   if(footer) footer.style.display = '';
 
   /* Derive storage key and header from workout */
-  STORAGE_KEY = `stuart-training-os-${workout.date}-${workout.slug}`;
-  document.getElementById('headerTitle').textContent = workout.headerTitle || 'Stuart Training OS';
+  STORAGE_KEY = `protein-social-${workout.date}-${workout.slug}`;
+  document.getElementById('headerTitle').textContent = workout.headerTitle || 'Protein Social';
   const subParts = [];
   if(workout.date) subParts.push(workout.date);
   if(workout.duration) subParts.push(workout.duration);
@@ -607,7 +636,7 @@ function renderWorkout(workout){
               <div class="ex-name">${escapeHtml(ex.name)}</div>
               <div class="ex-detail">${escapeHtml(ex.detail || '')}</div>
             </div>
-            <a class="play" href="https://www.youtube.com/results?search_query=${urlEncodeQuery(query)}" target="_blank" rel="noopener" aria-label="Watch form">
+            <a class="play" href="https://www.youtube.com/results?search_query=${urlEncodeQuery(query)}" target="_blank" rel="noopener noreferrer" aria-label="Watch form">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </a>
           </div>
@@ -679,77 +708,12 @@ function renderEmptyStateHtml(){
   return `
     <div class="empty-state">
       <h3>No workout loaded</h3>
-      <p>Tap <strong>Import</strong> in the header and paste a workout JSON to begin.<br>
-      New to this? <a href="#" onclick="copyTemplate(event)" style="color:var(--accent);font-weight:700">Copy a blank template</a> to give to ChatGPT.</p>
-      <button class="btn primary" onclick="openImportModal()">Import Workout</button>
+      <p>Paste a workout JSON to begin, or get one from AI with a ready-to-use prompt.</p>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" onclick="openHelpModal()">Get from AI</button>
+        <button class="btn primary" onclick="openImportModal()">Import Workout</button>
+      </div>
     </div>`;
-}
-
-/* ================================================================
-   WORKOUT TEMPLATE — canonical schema example
-   Copied via the "Copy blank template" link; paste into ChatGPT
-   or edit by hand as a starting point for a new workout.
-   ================================================================ */
-const WORKOUT_TEMPLATE = {
-  "headerTitle": "Workout Title Here",
-  "date": "YYYY-MM-DD",
-  "duration": "~45 min",
-  "slug": "lowercase-hyphen-slug",
-  "theme": "dark",
-  "parameters": [
-    { "label": "Goal", "value": "describe the training goal" },
-    { "label": "Bias", "value": "what's emphasized" }
-  ],
-  "biohackerTips": [
-    { "label": "Pre", "value": "pre-workout tip" },
-    { "label": "Post", "value": "post-workout tip" }
-  ],
-  "blocks": [
-    {
-      "emoji": "🔥",
-      "name": "Warmup",
-      "roundLabel": "1 round",
-      "restCue": "optional rest cue for this block",
-      "exercises": [
-        {
-          "name": "Exercise Name",
-          "detail": "prescription (e.g. 3x10 @ RPE 7, 0:45 / side, 250m hard)",
-          "rounds": 1,
-          "youtubeQuery": "optional, defaults to '{name} proper form'"
-        }
-      ]
-    },
-    {
-      "emoji": "💪",
-      "name": "Strength",
-      "roundLabel": "3 rounds",
-      "exercises": [
-        { "name": "Exercise A", "detail": "10 reps @ RPE 7", "rounds": 3 },
-        { "name": "Exercise B", "detail": "8 / side", "rounds": 3 }
-      ]
-    }
-  ]
-};
-
-function copyTemplate(ev){
-  if(ev) ev.preventDefault();
-  const text = JSON.stringify(WORKOUT_TEMPLATE, null, 2);
-  const doFallback = () => {
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); } catch(e){}
-    document.body.removeChild(ta);
-  };
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(text).catch(doFallback);
-  } else { doFallback(); }
-  /* Brief visual confirmation — flash the link that was tapped */
-  if(ev && ev.target){
-    const el = ev.target;
-    const old = el.textContent;
-    el.textContent = 'Copied ✓';
-    setTimeout(() => { el.textContent = old; }, 1200);
-  }
 }
 
 /* ================================================================
@@ -855,6 +819,7 @@ function validateWorkout(w){
   if(!w.date || typeof w.date !== 'string') return 'Missing required field: date (string, YYYY-MM-DD).';
   if(!/^\d{4}-\d{2}-\d{2}$/.test(w.date)) return 'date must be in YYYY-MM-DD format.';
   if(!w.slug || typeof w.slug !== 'string') return 'Missing required field: slug (string).';
+  if(!/^[a-z0-9-]+$/.test(w.slug)) return 'slug must be lowercase alphanumeric with hyphens only (a-z, 0-9, -).';
   if(!Array.isArray(w.blocks) || w.blocks.length === 0) return 'blocks must be a non-empty array.';
   for(let i = 0; i < w.blocks.length; i++){
     const b = w.blocks[i];
@@ -869,22 +834,69 @@ function validateWorkout(w){
   return true;
 }
 
-function openExportModal(){
-  if(!WORKOUT){
-    alert('No workout loaded to export.');
-    return;
+/* ================================================================
+   SHARE — native iOS share sheet with link fallback
+   Workout is encoded into the URL hash so sharing requires no server.
+   The recipient's browser decodes it on page load.
+   ================================================================ */
+function buildShareUrl(workout){
+  /* base64url-encode the JSON so it survives in a URL hash */
+  const json = JSON.stringify(workout);
+  /* btoa handles ASCII; wrap in encodeURIComponent for unicode (emoji, etc.) */
+  const encoded = btoa(unescape(encodeURIComponent(json)));
+  /* Use origin + pathname to strip any existing hash or query params */
+  const base = window.location.origin + window.location.pathname;
+  return base + '#w=' + encoded;
+}
+
+function decodeSharedWorkout(){
+  /* Called on page load. If the URL hash contains a shared workout, decode it. */
+  const hash = window.location.hash;
+  if(!hash || !hash.startsWith('#w=')) return null;
+  try {
+    const encoded = hash.slice(3);
+    const json = decodeURIComponent(escape(atob(encoded)));
+    const parsed = JSON.parse(json);
+    if(validateWorkout(parsed) === true) return parsed;
+  } catch(e){}
+  return null;
+}
+
+async function shareWorkout(){
+  if(!WORKOUT){ alert('No workout loaded to share.'); return; }
+  const url = buildShareUrl(WORKOUT);
+  const shareData = {
+    title: WORKOUT.headerTitle || 'Protein Social Workout',
+    text: WORKOUT.headerTitle || 'Check out this workout',
+    url: url
+  };
+  /* Try native share sheet first (iOS/Android/Chrome desktop HTTPS) */
+  if(navigator.share){
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch(e){
+      /* User cancelled — don't fall back to the modal in that case */
+      if(e && e.name === 'AbortError') return;
+      /* Any other error: fall through to modal */
+    }
   }
-  const modal = document.getElementById('exportModal');
-  const textarea = document.getElementById('exportTextarea');
-  textarea.value = JSON.stringify(WORKOUT, null, 2);
+  /* Fallback: open the share modal so the user can copy the link manually */
+  openShareModal(url);
+}
+
+function openShareModal(url){
+  const modal = document.getElementById('shareModal');
+  const textarea = document.getElementById('shareTextarea');
+  textarea.value = url;
   modal.classList.add('active');
   setTimeout(() => { textarea.focus(); textarea.select(); }, 50);
 }
-function closeExportModal(){
-  document.getElementById('exportModal').classList.remove('active');
+function closeShareModal(){
+  document.getElementById('shareModal').classList.remove('active');
 }
-function copyExport(){
-  const textarea = document.getElementById('exportTextarea');
+function copyShareLink(){
+  const textarea = document.getElementById('shareTextarea');
   const text = textarea.value;
   const doFallback = () => {
     textarea.select();
@@ -892,10 +904,87 @@ function copyExport(){
   };
   if(navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(text).catch(doFallback);
-  } else {
-    doFallback();
-  }
-  const btn = document.getElementById('exportCopyBtn');
+  } else { doFallback(); }
+  const btn = document.getElementById('shareCopyBtn');
+  const old = btn.textContent;
+  btn.textContent = 'Copied ✓';
+  setTimeout(() => btn.textContent = old, 1200);
+}
+
+/* ================================================================
+   HELP — the LLM prompt for building a new workout
+   ================================================================ */
+const LLM_PROMPT = `You are helping me build a workout for Protein Social, a mobile workout tracker.
+
+Your job: output ONLY a JSON object matching the schema below. No markdown fences, no commentary before or after the JSON.
+
+SCHEMA:
+{
+  "headerTitle": string,              // required — display name of the workout
+  "date": "YYYY-MM-DD",               // required — date of the session
+  "duration": string,                 // optional — e.g. "~45 min"
+  "slug": string,                     // required — lowercase letters, digits, and hyphens only
+  "theme": "dark" | "light",          // optional
+  "parameters": [                     // optional — high-level workout setup
+    { "label": string, "value": string }
+  ],
+  "biohackerTips": [                  // optional — pre/during/post tips
+    { "label": string, "value": string }
+  ],
+  "blocks": [                         // required — 1 or more workout blocks
+    {
+      "emoji": string,                // optional — e.g. "🔥" "💪" "🧱" "🚣" "⚙️"
+      "name": string,                 // required — e.g. "Warmup" "Strength A" "Abs"
+      "roundLabel": string,           // optional — display label like "3 rounds" or "AMRAP"
+      "restCue": string,              // optional — e.g. "Rest 60 sec between rounds"
+      "exercises": [                  // required — 1 or more exercises
+        {
+          "name": string,             // required — e.g. "Landmine Squat to Press"
+          "detail": string,           // optional — prescription, e.g. "10 reps @ RPE 7" or "0:45 / side"
+          "rounds": number,           // optional — default 1; must match the block's round count
+          "youtubeQuery": string      // optional — auto-derived from name if omitted
+        }
+      ]
+    }
+  ]
+}
+
+RULES:
+- Each exercise's "rounds" must match the block's round count. If block says "3 rounds", every exercise has "rounds": 3.
+- For warmup / mobility / one-shot moves, use "rounds": 1.
+- Pick varied, specific exercises. Don't repeat the same exercise within a workout.
+- Include realistic prescriptions in "detail" (reps, tempo, time, distance).
+- Keep slug short, lowercase, hyphenated. Example: "full-body-lower-bias".
+
+NOW BUILD:
+Generate a workout for: [replace this line with your request, e.g. "a 45-minute full-body session biased toward glutes and posture, about 4 blocks"]`;
+
+function openHelpModal(){
+  const textarea = document.getElementById('helpPromptTextarea');
+  textarea.value = LLM_PROMPT;
+  document.getElementById('helpModal').classList.add('active');
+  setTimeout(() => { textarea.focus(); textarea.select(); }, 50);
+}
+function openHelpModalFromImport(ev){
+  if(ev) ev.preventDefault();
+  /* Close import modal first so help is the top layer */
+  closeImportModal();
+  openHelpModal();
+}
+function closeHelpModal(){
+  document.getElementById('helpModal').classList.remove('active');
+}
+function copyHelpPrompt(){
+  const textarea = document.getElementById('helpPromptTextarea');
+  const text = textarea.value;
+  const doFallback = () => {
+    textarea.select();
+    try { document.execCommand('copy'); } catch(e){}
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).catch(doFallback);
+  } else { doFallback(); }
+  const btn = document.getElementById('helpCopyBtn');
   const old = btn.textContent;
   btn.textContent = 'Copied ✓';
   setTimeout(() => btn.textContent = old, 1200);
@@ -1296,7 +1385,7 @@ function copyWorkout(){
 /* ================================================================
    INIT
    ================================================================ */
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   loadTheme();
   timerLoad();
   if(timerState.panelOpen){
@@ -1311,7 +1400,11 @@ window.addEventListener('DOMContentLoaded', () => {
     timerStartTicking();
   }
 
-  /* Try to restore last imported workout */
+  /* Priority for what workout to show on load:
+     1. A valid shared workout encoded in the URL hash (#w=...)
+     2. The last imported workout from localStorage
+     3. Empty state */
+  const sharedFromUrl = decodeSharedWorkout();
   let restored = null;
   try {
     const raw = localStorage.getItem(WORKOUT_KEY);
@@ -1321,9 +1414,55 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   } catch(e){}
 
+  /* Render whichever exists first, so the UI has something to show
+     while we handle the shared-workout flow below. */
   renderWorkout(restored);
 
-  document.getElementById('notes').addEventListener('input', saveState);
+  /* If a shared workout is in the URL, apply it — but warn if the
+     current workout has unsaved progress. */
+  if(sharedFromUrl){
+    /* Clear the hash so a page refresh doesn't re-prompt the user */
+    const cleanUrl = window.location.origin + window.location.pathname;
+    history.replaceState(null, '', cleanUrl);
+
+    const hasProgress = restored && allChecks().some(c => c.checked);
+    let proceed = true;
+    if(hasProgress){
+      proceed = await askConfirm(
+        'This link has a workout to load. Loading it will discard your current progress. Continue?',
+        { title: 'Load shared workout?', okLabel: 'Load & Discard Progress' }
+      );
+    }
+    if(proceed){
+      try { localStorage.setItem(WORKOUT_KEY, JSON.stringify(sharedFromUrl)); } catch(e){}
+      if(sharedFromUrl.theme === 'dark' || sharedFromUrl.theme === 'light'){
+        applyTheme(sharedFromUrl.theme);
+        try { localStorage.setItem(THEME_KEY, sharedFromUrl.theme); } catch(e){}
+      }
+      renderWorkout(sharedFromUrl);
+    }
+  }
+
+  /* Debounce notes typing so we don't hit localStorage on every keystroke.
+     Checkboxes stay instant (their change events still fire saveState directly). */
+  let notesDebounceTimer = null;
+  document.getElementById('notes').addEventListener('input', () => {
+    clearTimeout(notesDebounceTimer);
+    notesDebounceTimer = setTimeout(saveState, 300);
+  });
+
+  /* Escape closes any open modal. Prioritizes the topmost. */
+  document.addEventListener('keydown', (e) => {
+    if(e.key !== 'Escape') return;
+    const confirmModal = document.getElementById('confirmModal');
+    if(confirmModal.classList.contains('active')){ confirmCancel(); return; }
+    const helpModal = document.getElementById('helpModal');
+    if(helpModal.classList.contains('active')){ closeHelpModal(); return; }
+    const shareModal = document.getElementById('shareModal');
+    if(shareModal.classList.contains('active')){ closeShareModal(); return; }
+    const importModal = document.getElementById('importModal');
+    if(importModal.classList.contains('active')){ closeImportModal(); return; }
+  });
 
   /* Keep body padding in sync with the real header height.
      Called on first paint, on timer toggle (already wired), on viewport
