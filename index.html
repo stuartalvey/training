@@ -135,16 +135,20 @@ button{font:inherit;letter-spacing:-0.01em}
   border-bottom:1px solid var(--line);padding:9px 14px 10px 14px;
   transition:background .25s ease, border-color .25s ease;
 }
+.header-brand{
+  font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:2px;line-height:1
+}
 .header-title{
-  font-size:18px;font-weight:700;letter-spacing:-0.022em;line-height:1.2;
-  margin-bottom:4px;
+  font-size:20px;font-weight:700;letter-spacing:-0.022em;line-height:1.15;
+  margin-bottom:6px;
   /* allow up to 2 lines, then ellipsize — keeps very long titles from blowing up the header */
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden
 }
 .header-row{display:flex;align-items:center;gap:8px}
 .header-sub{font-size:12px;color:var(--muted);letter-spacing:-0.01em;font-weight:500;
   flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.controls{display:flex;gap:6px;flex-wrap:nowrap;align-items:center;flex:0 0 auto}
+.controls{display:flex;gap:4px;flex-wrap:nowrap;align-items:center;flex:0 0 auto}
 .btn{
   border:1px solid var(--line);background:var(--card);color:var(--text);
   padding:7px 12px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;font-weight:600;
@@ -155,9 +159,13 @@ button{font:inherit;letter-spacing:-0.01em}
 .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn.primary:active{background:var(--accent-pressed)}
 .btn.danger{color:var(--danger);border-color:var(--line)}
+.footer-btn{
+  flex:1;min-width:0;padding:10px 6px;font-size:13px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
 .icon-btn{
   display:inline-flex;align-items:center;justify-content:center;
-  width:36px;height:36px;padding:0;border-radius:var(--radius-sm);
+  width:32px;height:32px;padding:0;border-radius:var(--radius-sm);
   border:1px solid var(--line);background:var(--card);color:var(--text);
   cursor:pointer;transition:transform .06s ease, background .15s ease
 }
@@ -390,7 +398,8 @@ button{font:inherit;letter-spacing:-0.01em}
 
 <!-- ============ HEADER ============ -->
 <div class="header">
-  <div class="header-title" id="headerTitle">Protein Social</div>
+  <div class="header-brand">Protein Social</div>
+  <div class="header-title" id="headerTitle">Workout</div>
   <div class="header-row">
     <div class="header-sub" id="headerSub">No workout loaded</div>
     <div class="controls">
@@ -410,7 +419,13 @@ button{font:inherit;letter-spacing:-0.01em}
           <line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/>
         </svg>
       </button>
-      <button class="btn" onclick="openImportModal()">Import</button>
+      <button class="icon-btn" onclick="openImportModal()" aria-label="Import workout" title="Import workout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v13"/>
+          <polyline points="7 11 12 16 17 11"/>
+          <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>
+        </svg>
+      </button>
       <button class="icon-btn" onclick="shareWorkout()" aria-label="Share workout" title="Share workout">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 3v13"/>
@@ -451,22 +466,22 @@ button{font:inherit;letter-spacing:-0.01em}
 
 <!-- ============ NOTES (static) ============ -->
 <div class="section">
-  <div class="section-head" onclick="toggleCollapsible('notesBody', this)">
+  <div class="section-head collapsed" onclick="toggleCollapsible('notesBody', this)">
     <h2>📝 Notes</h2>
-    <div class="meta">tap to collapse</div>
+    <div class="meta">tap to expand</div>
     <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
-  <div class="section-body" id="notesBody" data-collapsible="1">
+  <div class="section-body hidden" id="notesBody" data-collapsible="1">
     <textarea id="notes" class="notes-area" placeholder="Notes (how did this feel, tweaks, etc.)"></textarea>
     <div class="small" style="margin-top:8px">Saved locally per workout.</div>
   </div>
 </div>
 
-<!-- ============ ACTIONS (Copy / Reset / Unload) — footer ============ -->
-<div id="footerActions" style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin:14px 0 0 0">
-  <button class="btn" onclick="copyWorkout()" id="copyBtn">Copy Workout</button>
-  <button class="btn danger" onclick="resetAll()">Reset Progress</button>
-  <button class="btn danger" onclick="unloadWorkout()">Unload</button>
+<!-- ============ ACTIONS (Copy / Reset / Exit) — footer ============ -->
+<div id="footerActions" style="display:flex;gap:8px;margin:14px 0 0 0">
+  <button class="btn footer-btn" onclick="copyWorkout()" id="copyBtn">Copy Workout</button>
+  <button class="btn footer-btn danger" onclick="resetAll()">Reset Workout</button>
+  <button class="btn footer-btn danger" onclick="unloadWorkout()">Exit Workout</button>
 </div>
 
 <div class="footer-space"></div>
@@ -572,6 +587,38 @@ function escapeHtml(s){
   }[c]));
 }
 
+/* Tolerantly extract a JSON object from a pasted string.
+   Handles common LLM output artifacts:
+     - markdown code fences: ```json ... ``` or ``` ... ```
+     - prose before or after the object ("Here's your workout: {...}")
+     - leading/trailing whitespace and stray quotes
+   Returns the JSON substring, or null if none found. */
+function extractJsonObject(raw){
+  if(!raw || typeof raw !== 'string') return null;
+  let s = raw.trim();
+  /* Strip markdown code fences if present */
+  s = s.replace(/^```(?:json|JSON)?\s*/i, '').replace(/```\s*$/i, '').trim();
+  /* Find the first { and the matching last } — simple bracket-depth scan
+     so we don't accidentally stop at a } inside a string value. */
+  const start = s.indexOf('{');
+  if(start === -1) return null;
+  let depth = 0;
+  let inString = false;
+  let escape = false;
+  let end = -1;
+  for(let i = start; i < s.length; i++){
+    const ch = s[i];
+    if(escape){ escape = false; continue; }
+    if(ch === '\\' && inString){ escape = true; continue; }
+    if(ch === '"'){ inString = !inString; continue; }
+    if(inString) continue;
+    if(ch === '{') depth++;
+    else if(ch === '}'){ depth--; if(depth === 0){ end = i; break; } }
+  }
+  if(end === -1) return null;
+  return s.slice(start, end + 1);
+}
+
 /* ================================================================
    RENDER — build the DOM from the WORKOUT object
    ================================================================ */
@@ -583,8 +630,8 @@ function renderWorkout(workout){
   if(!workout){
     renderEmptyState();
     STORAGE_KEY = null;
-    document.getElementById('headerTitle').textContent = 'Protein Social';
-    document.getElementById('headerSub').textContent = 'No workout loaded — tap Import';
+    document.getElementById('headerTitle').textContent = 'Workout';
+    document.getElementById('headerSub').textContent = 'No workout loaded';
     if(footer) footer.style.display = 'none';
     updateProgress();
     return;
@@ -594,7 +641,7 @@ function renderWorkout(workout){
 
   /* Derive storage key and header from workout */
   STORAGE_KEY = `protein-social-${workout.date}-${workout.slug}`;
-  document.getElementById('headerTitle').textContent = workout.headerTitle || 'Protein Social';
+  document.getElementById('headerTitle').textContent = workout.headerTitle || 'Workout';
   const subParts = [];
   if(workout.date) subParts.push(workout.date);
   if(workout.duration) subParts.push(workout.duration);
@@ -603,7 +650,7 @@ function renderWorkout(workout){
   /* Parameters */
   const paramsContainer = document.getElementById('parametersContainer');
   if(workout.parameters && workout.parameters.length){
-    paramsContainer.innerHTML = renderSection('parametersBody', '📋 Parameters', workout.parameters, false);
+    paramsContainer.innerHTML = renderSection('parametersBody', '📋 Parameters', workout.parameters, true);
   } else {
     paramsContainer.innerHTML = '';
   }
@@ -651,13 +698,13 @@ function renderWorkout(workout){
 
     return `
       <div class="block">
-        <div class="block-head" onclick="toggleCollapsible('${blockBodyId}', this)">
+        <div class="block-head collapsed" onclick="toggleCollapsible('${blockBodyId}', this)">
           <div class="block-head-emoji">${escapeHtml(block.emoji || '')}</div>
           <div class="block-head-title">${escapeHtml(block.name || '')}</div>
           <div class="block-head-meta">${escapeHtml(block.roundLabel || '')}</div>
           <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
-        <div class="block-body" id="${blockBodyId}" data-collapsible="1">
+        <div class="block-body hidden" id="${blockBodyId}" data-collapsible="1">
           ${exercisesHtml}
           ${restHtml}
         </div>
@@ -769,9 +816,17 @@ async function handleImport(){
     err.classList.add('active'); return;
   }
 
+  /* Defensive cleanup — LLMs often wrap JSON in markdown fences or add prose.
+     Extract the JSON object between the first { and last }. */
+  const extracted = extractJsonObject(raw);
+  if(!extracted){
+    err.textContent = 'Could not find a JSON object in the pasted text. Make sure you copied the full workout.';
+    err.classList.add('active'); return;
+  }
+
   let parsed;
   try {
-    parsed = JSON.parse(raw);
+    parsed = JSON.parse(extracted);
   } catch(e) {
     err.textContent = 'Invalid JSON: ' + e.message;
     err.classList.add('active'); return;
@@ -916,7 +971,13 @@ function copyShareLink(){
    ================================================================ */
 const LLM_PROMPT = `You are helping me build a workout for Protein Social, a mobile workout tracker.
 
-Your job: output ONLY a JSON object matching the schema below. No markdown fences, no commentary before or after the JSON.
+OUTPUT FORMAT — READ CAREFULLY:
+Your entire reply must be exactly ONE JSON object and nothing else.
+- Do NOT wrap the JSON in triple backticks or any code fence.
+- Do NOT prefix with "Here's your workout:" or any introduction.
+- Do NOT add commentary or explanation after the JSON.
+- Do NOT label it as \`\`\`json or \`\`\`.
+- The very first character of your reply must be "{" and the very last must be "}".
 
 SCHEMA:
 {
@@ -957,7 +1018,9 @@ RULES:
 - Keep slug short, lowercase, hyphenated. Example: "full-body-lower-bias".
 
 NOW BUILD:
-Generate a workout for: [replace this line with your request, e.g. "a 45-minute full-body session biased toward glutes and posture, about 4 blocks"]`;
+Generate a workout for: [replace this line with your request, e.g. "a 45-minute full-body session biased toward glutes and posture, about 4 blocks"]
+
+REMINDER: Reply with the raw JSON object only. No \`\`\` fences. No prose. First character "{", last character "}".`;
 
 function openHelpModal(){
   const textarea = document.getElementById('helpPromptTextarea');
@@ -1309,14 +1372,15 @@ async function resetAll(){
   if(!WORKOUT){ return; }
   const ok = await askConfirm(
     'Reset all checkboxes and notes for this workout? The workout itself will stay loaded.',
-    { title: 'Reset progress?', okLabel: 'Reset' }
+    { title: 'Reset workout?', okLabel: 'Reset' }
   );
   if(!ok) return;
   allChecks().forEach(c => c.checked = false);
   document.getElementById('notes').value = '';
   if(STORAGE_KEY) try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
-  allCollapsibles().forEach(el => el.classList.remove('hidden'));
-  document.querySelectorAll('.section-head, .block-head').forEach(h => h.classList.remove('collapsed'));
+  /* Collapse everything back to initial state (consistent with fresh load) */
+  allCollapsibles().forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.section-head, .block-head').forEach(h => h.classList.add('collapsed'));
   updateProgress();
   updateExpandIcon();
 }
@@ -1331,8 +1395,8 @@ async function resetAll(){
 async function unloadWorkout(){
   if(!WORKOUT){ return; }
   const ok = await askConfirm(
-    'Unload this workout? Progress and notes will be cleared and you will return to the empty state.',
-    { title: 'Unload workout?', okLabel: 'Unload' }
+    'Exit this workout? Progress and notes will be cleared and you will return to the empty state.',
+    { title: 'Exit workout?', okLabel: 'Exit' }
   );
   if(!ok) return;
   if(STORAGE_KEY) try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
