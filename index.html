@@ -198,7 +198,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 .first-hint-play{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;
   border-radius:999px;background:var(--card);vertical-align:middle;margin:0 2px;color:var(--accent)}
 
-/* REST / NOTES / FOOTER! */
+/* REST / NOTES / FOOTER */
 .rest{margin:10px 4px 2px 4px;font-size:13px;color:var(--muted);font-style:normal;letter-spacing:-0.01em}
 .notes-area{width:100%;min-height:120px;background:var(--card2);color:var(--text);border:1px solid var(--line);
   border-radius:var(--radius);padding:12px 14px;font:inherit;font-size:16px;line-height:1.42;resize:vertical;
@@ -214,8 +214,21 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   padding:36px 20px 28px 20px;text-align:center;margin:12px 0;
   box-shadow:var(--shadow)
 }
-.empty-state h3{margin:0 0 6px 0;font-size:22px;letter-spacing:-0.028em;font-weight:700}
-.empty-state p{margin:0 0 28px 0;font-size:14px;color:var(--muted);line-height:1.5;letter-spacing:-0.01em}
+.empty-logo{display:flex;justify-content:center;margin-bottom:14px}
+.empty-logo-mark{
+  width:72px;height:72px;border-radius:22px;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:40px;font-weight:800;color:#fff;
+  font-family:-apple-system,"SF Pro Display","SF Pro",BlinkMacSystemFont,ui-sans-serif,sans-serif;
+  letter-spacing:-0.04em;
+  box-shadow:0 4px 20px rgba(10,132,255,.35);
+}
+[data-theme="light"] .empty-logo-mark{box-shadow:0 4px 20px rgba(0,122,255,.3)}
+.empty-tagline{
+  font-size:22px;font-weight:700;letter-spacing:-0.028em;
+  margin-bottom:28px;color:var(--text)
+}
 .empty-state-actions{display:flex;flex-direction:column;gap:10px}
 .empty-action-btn{
   width:100%;padding:16px 20px;border-radius:var(--radius);
@@ -421,11 +434,32 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 </div>
 <div class="footer-space"></div>
 <div style="text-align:center;font-size:11px;color:var(--muted);letter-spacing:-0.01em;padding:4px 0 16px 0">
+  <button onclick="openAboutModal()" style="background:none;border:none;color:var(--muted);font-size:11px;letter-spacing:-0.01em;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px">About</button>
+  &nbsp;&middot;&nbsp;
   &copy; Alvey Health &middot; Protein Social
 </div>
 
 
-<!-- GENERATE MODAL -->
+<!-- ABOUT MODAL -->
+<div class="modal-backdrop" id="aboutModal" onclick="if(event.target===this) closeAboutModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>About Protein Social</h3>
+    </div>
+    <div class="modal-help" style="line-height:1.6;font-size:14px;color:var(--text)">
+      This app was built to make workouts as low friction as possible by leveraging the power of AI. While you can build a custom workout directly in the app, best practice is working with your own preferred AI to generate workouts designed exactly for you.
+      <br><br>
+      For example, set up a project in ChatGPT or Claude with notes on the equipment available to you, your training goals, and other important parameters such as injuries or preferences. Then simply ask your AI for a workout when it's time to train, giving it a few inputs like energy level and time constraints. Import the workout into Protein Social, then use the app to track progress, watch proper form videos, time your circuits, and share your favorite workouts with friends.
+      <br><br>
+      Thanks for checking out Protein Social!
+    </div>
+    <div class="modal-actions">
+      <button class="btn primary" onclick="closeAboutModal()">Got it</button>
+    </div>
+  </div>
+</div>
+
+
 <div class="modal-backdrop" id="generateModal" onclick="if(event.target===this) closeGenerateModal()">
   <div class="modal">
     <div class="modal-head">
@@ -759,8 +793,10 @@ function renderEmptyState(){
 }
 function renderEmptyStateHtml(){
   return `<div class="empty-state">
-    <h3>Ready to train?</h3>
-    <p>Choose how you want to start your workout.</p>
+    <div class="empty-logo">
+      <div class="empty-logo-mark">P</div>
+    </div>
+    <div class="empty-tagline">Build. Train. Share.</div>
     <div class="empty-state-actions">
       <button class="empty-action-btn" onclick="openGenerateModal()">
         <span class="ea-icon">⚡</span>
@@ -1201,8 +1237,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('notes').addEventListener('input', () => { clearTimeout(notesDebounce); notesDebounce = setTimeout(saveState, 300); });
   document.addEventListener('keydown', e => {
     if(e.key !== 'Escape') return;
-    const ids = ['confirmModal','helpModal','shareModal','importModal','generateModal'];
-    const fns = [confirmCancel, closeHelpModal, closeShareModal, closeImportModal, closeGenerateModal];
+    const ids = ['confirmModal','helpModal','shareModal','importModal','generateModal','aboutModal'];
+    const fns = [confirmCancel, closeHelpModal, closeShareModal, closeImportModal, closeGenerateModal, closeAboutModal];
     for(let i = 0; i < ids.length; i++){ if(document.getElementById(ids[i]).classList.contains('active')){ fns[i](); return; } }
   });
   requestAnimationFrame(syncHeaderHeight);
@@ -1290,7 +1326,9 @@ let genState = {
 };
 
 /* ---- open / close ---- */
-function openGenerateModal(){
+function openAboutModal(){ document.getElementById('aboutModal').classList.add('active'); }
+function closeAboutModal(){ document.getElementById('aboutModal').classList.remove('active'); }
+
   genState.step = 0;
   genState.equipment = new Set();
   genState.muscles = new Set();
