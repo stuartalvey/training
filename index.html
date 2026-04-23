@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,21 +32,26 @@
   --shadow:0 1px 0 rgba(0,0,0,.03), 0 4px 16px rgba(0,0,0,.06);
   --header-bg:rgba(242,242,247,.82);--overlay-bg:rgba(0,0,0,.35);
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html{overscroll-behavior:none}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
   font-family:-apple-system,"SF Pro Text","SF Pro",BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;font-feature-settings:"kern" 1;
   transition:background .25s ease, color .25s ease}
-body{padding:calc(var(--headerH) + 16px) 14px 40px 14px;line-height:1.38;font-size:15px;
-  letter-spacing:-0.01em;transition:padding-top .2s ease}
+/* hide scrollbars while keeping scroll functionality */
+::-webkit-scrollbar{display:none}
+body{padding:calc(var(--headerH) + 16px) 14px max(40px, env(safe-area-inset-bottom)) 14px;
+  line-height:1.38;font-size:15px;letter-spacing:-0.01em;transition:padding-top .2s ease}
 a{color:var(--accent);text-decoration:none}
-button{font:inherit;letter-spacing:-0.01em}
+button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:none}
 
 /* HEADER */
 .header{
   position:fixed;top:0;left:0;right:0;z-index:20;
   background:var(--header-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-bottom:1px solid var(--line);padding:9px 14px 10px 14px;
+  border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top) + 9px) 14px 10px 14px;
   transition:background .25s ease, border-color .25s ease;
 }
 .header-brand{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;line-height:1}
@@ -57,7 +62,7 @@ button{font:inherit;letter-spacing:-0.01em}
 .controls{display:flex;gap:6px;align-items:center;width:100%}
 .icon-btn{
   display:inline-flex;align-items:center;justify-content:center;
-  flex:1 1 0;height:36px;padding:0;
+  flex:1 1 0;height:44px;padding:0;
   border:1px solid var(--line);background:var(--card);color:var(--text);
   cursor:pointer;transition:transform .06s ease, background .15s ease;
   border-radius:var(--radius-sm);
@@ -94,7 +99,7 @@ button{font:inherit;letter-spacing:-0.01em}
 .timer-mode-label.countdown{color:var(--accent);background:rgba(10,132,255,.12)}
 .timer-mode-label.expired{color:var(--danger);background:rgba(255,69,58,.14)}
 .timer-display{text-align:center;font-variant-numeric:tabular-nums;font-weight:200;
-  font-size:clamp(64px, 22vw, 96px);line-height:1;letter-spacing:-0.04em;color:var(--text);
+  font-size:clamp(64px, 22vw, 96px);line-height:1;letter-spacing:-0.05em;color:var(--text);
   font-family:-apple-system,"SF Pro Display","SF Pro",BlinkMacSystemFont,ui-sans-serif,system-ui,sans-serif;
   padding:4px 0 2px 0;transition:color .2s ease}
 .timer-display.countdown{color:var(--accent)}
@@ -161,7 +166,7 @@ button{font:inherit;letter-spacing:-0.01em}
 .ex-top{display:flex;align-items:flex-start;gap:10px}
 .ex-name{font-size:15px;font-weight:600;flex:1;min-width:0;letter-spacing:-0.015em;transition:color .25s ease}
 .ex-detail{margin-top:3px;font-size:13px;color:var(--muted);letter-spacing:-0.01em}
-.play{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:none;
+.play{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:none;
   border-radius:999px;background:var(--card);flex:0 0 auto;color:var(--accent);
   transition:background .15s ease, transform .06s ease}
 .play:active{transform:scale(.9);background:var(--line)}
@@ -197,7 +202,7 @@ button{font:inherit;letter-spacing:-0.01em}
 /* REST / NOTES / FOOTER */
 .rest{margin:10px 4px 2px 4px;font-size:13px;color:var(--muted);font-style:normal;letter-spacing:-0.01em}
 .notes-area{width:100%;min-height:120px;background:var(--card2);color:var(--text);border:1px solid var(--line);
-  border-radius:var(--radius);padding:12px 14px;font:inherit;font-size:15px;line-height:1.42;resize:vertical;
+  border-radius:var(--radius);padding:12px 14px;font:inherit;font-size:16px;line-height:1.42;resize:vertical;
   letter-spacing:-0.01em;transition:border-color .15s ease, background .25s ease}
 .notes-area:focus{outline:none;border-color:var(--accent)}
 .footer-space{height:32px}
@@ -205,26 +210,55 @@ button{font:inherit;letter-spacing:-0.01em}
 .small{font-size:12px;color:var(--muted);letter-spacing:-0.01em}
 
 /* EMPTY STATE */
-.empty-state{background:var(--card);border:1px dashed var(--line-strong);border-radius:var(--radius-lg);
-  padding:36px 20px;text-align:center;margin:12px 0}
-.empty-state h3{margin:0 0 8px 0;font-size:18px;letter-spacing:-0.022em;font-weight:600}
-.empty-state p{margin:0 0 16px 0;font-size:14px;color:var(--muted);line-height:1.5;letter-spacing:-0.01em}
+.empty-state{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:36px 20px 28px 20px;text-align:center;margin:12px 0;
+  box-shadow:var(--shadow)
+}
+.empty-state h3{margin:0 0 6px 0;font-size:22px;letter-spacing:-0.028em;font-weight:700}
+.empty-state p{margin:0 0 28px 0;font-size:14px;color:var(--muted);line-height:1.5;letter-spacing:-0.01em}
+.empty-state-actions{display:flex;flex-direction:column;gap:10px}
+.empty-action-btn{
+  width:100%;padding:16px 20px;border-radius:var(--radius);
+  border:1px solid var(--line);background:var(--card2);color:var(--text);
+  font-size:16px;font-weight:600;letter-spacing:-0.02em;
+  cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;
+  transition:background .15s ease, transform .06s ease
+}
+.empty-action-btn:active{transform:scale(.98);background:var(--line)}
+.empty-action-btn .ea-icon{font-size:22px;flex:0 0 auto;line-height:1}
+.empty-action-btn .ea-text{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0}
+.empty-action-btn .ea-label{font-size:16px;font-weight:600;letter-spacing:-0.02em}
+.empty-action-btn .ea-sub{font-size:12px;color:var(--muted);font-weight:400;letter-spacing:-0.01em}
 
 /* MODAL */
 .modal-backdrop{position:fixed;inset:0;background:var(--overlay-bg);z-index:50;display:none;
-  align-items:flex-start;justify-content:center;padding:40px 14px 14px 14px;overflow-y:auto;
+  align-items:flex-end;justify-content:center;
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .modal-backdrop.active{display:flex}
-.modal{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
-  box-shadow:0 30px 60px rgba(0,0,0,.4);width:100%;max-width:560px;padding:18px;
-  display:flex;flex-direction:column;gap:14px}
+@keyframes sheetUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes sheetDown{from{transform:translateY(0);opacity:1}to{transform:translateY(100%);opacity:0}}
+.modal{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow:0 -8px 40px rgba(0,0,0,.4);width:100%;max-width:560px;
+  padding:18px 18px max(18px, env(safe-area-inset-bottom)) 18px;
+  display:flex;flex-direction:column;gap:14px;
+  max-height:92vh;overflow-y:auto;
+  animation:sheetUp .32s cubic-bezier(0.32,0.72,0,1) both;
+}
+/* drag handle pill at top of sheet */
+.modal::before{
+  content:'';display:block;width:36px;height:4px;border-radius:999px;
+  background:var(--line-strong);margin:0 auto 6px auto;flex:0 0 auto;
+}
 .modal-head{display:flex;align-items:center;gap:8px}
 .modal-head h3{margin:0;font-size:18px;flex:1;letter-spacing:-0.022em;font-weight:600}
 .modal-close{background:var(--card2);border:none;color:var(--muted);cursor:pointer;font-size:17px;
   width:30px;height:30px;border-radius:999px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
 .modal-close:active{background:var(--line)}
 .modal textarea{width:100%;min-height:240px;background:var(--card2);color:var(--text);border:1px solid var(--line);
-  border-radius:var(--radius);padding:12px;font-size:12px;
+  border-radius:var(--radius);padding:12px;font-size:16px;
   font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;resize:vertical;line-height:1.5}
 .modal textarea:focus{outline:none;border-color:var(--accent)}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
@@ -372,7 +406,7 @@ button{font:inherit;letter-spacing:-0.01em}
 <div id="blocksContainer"></div>
 
 <!-- NOTES -->
-<div class="section">
+<div class="section" id="notesSection">
   <div class="section-head collapsed" onclick="toggleCollapsible('notesBody', this)">
     <h2>📝 Notes</h2>
     <div class="meta">tap to expand</div>
@@ -584,15 +618,18 @@ function extractJsonObject(raw){
 function renderWorkout(workout){
   WORKOUT = workout;
   const footer = document.getElementById('footerActions');
+  const notesSection = document.getElementById('notesSection');
   if(!workout){
     renderEmptyState();
     STORAGE_KEY = null;
     document.getElementById('headerTitle').textContent = 'Workout';
     if(footer) footer.style.display = 'none';
+    if(notesSection) notesSection.style.display = 'none';
     updateProgress();
     return;
   }
   if(footer) footer.style.display = '';
+  if(notesSection) notesSection.style.display = '';
   STORAGE_KEY = `protein-social-${workout.date}-${workout.slug}`;
   document.getElementById('headerTitle').textContent = workout.headerTitle || 'Workout';
 
@@ -731,12 +768,30 @@ function renderEmptyState(){
 }
 function renderEmptyStateHtml(){
   return `<div class="empty-state">
-    <h3>No workout loaded</h3>
-    <p>Generate one instantly, build with AI, or import a JSON workout.</p>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-      <button class="btn" onclick="openGenerateModal()">⚡ Generate in App</button>
-      <button class="btn" onclick="openHelpModal()">🤖 Build with AI</button>
-      <button class="btn" onclick="openImportModal()">📥 Import</button>
+    <h3>Ready to train?</h3>
+    <p>Choose how you want to start your workout.</p>
+    <div class="empty-state-actions">
+      <button class="empty-action-btn" onclick="openGenerateModal()">
+        <span class="ea-icon">⚡</span>
+        <span class="ea-text">
+          <span class="ea-label">Generate in App</span>
+          <span class="ea-sub">Pick equipment, muscles &amp; duration</span>
+        </span>
+      </button>
+      <button class="empty-action-btn" onclick="openHelpModal()">
+        <span class="ea-icon">🤖</span>
+        <span class="ea-text">
+          <span class="ea-label">Build with AI</span>
+          <span class="ea-sub">Copy a prompt into any AI chat</span>
+        </span>
+      </button>
+      <button class="empty-action-btn" onclick="openImportModal()">
+        <span class="ea-icon">📥</span>
+        <span class="ea-text">
+          <span class="ea-label">Import</span>
+          <span class="ea-sub">Paste a workout JSON</span>
+        </span>
+      </button>
     </div>
   </div>`;
 }
@@ -949,7 +1004,12 @@ function toggleTheme(){
 }
 function loadTheme(){
   let theme = 'dark';
-  try { theme = localStorage.getItem(THEME_KEY) || 'dark'; } catch(e){}
+  try { theme = localStorage.getItem(THEME_KEY) || null; } catch(e){}
+  // If no saved preference, follow the system setting
+  if(!theme){
+    theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+      ? 'light' : 'dark';
+  }
   applyTheme(theme);
 }
 
