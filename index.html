@@ -237,6 +237,73 @@ button{font:inherit;letter-spacing:-0.01em}
   background:var(--card);padding:1px 6px;border-radius:5px;font-size:12px;color:var(--text)}
 
 @media (min-width:740px){body{max-width:780px;margin:0 auto}}
+
+/* ============ GENERATE MODAL — multi-step workout builder ============ */
+.gen-step{ display:none; flex-direction:column; gap:14px; }
+.gen-step.active{ display:flex; }
+.gen-step-title{ font-size:15px; font-weight:600; color:var(--muted); letter-spacing:-0.01em; }
+.gen-progress{ display:flex; gap:6px; align-items:center; }
+.gen-pip{ width:6px; height:6px; border-radius:999px; background:var(--line); transition:background .2s ease; flex:0 0 auto; }
+.gen-pip.active{ background:var(--accent); }
+.gen-pip.done{ background:var(--success); }
+
+/* Preset buttons */
+.gen-presets{ display:flex; gap:8px; }
+.gen-preset-btn{
+  flex:1; border:1px solid var(--line); background:var(--card2); color:var(--text);
+  padding:10px 8px; border-radius:var(--radius-sm); cursor:pointer; font-size:13px; font-weight:700;
+  letter-spacing:-0.01em; text-align:center;
+  transition:background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease;
+}
+.gen-preset-btn:active{ transform:scale(.97); }
+.gen-preset-btn.selected{ background:rgba(10,132,255,.15); border-color:var(--accent); color:var(--accent); }
+
+/* Chip grids */
+.gen-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.gen-chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 13px; border-radius:999px;
+  border:1px solid var(--line); background:var(--card2); color:var(--text);
+  font-size:13px; font-weight:600; letter-spacing:-0.01em;
+  cursor:pointer; user-select:none;
+  transition:background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease;
+}
+.gen-chip:active{ transform:scale(.95); }
+.gen-chip.selected{
+  background:var(--pill-checked-bg); border-color:var(--pill-checked-border); color:var(--pill-checked-text);
+}
+.gen-chip-icon{ font-size:15px; line-height:1; }
+
+/* Duration chips — larger */
+.gen-duration-chips{ display:flex; gap:8px; }
+.gen-duration-chip{
+  flex:1; padding:14px 8px; border-radius:var(--radius); text-align:center;
+  border:1px solid var(--line); background:var(--card2); color:var(--text);
+  font-size:15px; font-weight:700; letter-spacing:-0.02em;
+  cursor:pointer; user-select:none;
+  transition:background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease;
+}
+.gen-duration-chip:active{ transform:scale(.96); }
+.gen-duration-chip.selected{
+  background:rgba(10,132,255,.15); border-color:var(--accent); color:var(--accent);
+}
+.gen-duration-chip .dur-sub{ font-size:11px; font-weight:500; color:var(--muted); margin-top:2px; display:block; }
+.gen-duration-chip.selected .dur-sub{ color:var(--accent); opacity:.75; }
+
+/* Generate button */
+.gen-build-btn{
+  width:100%; padding:14px; border:none; border-radius:var(--radius); background:var(--accent); color:#fff;
+  font-size:16px; font-weight:700; letter-spacing:-0.02em; cursor:pointer;
+  transition:background .15s ease, transform .06s ease;
+}
+.gen-build-btn:active{ background:var(--accent-pressed); transform:scale(.98); }
+.gen-build-btn:disabled{ background:var(--muted2); cursor:not-allowed; transform:none; }
+
+.gen-nav{ display:flex; gap:8px; justify-content:space-between; align-items:center; }
+.gen-nav-back{ background:none; border:none; color:var(--muted); font-size:14px; font-weight:600; cursor:pointer; padding:4px 0; letter-spacing:-0.01em; }
+.gen-nav-back:active{ color:var(--text); }
+.gen-section-label{ font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-bottom:2px; }
+
 </style>
 </head>
 <body>
@@ -326,6 +393,73 @@ button{font:inherit;letter-spacing:-0.01em}
 <div class="footer-space"></div>
 <div style="text-align:center;font-size:11px;color:var(--muted);letter-spacing:-0.01em;padding:4px 0 16px 0">
   &copy; Alvey Health &middot; Protein Social
+</div>
+
+
+<!-- GENERATE MODAL -->
+<div class="modal-backdrop" id="generateModal" onclick="if(event.target===this) closeGenerateModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="genModalTitle">Build a Workout</h3>
+      <button class="modal-close" onclick="closeGenerateModal()" aria-label="Close">&times;</button>
+    </div>
+
+    <!-- pip progress -->
+    <div class="gen-progress">
+      <div class="gen-pip active" id="pip0"></div>
+      <div class="gen-pip" id="pip1"></div>
+      <div class="gen-pip" id="pip2"></div>
+    </div>
+
+    <!-- STEP 1: Equipment -->
+    <div class="gen-step active" id="genStep0">
+      <div class="gen-step-title">What equipment do you have?</div>
+
+      <div class="gen-presets">
+        <button class="gen-preset-btn" id="presetAlvey" onclick="applyPreset('alvey')">🏠 Alvey Gym</button>
+        <button class="gen-preset-btn" id="presetCommercial" onclick="applyPreset('commercial')">🏢 Commercial Gym</button>
+      </div>
+
+      <div>
+        <div class="gen-section-label">Or select individually</div>
+        <div class="gen-chips" id="equipChips"></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Muscle Groups -->
+    <div class="gen-step" id="genStep1">
+      <div class="gen-step-title">Which muscle groups?</div>
+      <div class="gen-chips" id="muscleChips"></div>
+    </div>
+
+    <!-- STEP 3: Duration -->
+    <div class="gen-step" id="genStep2">
+      <div class="gen-step-title">How long do you have?</div>
+      <div class="gen-duration-chips" id="durationChips">
+        <div class="gen-duration-chip" data-dur="15" onclick="selectDuration(15)">
+          15<br><span class="dur-sub">min</span>
+        </div>
+        <div class="gen-duration-chip" data-dur="30" onclick="selectDuration(30)">
+          30<br><span class="dur-sub">min</span>
+        </div>
+        <div class="gen-duration-chip" data-dur="45" onclick="selectDuration(45)">
+          45<br><span class="dur-sub">min</span>
+        </div>
+        <div class="gen-duration-chip" data-dur="60" onclick="selectDuration(60)">
+          60<br><span class="dur-sub">min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- error -->
+    <div class="modal-error" id="genError"></div>
+
+    <!-- nav -->
+    <div class="gen-nav">
+      <button class="gen-nav-back" id="genBackBtn" onclick="genBack()" style="visibility:hidden">← Back</button>
+      <button class="btn primary" id="genNextBtn" onclick="genNext()">Next →</button>
+    </div>
+  </div>
 </div>
 
 <!-- IMPORT MODAL -->
@@ -598,10 +732,11 @@ function renderEmptyState(){
 function renderEmptyStateHtml(){
   return `<div class="empty-state">
     <h3>No workout loaded</h3>
-    <p>Paste a workout JSON to begin, or get one from AI with a ready-to-use prompt.</p>
+    <p>Generate one instantly, build with AI, or import a JSON workout.</p>
     <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-      <button class="btn" onclick="openHelpModal()">Get from AI</button>
-      <button class="btn primary" onclick="openImportModal()">Import Workout</button>
+      <button class="btn" onclick="openGenerateModal()">⚡ Generate in App</button>
+      <button class="btn" onclick="openHelpModal()">🤖 Build with AI</button>
+      <button class="btn" onclick="openImportModal()">📥 Import</button>
     </div>
   </div>`;
 }
@@ -1015,14 +1150,451 @@ window.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('notes').addEventListener('input', () => { clearTimeout(notesDebounce); notesDebounce = setTimeout(saveState, 300); });
   document.addEventListener('keydown', e => {
     if(e.key !== 'Escape') return;
-    const ids = ['confirmModal','helpModal','shareModal','importModal'];
-    const fns = [confirmCancel, closeHelpModal, closeShareModal, closeImportModal];
+    const ids = ['confirmModal','helpModal','shareModal','importModal','generateModal'];
+    const fns = [confirmCancel, closeHelpModal, closeShareModal, closeImportModal, closeGenerateModal];
     for(let i = 0; i < ids.length; i++){ if(document.getElementById(ids[i]).classList.contains('active')){ fns[i](); return; } }
   });
   requestAnimationFrame(syncHeaderHeight);
   window.addEventListener('resize', () => requestAnimationFrame(syncHeaderHeight));
   window.addEventListener('orientationchange', () => { setTimeout(syncHeaderHeight, 50); setTimeout(syncHeaderHeight, 300); });
 });
+
+/* ================================================================
+   GENERATE WORKOUT — vault-driven builder
+   ================================================================ */
+const ALVEY_PRESET = [
+  'bodyweight','dumbbells','barbell-weights','bench','cable-machine',
+  'pullup-bar','leg-press','smith-machine','kettlebells','treadmill','bike','rower'
+];
+
+const EQUIP_META = {
+  'bodyweight':     { label: 'Bodyweight',       icon: '🤸' },
+  'dumbbells':      { label: 'Dumbbells',         icon: '🏋️' },
+  'barbell-weights':{ label: 'Barbell & Weights', icon: '🪁' },
+  'bench':          { label: 'Bench',             icon: '🛋️' },
+  'cable-machine':  { label: 'Cable Machine',     icon: '🔗' },
+  'pullup-bar':     { label: 'Pull-up Bar',        icon: '🔝' },
+  'leg-press':      { label: 'Leg Press',          icon: '🦵' },
+  'smith-machine':  { label: 'Smith Machine',      icon: '⚙️' },
+  'kettlebells':    { label: 'Kettlebells',        icon: '🫙' },
+  'treadmill':      { label: 'Treadmill',          icon: '🏃' },
+  'bike':           { label: 'Bike / Assault Bike',icon: '🚴' },
+  'rower':          { label: 'Rower',              icon: '🚣' },
+};
+
+const MUSCLE_META = {
+  'chest':     { label: 'Chest',     icon: '💪' },
+  'back':      { label: 'Back',      icon: '🔙' },
+  'shoulders': { label: 'Shoulders', icon: '🏹' },
+  'arms':      { label: 'Arms',      icon: '💪' },
+  'legs':      { label: 'Legs',      icon: '🦵' },
+  'glutes':    { label: 'Glutes',    icon: '🍑' },
+  'core':      { label: 'Core',      icon: '🎯' },
+  'cardio':    { label: 'Cardio',    icon: '❤️' },
+};
+
+// Sets/reps config per duration
+const DURATION_CONFIG = {
+  15: { sets: 2, compReps: 10, isoReps: 12, rest: 'Rest 30 sec between sets' },
+  30: { sets: 3, compReps: 10, isoReps: 12, rest: 'Rest 45 sec between sets' },
+  45: { sets: 3, compReps: 10, isoReps: 12, rest: 'Rest 60 sec between sets' },
+  60: { sets: 4, compReps:  8, isoReps: 15, rest: 'Rest 60–90 sec between sets' },
+};
+
+// Block templates per duration: array of block descriptors
+// Each block: { name, emoji, muscleSlots, type }
+// muscleSlots: how many exercises to fill, type: 'strength'|'core'|'finisher'|'warmup'
+const BLOCK_TEMPLATES = {
+  15: [
+    { name: 'Strength',  emoji: '💪', slots: 3, type: 'strength' },
+    { name: 'Finisher',  emoji: '🔥', slots: 2, type: 'finisher' },
+  ],
+  30: [
+    { name: 'Warmup',    emoji: '🔥', slots: 2, type: 'warmup',   rounds: 1 },
+    { name: 'Strength',  emoji: '💪', slots: 4, type: 'strength' },
+    { name: 'Core',      emoji: '🎯', slots: 3, type: 'core',     rounds: 2 },
+  ],
+  45: [
+    { name: 'Warmup',    emoji: '🔥', slots: 3, type: 'warmup',   rounds: 1 },
+    { name: 'Strength A',emoji: '💪', slots: 3, type: 'strength' },
+    { name: 'Strength B',emoji: '🧱', slots: 3, type: 'strength' },
+    { name: 'Core',      emoji: '🎯', slots: 3, type: 'core',     rounds: 2 },
+  ],
+  60: [
+    { name: 'Warmup',    emoji: '🔥', slots: 3, type: 'warmup',   rounds: 1 },
+    { name: 'Strength A',emoji: '💪', slots: 4, type: 'strength' },
+    { name: 'Strength B',emoji: '🧱', slots: 4, type: 'strength' },
+    { name: 'Strength C',emoji: '⚡', slots: 3, type: 'strength' },
+    { name: 'Core & Finisher', emoji: '🎯', slots: 3, type: 'core', rounds: 2 },
+  ],
+};
+
+let genState = {
+  step: 0,
+  equipment: new Set(),
+  muscles: new Set(),
+  duration: null,
+  vault: null,
+  allEquipTags: [],
+};
+
+/* ---- open / close ---- */
+function openGenerateModal(){
+  genState.step = 0;
+  genState.equipment = new Set();
+  genState.muscles = new Set();
+  genState.duration = null;
+  document.getElementById('genError').classList.remove('active');
+  document.getElementById('genError').textContent = '';
+  document.getElementById('generateModal').classList.add('active');
+  // load vault if not already loaded
+  if(!genState.vault){
+    loadVault().then(() => renderGenStep(0));
+  } else {
+    renderGenStep(0);
+  }
+}
+function closeGenerateModal(){
+  document.getElementById('generateModal').classList.remove('active');
+}
+
+async function loadVault(){
+  try {
+    const res = await fetch('/vault.json');
+    const data = await res.json();
+    genState.vault = data.exercises;
+    // derive all unique equipment tags from vault
+    const tags = new Set();
+    data.exercises.forEach(ex => ex.equipment.forEach(e => tags.add(e)));
+    genState.allEquipTags = [...tags].sort();
+  } catch(e){
+    genState.vault = [];
+    genState.allEquipTags = Object.keys(EQUIP_META);
+  }
+}
+
+/* ---- step rendering ---- */
+function renderGenStep(step){
+  genState.step = step;
+  // show/hide steps
+  document.querySelectorAll('.gen-step').forEach((el, i) => {
+    el.classList.toggle('active', i === step);
+  });
+  // pips
+  [0,1,2].forEach(i => {
+    const pip = document.getElementById('pip'+i);
+    pip.classList.toggle('active', i === step);
+    pip.classList.toggle('done', i < step);
+  });
+  // title
+  const titles = ['Build a Workout', 'Muscle Groups', 'Duration'];
+  document.getElementById('genModalTitle').textContent = titles[step];
+  // back btn
+  document.getElementById('genBackBtn').style.visibility = step > 0 ? 'visible' : 'hidden';
+  // next btn
+  const nextBtn = document.getElementById('genNextBtn');
+  if(step < 2){
+    nextBtn.textContent = 'Next →';
+    nextBtn.className = 'btn primary';
+    nextBtn.onclick = genNext;
+  } else {
+    nextBtn.textContent = '⚡ Build Workout';
+    nextBtn.className = 'btn primary';
+    nextBtn.onclick = genBuild;
+  }
+  // render content
+  if(step === 0) renderEquipChips();
+  if(step === 1) renderMuscleChips();
+  document.getElementById('genError').classList.remove('active');
+}
+
+function renderEquipChips(){
+  const container = document.getElementById('equipChips');
+  const tags = genState.allEquipTags.length ? genState.allEquipTags : Object.keys(EQUIP_META);
+  container.innerHTML = tags.map(tag => {
+    const meta = EQUIP_META[tag] || { label: tag, icon: '🔧' };
+    const sel = genState.equipment.has(tag) ? 'selected' : '';
+    return `<div class="gen-chip ${sel}" onclick="toggleEquip('${tag}')">
+      <span class="gen-chip-icon">${meta.icon}</span>${escapeHtml(meta.label)}
+    </div>`;
+  }).join('');
+  // sync preset highlight
+  syncPresetButtons();
+}
+
+function renderMuscleChips(){
+  const container = document.getElementById('muscleChips');
+  container.innerHTML = Object.entries(MUSCLE_META).map(([key, meta]) => {
+    const sel = genState.muscles.has(key) ? 'selected' : '';
+    return `<div class="gen-chip ${sel}" onclick="toggleMuscle('${key}')">
+      <span class="gen-chip-icon">${meta.icon}</span>${meta.label}
+    </div>`;
+  }).join('');
+}
+
+/* ---- interactions ---- */
+function toggleEquip(tag){
+  if(genState.equipment.has(tag)) genState.equipment.delete(tag);
+  else genState.equipment.add(tag);
+  renderEquipChips();
+}
+function toggleMuscle(m){
+  if(genState.muscles.has(m)) genState.muscles.delete(m);
+  else genState.muscles.add(m);
+  renderMuscleChips();
+}
+function selectDuration(d){
+  genState.duration = d;
+  document.querySelectorAll('.gen-duration-chip').forEach(el => {
+    el.classList.toggle('selected', parseInt(el.dataset.dur) === d);
+  });
+}
+
+function applyPreset(type){
+  if(type === 'alvey'){
+    genState.equipment = new Set(ALVEY_PRESET);
+  } else {
+    // commercial = all tags in vault
+    genState.equipment = new Set(genState.allEquipTags);
+  }
+  renderEquipChips();
+}
+
+function syncPresetButtons(){
+  const alveyBtn = document.getElementById('presetAlvey');
+  const commBtn  = document.getElementById('presetCommercial');
+  if(!alveyBtn || !commBtn) return;
+  // alvey selected if equipment matches exactly
+  const alveyMatch = ALVEY_PRESET.length === genState.equipment.size &&
+    ALVEY_PRESET.every(t => genState.equipment.has(t));
+  const allMatch = genState.allEquipTags.length > 0 &&
+    genState.allEquipTags.length === genState.equipment.size &&
+    genState.allEquipTags.every(t => genState.equipment.has(t));
+  alveyBtn.classList.toggle('selected', alveyMatch);
+  commBtn.classList.toggle('selected', allMatch && !alveyMatch);
+}
+
+function genBack(){
+  if(genState.step > 0) renderGenStep(genState.step - 1);
+}
+function genNext(){
+  const err = document.getElementById('genError');
+  err.classList.remove('active');
+  if(genState.step === 0 && genState.equipment.size === 0){
+    err.textContent = 'Select at least one piece of equipment.';
+    err.classList.add('active'); return;
+  }
+  if(genState.step === 1 && genState.muscles.size === 0){
+    err.textContent = 'Select at least one muscle group.';
+    err.classList.add('active'); return;
+  }
+  renderGenStep(genState.step + 1);
+}
+
+/* ================================================================
+   BUILDER LOGIC
+   ================================================================ */
+function genBuild(){
+  const err = document.getElementById('genError');
+  err.classList.remove('active');
+  if(!genState.duration){
+    err.textContent = 'Select a duration.';
+    err.classList.add('active'); return;
+  }
+
+  const workout = buildWorkout(
+    genState.vault,
+    [...genState.equipment],
+    [...genState.muscles],
+    genState.duration
+  );
+
+  if(!workout){
+    err.textContent = 'Not enough exercises found for your selections. Try adding more equipment or muscle groups.';
+    err.classList.add('active'); return;
+  }
+
+  closeGenerateModal();
+  try { localStorage.setItem(WORKOUT_KEY, JSON.stringify(workout)); } catch(e){}
+  renderWorkout(workout);
+}
+
+function buildWorkout(vault, equipment, muscles, duration){
+  const cfg = DURATION_CONFIG[duration];
+  const templates = BLOCK_TEMPLATES[duration];
+  const equipSet = new Set(equipment);
+  const today = new Date();
+  const dateStr = today.toISOString().slice(0,10);
+  const slugDate = dateStr.replace(/-/g,'');
+
+  // Filter: exercise is available if ALL its required equipment is in user's set
+  // (bodyweight is always available if user has any equipment, so add it implicitly)
+  equipSet.add('bodyweight');
+
+  function canDo(ex){
+    return ex.equipment.every(e => equipSet.has(e));
+  }
+
+  // Pool: exercises matching equipment AND at least one selected muscle (primary)
+  const muscleSet = new Set(muscles);
+
+  function matchesMuscle(ex){
+    return ex.muscles.some(m => muscleSet.has(m)) ||
+           ex.secondary.some(m => muscleSet.has(m));
+  }
+
+  function primaryMuscle(ex){
+    return ex.muscles.some(m => muscleSet.has(m));
+  }
+
+  const pool = vault.filter(ex => canDo(ex) && matchesMuscle(ex));
+  if(pool.length < 4) return null;
+
+  // Shuffle helper
+  function shuffle(arr){
+    const a = [...arr];
+    for(let i = a.length-1; i > 0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  // Track used exercise ids to avoid repeats within a workout
+  const usedIds = new Set();
+
+  function pickExercises(slots, typeFilter, mustMuscles){
+    const mustSet = mustMuscles ? new Set(mustMuscles) : null;
+    let candidates = pool.filter(ex => {
+      if(usedIds.has(ex.id)) return false;
+      if(typeFilter && ex.type !== typeFilter) return false;
+      if(mustSet && !ex.muscles.some(m => mustSet.has(m))) return false;
+      return true;
+    });
+    candidates = shuffle(candidates);
+    const picked = [];
+    // Fill compounds first, then isolations
+    const compounds = candidates.filter(e => e.type === 'compound');
+    const isolations = candidates.filter(e => e.type === 'isolation');
+    const ordered = [...compounds, ...isolations];
+    for(const ex of ordered){
+      if(picked.length >= slots) break;
+      if(usedIds.has(ex.id)) continue;
+      picked.push(ex);
+      usedIds.add(ex.id);
+    }
+    return picked;
+  }
+
+  function makeDetail(ex, sets, cfg){
+    const reps = ex.type === 'compound' ? cfg.compReps : cfg.isoReps;
+    if(ex.timed){
+      const secs = duration <= 15 ? 30 : duration <= 30 ? 40 : 45;
+      return ex.unilateral ? `${sets} x ${secs} sec / side` : `${sets} x ${secs} sec`;
+    }
+    return ex.unilateral ? `${sets} x ${reps} / side` : `${sets} x ${reps}`;
+  }
+
+  const blocks = [];
+
+  for(const tmpl of templates){
+    const blockSets = tmpl.rounds || cfg.sets;
+    const blockRounds = tmpl.rounds || cfg.sets;
+
+    let exercises = [];
+
+    if(tmpl.type === 'warmup'){
+      // warmup: bodyweight and light moves, prefer cardio/core secondary
+      const warmupPool = pool.filter(ex =>
+        !usedIds.has(ex.id) &&
+        (ex.equipment.includes('bodyweight') || ex.equipment.every(e => equipSet.has(e))) &&
+        (ex.muscles.includes('cardio') || ex.muscles.includes('core') ||
+         ex.secondary.includes('core') || ex.secondary.includes('legs'))
+      );
+      exercises = shuffle(warmupPool).slice(0, tmpl.slots);
+      exercises.forEach(ex => usedIds.add(ex.id));
+    } else if(tmpl.type === 'core'){
+      // core block: filter to core-primary exercises
+      const corePool = pool.filter(ex =>
+        !usedIds.has(ex.id) && ex.muscles.includes('core')
+      );
+      exercises = shuffle(corePool).slice(0, tmpl.slots);
+      exercises.forEach(ex => usedIds.add(ex.id));
+      // fallback: any unused if not enough core
+      if(exercises.length < tmpl.slots){
+        const fallback = pool.filter(ex => !usedIds.has(ex.id));
+        shuffle(fallback).slice(0, tmpl.slots - exercises.length).forEach(ex => {
+          exercises.push(ex); usedIds.add(ex.id);
+        });
+      }
+    } else if(tmpl.type === 'finisher'){
+      // finisher: prefer cardio, core, or high-rep isolation
+      const finPool = pool.filter(ex =>
+        !usedIds.has(ex.id) &&
+        (ex.muscles.includes('cardio') || ex.muscles.includes('core') || ex.type === 'isolation')
+      );
+      exercises = shuffle(finPool).slice(0, tmpl.slots);
+      exercises.forEach(ex => usedIds.add(ex.id));
+      if(exercises.length < tmpl.slots){
+        const fallback = pool.filter(ex => !usedIds.has(ex.id));
+        shuffle(fallback).slice(0, tmpl.slots - exercises.length).forEach(ex => {
+          exercises.push(ex); usedIds.add(ex.id);
+        });
+      }
+    } else {
+      // strength block: compounds first then isolations from selected muscles
+      exercises = pickExercises(tmpl.slots, null, [...muscleSet]);
+      if(exercises.length < 2){
+        // fallback: any available
+        const fallback = pool.filter(ex => !usedIds.has(ex.id));
+        shuffle(fallback).slice(0, tmpl.slots - exercises.length).forEach(ex => {
+          exercises.push(ex); usedIds.add(ex.id);
+        });
+      }
+    }
+
+    if(exercises.length === 0) continue;
+
+    const blockExercises = exercises.map(ex => ({
+      name: ex.name,
+      detail: makeDetail(ex, blockRounds, cfg),
+      rounds: blockRounds,
+      youtubeQuery: ex.youtubeQuery,
+    }));
+
+    blocks.push({
+      emoji: tmpl.emoji,
+      name: tmpl.name,
+      roundLabel: blockRounds === 1 ? '1 round' : `${blockRounds} rounds`,
+      restCue: tmpl.type === 'warmup' ? 'Move at a comfortable pace' : cfg.rest,
+      exercises: blockExercises,
+    });
+  }
+
+  if(blocks.length === 0) return null;
+
+  // Build muscle label for title
+  const muscleLabels = [...muscleSet].map(m => MUSCLE_META[m]?.label || m);
+  const titleMuscles = muscleLabels.length <= 2
+    ? muscleLabels.join(' & ')
+    : muscleLabels.slice(0,2).join(', ') + ' +more';
+  const durationLabel = `${duration} Min`;
+
+  return {
+    headerTitle: `${durationLabel} — ${titleMuscles}`,
+    date: dateStr,
+    duration: `~${duration} min`,
+    slug: `generated-${slugDate}-${duration}min`,
+    parameters: [
+      { label: 'Type', value: 'Auto-Generated' },
+      { label: 'Equipment', value: equipment.map(e => EQUIP_META[e]?.label || e).join(', ') },
+      { label: 'Focus', value: muscleLabels.join(', ') },
+    ],
+    blocks,
+  };
+}
+/* end generate */
+
 </script>
 </body>
 </html>
