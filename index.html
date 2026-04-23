@@ -1329,6 +1329,7 @@ let genState = {
 function openAboutModal(){ document.getElementById('aboutModal').classList.add('active'); }
 function closeAboutModal(){ document.getElementById('aboutModal').classList.remove('active'); }
 
+function openGenerateModal(){
   genState.step = 0;
   genState.equipment = new Set();
   genState.muscles = new Set();
