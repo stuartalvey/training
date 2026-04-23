@@ -1,0 +1,1898 @@
+{
+  "exercises": [
+    {
+      "id": "pushup",
+      "name": "Push-Up",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "push-up proper form"
+    },
+    {
+      "id": "pushup-wide",
+      "name": "Wide-Grip Push-Up",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "wide grip push-up form"
+    },
+    {
+      "id": "pushup-decline",
+      "name": "Decline Push-Up",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "decline push-up form"
+    },
+    {
+      "id": "pushup-diamond",
+      "name": "Diamond Push-Up",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "diamond push-up form"
+    },
+    {
+      "id": "db-bench-press",
+      "name": "Dumbbell Bench Press",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell bench press form"
+    },
+    {
+      "id": "db-incline-press",
+      "name": "Dumbbell Incline Press",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell incline bench press form"
+    },
+    {
+      "id": "db-fly",
+      "name": "Dumbbell Chest Fly",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell chest fly form"
+    },
+    {
+      "id": "db-floor-press",
+      "name": "Dumbbell Floor Press",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell floor press form"
+    },
+    {
+      "id": "barbell-bench-press",
+      "name": "Barbell Bench Press",
+      "equipment": [
+        "barbell-weights",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "barbell bench press form"
+    },
+    {
+      "id": "barbell-incline-press",
+      "name": "Barbell Incline Press",
+      "equipment": [
+        "barbell-weights",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "barbell incline bench press form"
+    },
+    {
+      "id": "smith-bench-press",
+      "name": "Smith Machine Bench Press",
+      "equipment": [
+        "smith-machine",
+        "bench"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "smith machine bench press form"
+    },
+    {
+      "id": "cable-crossover",
+      "name": "Cable Crossover",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "cable crossover chest fly form"
+    },
+    {
+      "id": "cable-chest-fly-low",
+      "name": "Cable Low-to-High Fly",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "cable low to high chest fly form"
+    },
+    {
+      "id": "pullup",
+      "name": "Pull-Up",
+      "equipment": [
+        "bodyweight",
+        "pullup-bar"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "pull-up proper form"
+    },
+    {
+      "id": "chinup",
+      "name": "Chin-Up",
+      "equipment": [
+        "bodyweight",
+        "pullup-bar"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "chin-up proper form"
+    },
+    {
+      "id": "inverted-row",
+      "name": "Inverted Row",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "inverted row bodyweight form"
+    },
+    {
+      "id": "db-row",
+      "name": "Dumbbell Single-Arm Row",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "single arm dumbbell row form"
+    },
+    {
+      "id": "db-bent-row",
+      "name": "Dumbbell Bent-Over Row",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell bent over row form"
+    },
+    {
+      "id": "db-pullover",
+      "name": "Dumbbell Pullover",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "chest"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell pullover form"
+    },
+    {
+      "id": "barbell-row",
+      "name": "Barbell Bent-Over Row",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "barbell bent over row form"
+    },
+    {
+      "id": "deadlift",
+      "name": "Conventional Deadlift",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "glutes",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "conventional deadlift form"
+    },
+    {
+      "id": "rdl-barbell",
+      "name": "Romanian Deadlift",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "glutes",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "romanian deadlift form"
+    },
+    {
+      "id": "cable-seated-row",
+      "name": "Cable Seated Row",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "cable seated row form"
+    },
+    {
+      "id": "cable-pulldown",
+      "name": "Cable Lat Pulldown",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "lat pulldown form"
+    },
+    {
+      "id": "cable-straight-arm-pulldown",
+      "name": "Cable Straight-Arm Pulldown",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "straight arm lat pulldown form"
+    },
+    {
+      "id": "smith-row",
+      "name": "Smith Machine Bent-Over Row",
+      "equipment": [
+        "smith-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "smith machine bent over row form"
+    },
+    {
+      "id": "pike-pushup",
+      "name": "Pike Push-Up",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "triceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "pike push-up form"
+    },
+    {
+      "id": "db-shoulder-press",
+      "name": "Dumbbell Shoulder Press",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "triceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell shoulder press form"
+    },
+    {
+      "id": "db-lateral-raise",
+      "name": "Dumbbell Lateral Raise",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell lateral raise form"
+    },
+    {
+      "id": "db-front-raise",
+      "name": "Dumbbell Front Raise",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell front raise form"
+    },
+    {
+      "id": "db-rear-delt-fly",
+      "name": "Dumbbell Rear Delt Fly",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "back"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell rear delt fly form"
+    },
+    {
+      "id": "db-arnold-press",
+      "name": "Arnold Press",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "triceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "arnold press form"
+    },
+    {
+      "id": "barbell-ohp",
+      "name": "Barbell Overhead Press",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "triceps",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "barbell overhead press form"
+    },
+    {
+      "id": "cable-lateral-raise",
+      "name": "Cable Lateral Raise",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "cable lateral raise form"
+    },
+    {
+      "id": "cable-face-pull",
+      "name": "Cable Face Pull",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "back"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "cable face pull form"
+    },
+    {
+      "id": "smith-ohp",
+      "name": "Smith Machine Shoulder Press",
+      "equipment": [
+        "smith-machine"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "triceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "smith machine shoulder press form"
+    },
+    {
+      "id": "tricep-dip",
+      "name": "Tricep Dip",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [
+        "chest",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "tricep dip form bench"
+    },
+    {
+      "id": "diamond-pushup-arms",
+      "name": "Close-Grip Push-Up",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [
+        "chest"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "close grip push-up triceps form"
+    },
+    {
+      "id": "db-curl",
+      "name": "Dumbbell Bicep Curl",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "dumbbell bicep curl form"
+    },
+    {
+      "id": "db-hammer-curl",
+      "name": "Hammer Curl",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "hammer curl form"
+    },
+    {
+      "id": "db-incline-curl",
+      "name": "Incline Dumbbell Curl",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "incline dumbbell curl form"
+    },
+    {
+      "id": "db-overhead-tricep-ext",
+      "name": "Dumbbell Overhead Tricep Extension",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell overhead tricep extension form"
+    },
+    {
+      "id": "db-tricep-kickback",
+      "name": "Dumbbell Tricep Kickback",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "dumbbell tricep kickback form"
+    },
+    {
+      "id": "db-concentration-curl",
+      "name": "Concentration Curl",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "concentration curl form"
+    },
+    {
+      "id": "barbell-curl",
+      "name": "Barbell Curl",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "barbell curl form"
+    },
+    {
+      "id": "barbell-skull-crusher",
+      "name": "Skull Crusher",
+      "equipment": [
+        "barbell-weights",
+        "bench"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "skull crusher form"
+    },
+    {
+      "id": "barbell-close-grip-press",
+      "name": "Close-Grip Bench Press",
+      "equipment": [
+        "barbell-weights",
+        "bench"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [
+        "chest"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "close grip bench press triceps form"
+    },
+    {
+      "id": "cable-pushdown",
+      "name": "Cable Tricep Pushdown",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "cable tricep pushdown form"
+    },
+    {
+      "id": "cable-curl",
+      "name": "Cable Bicep Curl",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "cable bicep curl form"
+    },
+    {
+      "id": "cable-overhead-tricep",
+      "name": "Cable Overhead Tricep Extension",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "cable overhead tricep extension form"
+    },
+    {
+      "id": "bodyweight-squat",
+      "name": "Bodyweight Squat",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "bodyweight squat form"
+    },
+    {
+      "id": "jump-squat",
+      "name": "Jump Squat",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "jump squat form"
+    },
+    {
+      "id": "reverse-lunge",
+      "name": "Reverse Lunge",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "reverse lunge form"
+    },
+    {
+      "id": "walking-lunge-bw",
+      "name": "Walking Lunge",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "walking lunge form"
+    },
+    {
+      "id": "wall-sit",
+      "name": "Wall Sit",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "wall sit form"
+    },
+    {
+      "id": "step-up-bw",
+      "name": "Step-Up",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "step up exercise form"
+    },
+    {
+      "id": "db-goblet-squat",
+      "name": "Goblet Squat",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "goblet squat form"
+    },
+    {
+      "id": "db-walking-lunge",
+      "name": "Dumbbell Walking Lunge",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell walking lunge form"
+    },
+    {
+      "id": "db-rdl",
+      "name": "Dumbbell Romanian Deadlift",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes",
+        "back"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell romanian deadlift form"
+    },
+    {
+      "id": "db-step-up",
+      "name": "Dumbbell Step-Up",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "dumbbell step up form"
+    },
+    {
+      "id": "db-leg-curl",
+      "name": "Dumbbell Leg Curl",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell hamstring curl form"
+    },
+    {
+      "id": "barbell-squat",
+      "name": "Barbell Back Squat",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "barbell back squat form"
+    },
+    {
+      "id": "barbell-front-squat",
+      "name": "Barbell Front Squat",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "barbell front squat form"
+    },
+    {
+      "id": "barbell-lunge",
+      "name": "Barbell Lunge",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "barbell lunge form"
+    },
+    {
+      "id": "leg-press",
+      "name": "Leg Press",
+      "equipment": [
+        "leg-press"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "leg press machine form"
+    },
+    {
+      "id": "leg-press-narrow",
+      "name": "Narrow Stance Leg Press",
+      "equipment": [
+        "leg-press"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "narrow stance leg press quad form"
+    },
+    {
+      "id": "smith-squat",
+      "name": "Smith Machine Squat",
+      "equipment": [
+        "smith-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "smith machine squat form"
+    },
+    {
+      "id": "smith-split-squat",
+      "name": "Smith Machine Split Squat",
+      "equipment": [
+        "smith-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "smith machine split squat form"
+    },
+    {
+      "id": "cable-leg-extension",
+      "name": "Cable Leg Extension",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "cable leg extension form"
+    },
+    {
+      "id": "cable-hamstring-curl",
+      "name": "Cable Hamstring Curl",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "cable hamstring curl form"
+    },
+    {
+      "id": "glute-bridge",
+      "name": "Glute Bridge",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "glute bridge form"
+    },
+    {
+      "id": "single-leg-glute-bridge",
+      "name": "Single-Leg Glute Bridge",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs",
+        "core"
+      ],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "single leg glute bridge form"
+    },
+    {
+      "id": "hip-thrust-bw",
+      "name": "Bodyweight Hip Thrust",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "bodyweight hip thrust form"
+    },
+    {
+      "id": "donkey-kick",
+      "name": "Donkey Kick",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "donkey kick form"
+    },
+    {
+      "id": "fire-hydrant",
+      "name": "Fire Hydrant",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "fire hydrant exercise form"
+    },
+    {
+      "id": "db-hip-thrust",
+      "name": "Dumbbell Hip Thrust",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell hip thrust form"
+    },
+    {
+      "id": "db-sumo-squat",
+      "name": "Dumbbell Sumo Squat",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell sumo squat form"
+    },
+    {
+      "id": "db-curtsy-lunge",
+      "name": "Curtsy Lunge",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "curtsy lunge form"
+    },
+    {
+      "id": "db-rdl-single",
+      "name": "Single-Leg Romanian Deadlift",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "single leg romanian deadlift form"
+    },
+    {
+      "id": "barbell-hip-thrust",
+      "name": "Barbell Hip Thrust",
+      "equipment": [
+        "barbell-weights",
+        "bench"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "barbell hip thrust form"
+    },
+    {
+      "id": "barbell-sumo-deadlift",
+      "name": "Sumo Deadlift",
+      "equipment": [
+        "barbell-weights"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs",
+        "back"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "sumo deadlift form"
+    },
+    {
+      "id": "cable-kickback",
+      "name": "Cable Glute Kickback",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "youtubeQuery": "cable glute kickback form"
+    },
+    {
+      "id": "cable-pull-through",
+      "name": "Cable Pull-Through",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs",
+        "back"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "cable pull through form"
+    },
+    {
+      "id": "smith-hip-thrust",
+      "name": "Smith Machine Hip Thrust",
+      "equipment": [
+        "smith-machine",
+        "bench"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "smith machine hip thrust form"
+    },
+    {
+      "id": "leg-press-high-glute",
+      "name": "High-Foot Leg Press",
+      "equipment": [
+        "leg-press"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "high foot leg press glutes form"
+    },
+    {
+      "id": "plank",
+      "name": "Plank",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "plank form"
+    },
+    {
+      "id": "side-plank",
+      "name": "Side Plank",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "timed": true,
+      "youtubeQuery": "side plank form"
+    },
+    {
+      "id": "crunch",
+      "name": "Crunch",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "crunch form"
+    },
+    {
+      "id": "bicycle-crunch",
+      "name": "Bicycle Crunch",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "bicycle crunch form"
+    },
+    {
+      "id": "leg-raise",
+      "name": "Lying Leg Raise",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "lying leg raise form"
+    },
+    {
+      "id": "mountain-climber",
+      "name": "Mountain Climber",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "mountain climber form"
+    },
+    {
+      "id": "dead-bug",
+      "name": "Dead Bug",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dead bug exercise form"
+    },
+    {
+      "id": "hollow-body",
+      "name": "Hollow Body Hold",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "hollow body hold form"
+    },
+    {
+      "id": "v-up",
+      "name": "V-Up",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "v-up exercise form"
+    },
+    {
+      "id": "russian-twist-bw",
+      "name": "Russian Twist",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "russian twist form"
+    },
+    {
+      "id": "db-russian-twist",
+      "name": "Dumbbell Russian Twist",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell russian twist form"
+    },
+    {
+      "id": "db-suitcase-carry",
+      "name": "Dumbbell Suitcase Carry",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "timed": true,
+      "youtubeQuery": "suitcase carry form"
+    },
+    {
+      "id": "db-woodchop",
+      "name": "Dumbbell Woodchop",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "dumbbell woodchop form"
+    },
+    {
+      "id": "ab-wheel",
+      "name": "Ab Wheel Rollout",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "back",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "ab wheel rollout form"
+    },
+    {
+      "id": "cable-crunch",
+      "name": "Cable Crunch",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "cable crunch form"
+    },
+    {
+      "id": "cable-woodchop",
+      "name": "Cable Woodchop",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "cable woodchop form"
+    },
+    {
+      "id": "hanging-leg-raise",
+      "name": "Hanging Leg Raise",
+      "equipment": [
+        "pullup-bar"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "youtubeQuery": "hanging leg raise form"
+    },
+    {
+      "id": "burpee",
+      "name": "Burpee",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "chest",
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "burpee form"
+    },
+    {
+      "id": "jumping-jack",
+      "name": "Jumping Jack",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "shoulders",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "jumping jack form"
+    },
+    {
+      "id": "high-knees",
+      "name": "High Knees",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "high knees form"
+    },
+    {
+      "id": "box-jump",
+      "name": "Box Jump",
+      "equipment": [
+        "bodyweight",
+        "bench"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "box jump form"
+    },
+    {
+      "id": "kb-swing",
+      "name": "Kettlebell Swing",
+      "equipment": [
+        "kettlebells"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "glutes",
+        "back",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "kettlebell swing form"
+    },
+    {
+      "id": "kb-goblet-squat",
+      "name": "Kettlebell Goblet Squat",
+      "equipment": [
+        "kettlebells"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "kettlebell goblet squat form"
+    },
+    {
+      "id": "kb-clean-press",
+      "name": "Kettlebell Clean & Press",
+      "equipment": [
+        "kettlebells"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "legs",
+        "core",
+        "back"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "kettlebell clean and press form"
+    },
+    {
+      "id": "kb-turkish-getup",
+      "name": "Turkish Get-Up",
+      "equipment": [
+        "kettlebells"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders",
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "youtubeQuery": "turkish get-up form"
+    },
+    {
+      "id": "db-thruster",
+      "name": "Dumbbell Thruster",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "shoulders",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "youtubeQuery": "dumbbell thruster form"
+    },
+    {
+      "id": "battle-rope-waves",
+      "name": "Battle Rope Waves",
+      "equipment": [
+        "cable-machine"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "shoulders",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "battle rope waves form"
+    },
+    {
+      "id": "treadmill-walk-incline",
+      "name": "Incline Treadmill Walk",
+      "equipment": [
+        "treadmill"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "incline treadmill walk form"
+    },
+    {
+      "id": "treadmill-run",
+      "name": "Treadmill Run",
+      "equipment": [
+        "treadmill"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "treadmill running form"
+    },
+    {
+      "id": "treadmill-hiit-sprint",
+      "name": "Treadmill Sprint Interval",
+      "equipment": [
+        "treadmill"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "treadmill sprint interval HIIT"
+    },
+    {
+      "id": "bike-steady",
+      "name": "Steady-State Bike",
+      "equipment": [
+        "bike"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "stationary bike steady state cardio"
+    },
+    {
+      "id": "bike-hiit",
+      "name": "Bike Sprint Interval",
+      "equipment": [
+        "bike"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "stationary bike HIIT sprint intervals"
+    },
+    {
+      "id": "bike-resistance",
+      "name": "High-Resistance Bike Climb",
+      "equipment": [
+        "bike"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "stationary bike high resistance climb"
+    }
+  ]
+}
