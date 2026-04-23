@@ -244,13 +244,19 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   padding:18px 18px max(18px, env(safe-area-inset-bottom)) 18px;
   display:flex;flex-direction:column;gap:14px;
   max-height:92vh;overflow-y:auto;
+  overscroll-behavior:contain;
   animation:sheetUp .32s cubic-bezier(0.32,0.72,0,1) both;
 }
 .modal-head{display:flex;align-items:center;gap:8px}
 .modal-head h3{margin:0;font-size:18px;flex:1;letter-spacing:-0.022em;font-weight:600}
-.modal-close{background:var(--card2);border:none;color:var(--muted);cursor:pointer;font-size:17px;
-  width:30px;height:30px;border-radius:999px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
-.modal-close:active{background:var(--line)}
+.modal-close{
+  background:var(--card2);border:none;color:var(--muted);cursor:pointer;
+  width:34px;height:34px;border-radius:999px;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 auto;transition:background .15s ease, transform .06s ease;
+}
+.modal-close:active{background:var(--line);transform:scale(.92)}
+.modal-close svg{width:13px;height:13px;stroke-width:2.5}
 .modal textarea{width:100%;min-height:240px;background:var(--card2);color:var(--text);border:1px solid var(--line);
   border-radius:var(--radius);padding:12px;font-size:16px;
   font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;resize:vertical;line-height:1.5}
@@ -429,7 +435,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   <div class="modal">
     <div class="modal-head">
       <h3 id="genModalTitle">Build a Workout</h3>
-      <button class="modal-close" onclick="closeGenerateModal()" aria-label="Close">&times;</button>
+      <button class="modal-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
 
     <!-- pip progress -->
@@ -495,7 +501,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   <div class="modal">
     <div class="modal-head">
       <h3>Import Workout</h3>
-      <button class="modal-close" onclick="closeImportModal()" aria-label="Close">&times;</button>
+      <button class="modal-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-help">
       Paste a workout JSON object below, or
@@ -515,7 +521,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   <div class="modal">
     <div class="modal-head">
       <h3>Share Workout</h3>
-      <button class="modal-close" onclick="closeShareModal()" aria-label="Close">&times;</button>
+      <button class="modal-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-help">Copy this text and send it to someone. They can paste it into Protein Social using the Import icon.</div>
     <textarea id="shareTextarea" readonly></textarea>
@@ -531,7 +537,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   <div class="modal">
     <div class="modal-head">
       <h3>Get a Workout from AI</h3>
-      <button class="modal-close" onclick="closeHelpModal()" aria-label="Close">&times;</button>
+      <button class="modal-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-help">
       <strong>1.</strong> Copy the prompt below.<br>
@@ -1223,14 +1229,14 @@ const ALVEY_PRESET = [
 
 const EQUIP_META = {
   'bodyweight':     { label: 'Bodyweight',       icon: '🤸' },
-  'dumbbells':      { label: 'Dumbbells',         icon: '🏋️' },
-  'barbell-weights':{ label: 'Barbell & Weights', icon: '🪁' },
-  'bench':          { label: 'Bench',             icon: '🛋️' },
+  'dumbbells':      { label: 'Dumbbells',         icon: '💪' },
+  'barbell-weights':{ label: 'Barbell & Weights', icon: '🏋️' },
+  'bench':          { label: 'Bench',             icon: '🪑' },
   'cable-machine':  { label: 'Cable Machine',     icon: '🔗' },
-  'pullup-bar':     { label: 'Pull-up Bar',        icon: '🔝' },
+  'pullup-bar':     { label: 'Pull-up Bar',        icon: '🧗' },
   'leg-press':      { label: 'Leg Press',          icon: '🦵' },
-  'smith-machine':  { label: 'Smith Machine',      icon: '⚙️' },
-  'kettlebells':    { label: 'Kettlebells',        icon: '🫙' },
+  'smith-machine':  { label: 'Smith Machine',      icon: '🏗️' },
+  'kettlebells':    { label: 'Kettlebells',        icon: '🪨' },
   'treadmill':      { label: 'Treadmill',          icon: '🏃' },
   'bike':           { label: 'Bike / Assault Bike',icon: '🚴' },
   'rower':          { label: 'Rower',              icon: '🚣' },
