@@ -245,14 +245,6 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   display:flex;flex-direction:column;gap:14px;
   max-height:92vh;overflow-y:auto;
   animation:sheetUp .32s cubic-bezier(0.32,0.72,0,1) both;
-  touch-action:pan-y;
-  will-change:transform;
-}
-.modal.snap-back{transition:transform .3s cubic-bezier(0.32,0.72,0,1)}
-/* drag handle pill at top of sheet */
-.modal::before{
-  content:'';display:block;width:36px;height:4px;border-radius:999px;
-  background:var(--line-strong);margin:0 auto 6px auto;flex:0 0 auto;
 }
 .modal-head{display:flex;align-items:center;gap:8px}
 .modal-head h3{margin:0;font-size:18px;flex:1;letter-spacing:-0.022em;font-weight:600}
@@ -1218,9 +1210,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
   requestAnimationFrame(syncHeaderHeight);
   window.addEventListener('resize', () => requestAnimationFrame(syncHeaderHeight));
-  initAllSheetDismiss();
-  initRoundCheckboxDrag();
-  initGenChipDrag();
   window.addEventListener('orientationchange', () => { setTimeout(syncHeaderHeight, 50); setTimeout(syncHeaderHeight, 300); });
 });
 
@@ -1661,166 +1650,7 @@ function buildWorkout(vault, equipment, muscles, duration){
 /* end generate */
 
 
-/* ================================================================
-   SWIPE TO DISMISS — bottom sheet modals
-   Tracks touch on .modal, translates sheet down as user drags,
-   dismisses if drag distance > 120px or velocity > 0.4px/ms.
-   ================================================================ */
-function initSheetDismiss(modalEl, closeFn){
-  let startY = 0, startScrollTop = 0, dragY = 0, startTime = 0, active = false;
 
-  modalEl.addEventListener('touchstart', e => {
-    startY = e.touches[0].clientY;
-    startScrollTop = modalEl.scrollTop;
-    startTime = Date.now();
-    dragY = 0;
-    active = true;
-    // cancel any existing snap-back
-    modalEl.classList.remove('snap-back');
-    modalEl.style.transition = '';
-  }, { passive: true });
-
-  modalEl.addEventListener('touchmove', e => {
-    if(!active) return;
-    const dy = e.touches[0].clientY - startY;
-    // only allow downward drag when already scrolled to top
-    if(dy <= 0 || startScrollTop > 0) return;
-    dragY = dy;
-    // resist slightly for feel (0.85 multiplier)
-    modalEl.style.transform = `translateY(${dragY * 0.85}px)`;
-  }, { passive: true });
-
-  modalEl.addEventListener('touchend', e => {
-    if(!active) return;
-    active = false;
-    const elapsed = Date.now() - startTime;
-    const velocity = dragY / Math.max(elapsed, 1); // px/ms
-    if(dragY > 120 || velocity > 0.4){
-      // dismiss: animate down then close
-      modalEl.style.transition = 'transform .28s cubic-bezier(0.32,0.72,0,1)';
-      modalEl.style.transform = `translateY(110%)`;
-      setTimeout(() => {
-        closeFn();
-        modalEl.style.transform = '';
-        modalEl.style.transition = '';
-      }, 280);
-    } else {
-      // snap back
-      modalEl.classList.add('snap-back');
-      modalEl.style.transform = '';
-      setTimeout(() => modalEl.classList.remove('snap-back'), 300);
-    }
-    dragY = 0;
-  }, { passive: true });
-}
-
-/* Wire up all modals once DOM is ready */
-function initAllSheetDismiss(){
-  const pairs = [
-    ['importModal',   closeImportModal],
-    ['shareModal',    closeShareModal],
-    ['helpModal',     closeHelpModal],
-    ['generateModal', closeGenerateModal],
-    ['confirmModal',  confirmCancel],
-  ];
-  pairs.forEach(([id, fn]) => {
-    const backdrop = document.getElementById(id);
-    if(!backdrop) return;
-    const modal = backdrop.querySelector('.modal');
-    if(modal) initSheetDismiss(modal, fn);
-  });
-}
-
-/* ================================================================
-   DRAG TO MULTI-SELECT
-   Allows a single touch-drag across .cb pills (round checkboxes)
-   or .gen-chip items (equipment/muscle chips) to toggle multiple
-   at once — matching the state of the first item touched.
-   ================================================================ */
-function initDragSelect(containerSelector, itemSelector, toggleFn, getCheckedFn){
-  // Use event delegation on document for dynamically rendered containers
-  let dragging = false;
-  let targetState = null; // the state we're forcing (true=check, false=uncheck)
-  let lastItem = null;
-
-  document.addEventListener('touchstart', e => {
-    const item = e.target.closest(itemSelector);
-    if(!item) return;
-    const container = item.closest(containerSelector);
-    if(!container) return;
-    dragging = true;
-    lastItem = item;
-    // The first touch determines the target state: opposite of current
-    targetState = !getCheckedFn(item);
-    toggleFn(item, targetState);
-  }, { passive: true });
-
-  document.addEventListener('touchmove', e => {
-    if(!dragging || targetState === null) return;
-    const touch = e.touches[0];
-    const el = document.elementFromPoint(touch.clientX, touch.clientY);
-    if(!el) return;
-    const item = el.closest(itemSelector);
-    if(!item || item === lastItem) return;
-    const container = item.closest(containerSelector);
-    if(!container) return;
-    lastItem = item;
-    toggleFn(item, targetState);
-  }, { passive: true });
-
-  document.addEventListener('touchend', () => {
-    dragging = false;
-    targetState = null;
-    lastItem = null;
-  }, { passive: true });
-}
-
-/* --- Round checkbox drag select --- */
-function initRoundCheckboxDrag(){
-  initDragSelect(
-    '.checks',      // container
-    '.cb',          // item
-    (item, state) => {
-      const input = item.querySelector('input[type="checkbox"]');
-      if(!input || input.checked === state) return;
-      input.checked = state;
-      item.classList.toggle('checked', state);
-      dismissFirstHint();
-      saveState();
-    },
-    (item) => {
-      const input = item.querySelector('input[type="checkbox"]');
-      return input ? input.checked : false;
-    }
-  );
-}
-
-/* --- Gen chip drag select (equipment & muscle chips) --- */
-function initGenChipDrag(){
-  initDragSelect(
-    '.gen-chips, .gen-duration-chips',  // containers
-    '.gen-chip',                         // items
-    (item, state) => {
-      const tag = item.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
-      if(!tag) return;
-      const already = item.classList.contains('selected');
-      if(already === state) return;
-      // determine which toggle function to call based on context
-      if(item.closest('#equipChips')){
-        if(state) genState.equipment.add(tag);
-        else genState.equipment.delete(tag);
-        item.classList.toggle('selected', state);
-        syncPresetButtons();
-      } else if(item.closest('#muscleChips')){
-        if(state) genState.muscles.add(tag);
-        else genState.muscles.delete(tag);
-        item.classList.toggle('selected', state);
-      }
-    },
-    (item) => item.classList.contains('selected')
-  );
-}
-/* end swipe & drag */
 
 </script>
 </body>
