@@ -398,18 +398,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 }
 .gen-equip-item-icon{font-size:17px;flex:0 0 auto;width:22px;text-align:center}
 .gen-equip-item-label{flex:1;min-width:0}
-.gen-equip-check{
-  flex:0 0 auto;width:20px;height:20px;border-radius:999px;
-  border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;
-  transition:background .15s ease, border-color .15s ease
-}
-.gen-equip-item.selected .gen-equip-check{
-  background:var(--accent);border-color:var(--accent)
-}
-.gen-equip-check-mark{
-  width:10px;height:10px;display:none;
-}
-.gen-equip-item.selected .gen-equip-check-mark{display:block}
+
 
 
 /* duration chips */
@@ -1553,15 +1542,21 @@ function closeGenerateModal(){ document.getElementById('generateModal').classLis
 
 async function loadVault(){
   try {
+    console.log('[Vault] Fetching /vault.json...');
     const res = await fetch('/vault.json');
+    console.log('[Vault] Response status:', res.status, res.statusText);
+    if(!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     const data = await res.json();
+    console.log('[Vault] Parsed OK. Exercises:', data.exercises?.length ?? 'undefined');
     genState.vault = data.exercises;
     const tags = new Set();
     data.exercises.forEach(ex => ex.equipment.forEach(e => tags.add(e)));
     genState.allEquipTags = [...tags].sort();
     // fill commercial preset
     GYM_PRESETS.commercial.equipment = genState.allEquipTags;
+    console.log('[Vault] Load complete. Equipment tags:', genState.allEquipTags.length);
   } catch(e){
+    console.error('[Vault] LOAD FAILED:', e.message, e);
     genState.vault = [];
     genState.allEquipTags = Object.keys(EQUIP_META);
     GYM_PRESETS.commercial.equipment = genState.allEquipTags;
@@ -1609,11 +1604,7 @@ function renderEquipStep(){
     return `<div class="gen-equip-item ${sel}" onclick="toggleEquip('${tag}')">
       <span class="gen-equip-item-icon">${meta.icon}</span>
       <span class="gen-equip-item-label">${escapeHtml(meta.label)}</span>
-      <span class="gen-equip-check">
-        <svg class="gen-equip-check-mark" viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1.5,5 4,7.5 8.5,2.5"/>
-        </svg>
-      </span>
+
     </div>`;
   }).join('');
   syncSelectAllBtn();
@@ -1731,18 +1722,31 @@ function genNext(){
 /* ================================================================
    BUILDER LOGIC v2
    ================================================================ */
-function genBuild(){
+async function genBuild(){
   const err = document.getElementById('genError');
   err.classList.remove('active');
-  if(!genState.duration){ err.textContent='Select a duration.'; err.classList.add('active'); return; }
-  // Guard: vault must be loaded
-  if(!genState.vault || !genState.vault.length){
-    err.textContent='Still loading exercises — try again in a moment.';
-    err.classList.add('active');
-    loadVault().then(() => { err.classList.remove('active'); });
-    return;
+  console.log('[genBuild] Called. step:', genState.step, 'duration:', genState.duration, 'vault size:', genState.vault?.length ?? 'null');
+  if(!genState.duration){
+    err.textContent = 'Select a duration first.';
+    err.classList.add('active'); return;
   }
-  // Resolve surprise selections randomly
+  // Load vault if needed, then auto-retry
+  if(!genState.vault || !genState.vault.length){
+    const btn = document.getElementById('genNextBtn');
+    const orig = btn.textContent;
+    btn.textContent = 'Loading...';
+    btn.disabled = true;
+    await loadVault();
+    btn.textContent = orig;
+    btn.disabled = false;
+    if(!genState.vault || !genState.vault.length){
+      err.textContent = '⚠️ Vault not found — make sure vault.json is in your repo root and deployed.';
+      err.classList.add('active');
+      console.error('[genBuild] Vault still empty after retry. Check /vault.json is accessible.');
+      return;
+    }
+  }
+  // Resolve surprise
   const goalKeys = Object.keys(GOAL_META);
   const biasKeys = Object.keys(BIAS_META);
   const resolvedGoal = (genState.goal === 'surprise-goal' || !genState.goal)
@@ -1752,17 +1756,25 @@ function genBuild(){
     ? biasKeys[Math.floor(Math.random()*biasKeys.length)]
     : genState.bias;
 
-  const workout = buildWorkout(
-    genState.vault,
-    [...genState.equipment],
-    resolvedGoal,
-    resolvedBias,
-    genState.duration,
-    genState.energy || 'normal',
-    [...genState.constraints]
-  );
+  let workout = null;
+  try {
+    workout = buildWorkout(
+      genState.vault,
+      [...genState.equipment],
+      resolvedGoal,
+      resolvedBias,
+      genState.duration,
+      genState.energy || 'normal',
+      [...genState.constraints]
+    );
+  } catch(e){
+    err.textContent = 'Something went wrong building the workout. Try different selections.';
+    err.classList.add('active');
+    console.error('buildWorkout error:', e);
+    return;
+  }
   if(!workout){
-    err.textContent='Not enough exercises found. Try adjusting equipment or focus.';
+    err.textContent = 'Not enough exercises matched your filters. Try more equipment or a different focus.';
     err.classList.add('active'); return;
   }
   closeGenerateModal();
