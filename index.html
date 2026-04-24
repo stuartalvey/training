@@ -349,11 +349,12 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 .ex-action-btn{
   display:inline-flex;align-items:center;justify-content:center;
   width:38px;height:38px;border:none;border-radius:999px;
-  background:var(--card);color:var(--text);font-size:16px;
+  background:var(--card);color:var(--muted);
   cursor:pointer;flex:0 0 auto;
-  transition:background .15s ease, transform .06s ease;
+  transition:background .15s ease, transform .06s ease, color .15s ease;
 }
 .ex-action-btn:active{transform:scale(.88);background:var(--line)}
+.ex-action-btn.has-note{color:var(--accent)}
 .ex-note-preview{
   font-size:12px;color:var(--muted);letter-spacing:-0.01em;
   margin-top:6px;padding:6px 8px;border-radius:var(--radius-sm);
@@ -488,6 +489,40 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   </div>
 </div>
 
+
+<!-- SHARE CHOICE MODAL -->
+<div class="modal-backdrop" id="shareChoiceModal" onclick="if(event.target===this) closeShareChoiceModal()">
+  <div class="modal">
+    <div class="modal-head"><h3>Share</h3></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding-bottom:4px">
+      <button class="share-choice-btn" onclick="shareTemplate()">
+        <span class="share-choice-icon">📋</span>
+        <span class="share-choice-text">
+          <span class="share-choice-label">Share Workout Template</span>
+          <span class="share-choice-sub">JSON file — others can import and follow it</span>
+        </span>
+      </button>
+      <button class="share-choice-btn" onclick="shareSummary()">
+        <span class="share-choice-icon">📊</span>
+        <span class="share-choice-text">
+          <span class="share-choice-label">Share My Results</span>
+          <span class="share-choice-sub">Your progress, sets completed, and notes</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCISE NOTES MODAL -->
+<div class="modal-backdrop" id="exNoteModal" onclick="if(event.target===this) closeExNoteModal()">
+  <div class="modal">
+    <div class="modal-head"><h3 id="exNoteTitle">Exercise Notes</h3></div>
+    <textarea id="exNoteTextarea" class="notes-area" placeholder="How did this feel? Weight used, cues, tweaks..." style="min-height:100px"></textarea>
+    <div class="modal-actions">
+      <button class="btn primary" onclick="closeExNoteModal()">Done</button>
+    </div>
+  </div>
+</div>
 
 <div class="modal-backdrop" id="generateModal" onclick="if(event.target===this) closeGenerateModal()">
   <div class="modal">
@@ -684,7 +719,6 @@ function renderWorkout(workout){
     return;
   }
   if(footer) footer.style.display = '';
-  if(notesSection) notesSection.style.display = '';
   STORAGE_KEY = `protein-social-${workout.date}-${workout.slug}`;
   document.getElementById('headerTitle').textContent = workout.headerTitle || 'Workout';
 
@@ -722,7 +756,11 @@ function renderWorkout(workout){
       }).join('');
       const isGenerated = WORKOUT && WORKOUT._generated;
       const swapBtnHtml = isGenerated
-        ? `<button class="ex-action-btn" onclick="swapExercise(${exerciseIndex})" title="Swap exercise">🔄</button>`
+        ? `<button class="ex-action-btn" onclick="confirmSwap(${exerciseIndex})" title="Swap exercise">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+              </svg>
+            </button>`
         : '';
       return `<div class="exercise" data-ex-idx="${exerciseIndex}">
         <div class="ex-top">
@@ -767,7 +805,12 @@ function renderWorkout(workout){
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto">
         <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
       </svg>
-      <div style="flex:1;min-width:0">Tap <span class="first-hint-round">R</span> to log a set. Tap ✏️ to add exercise notes. Tap 🔄 to swap an exercise (generated workouts). Tap <span class="first-hint-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> for form videos. These tips disappear after first use.</div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
+          <div><span class="first-hint-round">R1</span> Tap to log a set</div>
+          <div>✏️ &nbsp;Add notes to an exercise</div>
+          <div>🔄 &nbsp;Swap exercise (generated workouts)</div>
+          <div><span class="first-hint-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> &nbsp;Watch form video</div>
+        </div>
     </div>`;
   }
 
@@ -1799,14 +1842,24 @@ function closeExNoteModal(){
 }
 function updateExNotePreview(exIdx, note){
   const el = document.getElementById(`ex-note-preview-${exIdx}`);
-  if(!el) return;
-  el.textContent = note ? `✏️ ${note}` : '';
-  el.classList.toggle('has-note', !!note);
+  if(el){ el.textContent = note ? note : ''; el.classList.toggle('has-note', !!note); }
+  // highlight the note button when note exists
+  const exerciseEl = document.querySelector(`.exercise[data-ex-idx="${exIdx}"]`);
+  if(exerciseEl){
+    const noteBtn = [...exerciseEl.querySelectorAll('.ex-action-btn')].find(b => b.title === 'Add note');
+    if(noteBtn) noteBtn.classList.toggle('has-note', !!note);
+  }
 }
 
 /* ================================================================
    SWAP EXERCISE — replace an exercise from the vault
    ================================================================ */
+async function confirmSwap(globalExIdx){
+  const exerciseEl = document.querySelector(`.exercise[data-ex-idx="${globalExIdx}"]`);
+  const name = exerciseEl?.querySelector('.ex-name')?.textContent || 'this exercise';
+  const ok = await askConfirm(`Swap "${name}" for a different exercise?`, { title: 'Swap Exercise?', okLabel: 'Swap', danger: false });
+  if(ok) swapExercise(globalExIdx);
+}
 function swapExercise(globalExIdx){
   if(!genState.vault || !genState.vault.length){
     loadVault().then(() => _doSwap(globalExIdx));
