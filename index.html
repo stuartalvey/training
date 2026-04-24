@@ -252,11 +252,23 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   border-radius:var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow:0 -8px 40px rgba(0,0,0,.4);width:100%;max-width:560px;
   padding:18px 18px max(18px, env(safe-area-inset-bottom)) 18px;
-  display:flex;flex-direction:column;gap:14px;
-  max-height:92vh;overflow-y:auto;
+  display:flex;flex-direction:column;gap:0;
+  max-height:82vh;overflow:hidden;
   overscroll-behavior:contain;
   animation:sheetUp .32s cubic-bezier(0.32,0.72,0,1) both;
 }
+/* generate steps scroll internally, not the whole modal */
+
+/* modal-head + gen-progress + gen-nav stay fixed — add spacing */
+.modal .modal-head{flex:0 0 auto}
+.modal .gen-progress{flex:0 0 auto;padding:8px 0 2px 0}
+.modal .gen-nav{flex:0 0 auto;padding-top:12px}
+.modal .modal-error{flex:0 0 auto}
+.modal .modal-help,.modal .modal-actions{flex:0 0 auto}
+/* generate steps scroll internally */
+.gen-step{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:14px 0 4px 0;display:none;flex-direction:column;gap:12px}
+.gen-step.active{display:flex}
 .modal-head{display:flex;align-items:center;gap:8px}
 .modal-head h3{margin:0;font-size:18px;flex:1;letter-spacing:-0.022em;font-weight:600}
 
@@ -367,6 +379,51 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 .share-choice-text{display:flex;flex-direction:column;gap:2px}
 .share-choice-label{font-size:15px;font-weight:600}
 .share-choice-sub{font-size:12px;color:var(--muted);font-weight:400;letter-spacing:-0.01em}
+
+
+/* equipment list rows */
+.gen-equip-list{display:flex;flex-direction:column;gap:6px;overflow-y:auto;
+  -webkit-overflow-scrolling:touch;flex:1;min-height:0}
+.gen-equip-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 12px;border-radius:var(--radius-sm);
+  background:var(--card2);color:var(--text);
+  font-size:14px;font-weight:600;letter-spacing:-0.01em;
+  cursor:pointer;border:1px solid transparent;
+  transition:background .15s ease, border-color .15s ease;
+  user-select:none;-webkit-user-select:none;flex:0 0 auto;
+}
+.gen-equip-item.selected{
+  background:rgba(10,132,255,.15);border-color:var(--accent);color:var(--accent)
+}
+.gen-equip-item-icon{font-size:17px;flex:0 0 auto;width:22px;text-align:center}
+.gen-equip-item-label{flex:1;min-width:0}
+.gen-equip-check{
+  flex:0 0 auto;width:20px;height:20px;border-radius:999px;
+  border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;
+  transition:background .15s ease, border-color .15s ease
+}
+.gen-equip-item.selected .gen-equip-check{
+  background:var(--accent);border-color:var(--accent)
+}
+.gen-equip-check-mark{
+  width:10px;height:10px;display:none;
+}
+.gen-equip-item.selected .gen-equip-check-mark{display:block}
+
+
+/* duration chips */
+.gen-duration-chip{
+  flex:1;padding:13px 4px;border-radius:var(--radius);text-align:center;
+  border:1px solid var(--line);background:var(--card2);color:var(--text);
+  font-size:16px;font-weight:700;letter-spacing:-0.02em;
+  cursor:pointer;user-select:none;-webkit-user-select:none;
+  transition:background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease;
+}
+.gen-duration-chip:active{transform:scale(.96)}
+.gen-duration-chip.selected{background:rgba(10,132,255,.15);border-color:var(--accent);color:var(--accent)}
+.gen-duration-chip .dur-sub{font-size:11px;font-weight:500;color:var(--muted);display:block;margin-top:2px}
+.gen-duration-chip.selected .dur-sub{color:var(--accent);opacity:.75}
 
 </style>
 </head>
@@ -536,22 +593,20 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
         <div class="gen-section-label">Equipment</div>
         <button class="gen-top-btn" id="selectAllBtn" onclick="toggleSelectAll()">Select All</button>
       </div>
-      <div class="gen-equip-scroll">
-        <div class="gen-chips" id="equipChips"></div>
-      </div>
+      <div class="gen-equip-list" id="equipChips"></div>
     </div>
 
     <!-- STEP 2: Session -->
     <div class="gen-step" id="genStep1">
       <div class="gen-section-row">
         <div class="gen-section-label">Training Goal</div>
-        <button class="gen-top-btn surprise" onclick="surpriseGoal()">🎲 Surprise Me</button>
+
       </div>
       <div id="goalChips" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px"></div>
 
       <div class="gen-section-row">
         <div class="gen-section-label">Body Focus</div>
-        <button class="gen-top-btn surprise" onclick="surpriseBias()">🎲 Surprise Me</button>
+
       </div>
       <div class="gen-bias-grid" id="biasChips"></div>
     </div>
@@ -576,7 +631,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 
     <div class="modal-error" id="genError"></div>
     <div class="gen-nav">
-      <button class="gen-nav-back" id="genBackBtn" onclick="genBack()" style="visibility:hidden">← Back</button>
+      <button class="btn" id="genBackBtn" onclick="genBack()" style="visibility:hidden">← Back</button>
       <button class="btn primary" id="genNextBtn" onclick="genNext()">Next →</button>
     </div>
   </div>
@@ -1368,7 +1423,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 const GYM_PRESETS = {
   bodyweight: { label:'Bodyweight Only', icon:'🤸', desc:'No equipment', equipment:['bodyweight'] },
   hotel:      { label:'Hotel Gym',       icon:'🏨', desc:'Light cardio + dumbbells', equipment:['bench','bike','bodyweight','cable-machine','dumbbells','resistance-bands','treadmill'] },
-  alvey:      { label:'Alvey Gym',       icon:'🏠', desc:'Home setup', equipment:['ab-roller','barbell-weights','bench','bike','bodyweight','cable-machine','dip-bars','dumbbells','kettlebells','landmine','leg-press','medicine-ball','pullup-bar','resistance-bands','rower','smith-machine','stability-ball','step-platform','treadmill'] },
+  alvey:      { label:'Alvey Gym',       icon:'🏠', desc:'Home setup', equipment:['ab-roller','barbell-weights','bench','bike','bodyweight','cable-machine','dip-bars','dumbbells','kettlebells','landmine','lat-pulldown-machine','leg-press','medicine-ball','pullup-bar','resistance-bands','rower','seated-row-machine','smith-machine','stability-ball','step-platform','treadmill'] },
   commercial: { label:'Full Gym',        icon:'🏢', desc:'Commercial gym', equipment:[] }, // filled from vault
 };
 
@@ -1543,14 +1598,20 @@ function renderEquipStep(){
       <span class="gen-preset-tile-desc">${p.desc}</span>
     </button>`;
   }).join('');
-  // Equipment chips (sorted alphabetically — EQUIP_META order)
-  const equipChips = document.getElementById('equipChips');
+  // Equipment as stacked list rows with checkmarks
+  const equipList = document.getElementById('equipChips');
   const tags = genState.allEquipTags.length ? genState.allEquipTags : Object.keys(EQUIP_META);
-  equipChips.innerHTML = tags.map(tag => {
+  equipList.innerHTML = tags.map(tag => {
     const meta = EQUIP_META[tag] || {label:tag, icon:'🔧'};
     const sel = genState.equipment.has(tag) ? 'selected' : '';
-    return `<div class="gen-chip ${sel}" onclick="toggleEquip('${tag}')">
-      <span class="gen-chip-icon">${meta.icon}</span>${escapeHtml(meta.label)}
+    return `<div class="gen-equip-item ${sel}" onclick="toggleEquip('${tag}')">
+      <span class="gen-equip-item-icon">${meta.icon}</span>
+      <span class="gen-equip-item-label">${escapeHtml(meta.label)}</span>
+      <span class="gen-equip-check">
+        <svg class="gen-equip-check-mark" viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1.5,5 4,7.5 8.5,2.5"/>
+        </svg>
+      </span>
     </div>`;
   }).join('');
   syncSelectAllBtn();
@@ -1593,15 +1654,18 @@ function syncSelectAllBtn(){
 
 /* ── SESSION STEP ── */
 function renderSessionStep(){
-  // Goal chips
-  document.getElementById('goalChips').innerHTML = Object.entries(GOAL_META).map(([key,m]) =>
+  // Goal chips — same list format as equip items, with Surprise Me at bottom
+  const goalEntries = [...Object.entries(GOAL_META), ['surprise-goal', {label:'Surprise Me', icon:'🎲', sub:'Any goal — revealed after build'}]];
+  document.getElementById('goalChips').innerHTML = goalEntries.map(([key,m]) =>
     `<button class="gen-goal-chip ${genState.goal===key?'selected':''}" onclick="selectGoal('${key}')">
       <span class="gen-goal-icon">${m.icon}</span>
-      <span><span style="display:block;font-size:14px;font-weight:700">${m.label}</span><span class="gen-goal-sub">${m.sub}</span></span>
+      <span style="flex:1"><span style="display:block;font-size:14px;font-weight:700">${m.label}</span><span class="gen-goal-sub">${m.sub||''}</span></span>
+      ${genState.goal===key ? `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="2,8 6,12 14,4"/></svg>` : ''}
     </button>`
   ).join('');
-  // Bias chips
-  document.getElementById('biasChips').innerHTML = Object.entries(BIAS_META).map(([key,m]) =>
+  // Bias chips with Surprise Me at end
+  const biasEntries = [...Object.entries(BIAS_META), ['surprise-bias', {label:'Surprise Me', icon:'🎲'}]];
+  document.getElementById('biasChips').innerHTML = biasEntries.map(([key,m]) =>
     `<button class="gen-bias-chip ${genState.bias===key?'selected':''}" onclick="selectBias('${key}')">
       <span class="gen-goal-icon">${m.icon}</span>${m.label}
     </button>`
@@ -1611,25 +1675,15 @@ function renderSessionStep(){
 function selectGoal(key){ genState.goal=key; renderSessionStep(); }
 function selectBias(key){ genState.bias=key; renderSessionStep(); }
 
-function surpriseGoal(){
-  const keys = Object.keys(GOAL_META);
-  genState.goal = keys[Math.floor(Math.random()*keys.length)];
-  renderSessionStep();
-}
-function surpriseBias(){
-  const keys = Object.keys(BIAS_META);
-  genState.bias = keys[Math.floor(Math.random()*keys.length)];
-  renderSessionStep();
-}
+
 
 /* ── CONSTRAINTS STEP ── */
 function renderConstraintsStep(){
   // Duration chips
   document.getElementById('durationChips').innerHTML = [10,20,30,45,60].map(d =>
-    `<div class="gen-duration-chip ${genState.duration===d?'selected':''}" onclick="selectDuration(${d})" style="flex:1;text-align:center;padding:12px 4px;cursor:pointer">
-      <span style="font-size:16px;font-weight:700">${d}</span><br>
-      <span class="dur-sub">min</span>
-    </div>`
+    `<button class="gen-duration-chip ${genState.duration===d?'selected':''}" onclick="selectDuration(${d})">
+      ${d}<span class="dur-sub">min</span>
+    </button>`
   ).join('');
   // Energy chips
   document.getElementById('energyChips').innerHTML = Object.entries(ENERGY_META).map(([key,m]) =>
@@ -1647,10 +1701,7 @@ function renderConstraintsStep(){
 }
 
 function selectDuration(d){
-  genState.duration=d;
-  document.querySelectorAll('#durationChips > div').forEach(el => {
-    el.classList.toggle('selected', parseInt(el.textContent)===d || el.onclick?.toString().includes('('+d+')'));
-  });
+  genState.duration = d;
   renderConstraintsStep();
 }
 function selectEnergy(key){ genState.energy=key; renderConstraintsStep(); }
@@ -1681,12 +1732,28 @@ function genBuild(){
   const err = document.getElementById('genError');
   err.classList.remove('active');
   if(!genState.duration){ err.textContent='Select a duration.'; err.classList.add('active'); return; }
+  // Guard: vault must be loaded
+  if(!genState.vault || !genState.vault.length){
+    err.textContent='Still loading exercises — try again in a moment.';
+    err.classList.add('active');
+    loadVault().then(() => { err.classList.remove('active'); });
+    return;
+  }
+  // Resolve surprise selections randomly
+  const goalKeys = Object.keys(GOAL_META);
+  const biasKeys = Object.keys(BIAS_META);
+  const resolvedGoal = (genState.goal === 'surprise-goal' || !genState.goal)
+    ? goalKeys[Math.floor(Math.random()*goalKeys.length)]
+    : genState.goal;
+  const resolvedBias = (genState.bias === 'surprise-bias' || !genState.bias)
+    ? biasKeys[Math.floor(Math.random()*biasKeys.length)]
+    : genState.bias;
 
   const workout = buildWorkout(
     genState.vault,
     [...genState.equipment],
-    genState.goal || 'athletic',
-    genState.bias || 'full-body',
+    resolvedGoal,
+    resolvedBias,
     genState.duration,
     genState.energy || 'normal',
     [...genState.constraints]
