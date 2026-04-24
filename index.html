@@ -2005,7 +2005,11 @@ function _doSwap(globalExIdx){
   const currentEx = WORKOUT.blocks[foundBlock].exercises[foundEx];
   const rounds = currentEx.rounds || 1;
   const dur = WORKOUT._duration || 45;
-  const cfg = DURATION_CONFIG[dur] || DURATION_CONFIG[45];
+  // Derive cfg from GOAL_CONFIG (DURATION_CONFIG no longer exists)
+  const goalKey = WORKOUT.parameters?.find(p => p.label === 'Goal')?.value;
+  const matchedGoal = Object.keys(GOAL_CONFIG).find(k => GOAL_META[k]?.label === goalKey) || 'athletic';
+  const goalCfg = GOAL_CONFIG[matchedGoal] || GOAL_CONFIG.athletic;
+  const cfg = { compReps: goalCfg.compReps, isoReps: goalCfg.isoReps };
 
   // All vault IDs currently in workout
   const usedIds = new Set();
