@@ -262,7 +262,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 /* modal-head + gen-progress + gen-nav stay fixed — add spacing */
 .modal .modal-head{flex:0 0 auto}
 .modal .gen-progress{flex:0 0 auto;padding:8px 0 2px 0}
-.modal .gen-nav{flex:0 0 auto;padding-top:12px}
+.modal .gen-nav{flex:0 0 auto;padding-top:12px;display:flex;justify-content:space-between;align-items:center}
 .modal .modal-error{flex:0 0 auto}
 .modal .modal-help,.modal .modal-actions{flex:0 0 auto}
 /* generate steps scroll internally */
@@ -294,14 +294,14 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 .gen-preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .gen-preset-tile{
   border:1px solid var(--line);background:var(--card2);color:var(--text);
-  padding:12px 10px;border-radius:var(--radius);cursor:pointer;text-align:left;
+  padding:8px 10px;border-radius:var(--radius);cursor:pointer;text-align:left;
   transition:background .15s ease, border-color .15s ease, transform .06s ease
 }
 .gen-preset-tile:active{transform:scale(.97)}
 .gen-preset-tile.selected{background:rgba(10,132,255,.15);border-color:var(--accent)}
-.gen-preset-tile-icon{font-size:22px;line-height:1;display:block;margin-bottom:4px}
-.gen-preset-tile-label{font-size:13px;font-weight:700;letter-spacing:-0.01em;display:block}
-.gen-preset-tile-desc{font-size:11px;color:var(--muted);display:block;margin-top:1px}
+.gen-preset-tile-icon{font-size:18px;line-height:1;display:block;margin-bottom:2px}
+.gen-preset-tile-label{font-size:13px;font-weight:700;letter-spacing:-0.01em;display:block;line-height:1.2}
+.gen-preset-tile-desc{font-size:10px;color:var(--muted);display:block;margin-top:1px}
 .gen-preset-tile.selected .gen-preset-tile-desc{color:var(--accent);opacity:.8}
 
 .gen-section-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -632,7 +632,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
     <div class="modal-error" id="genError"></div>
     <div class="gen-nav">
       <button class="btn" id="genBackBtn" onclick="genBack()" style="visibility:hidden">← Back</button>
-      <button class="btn primary" id="genNextBtn" onclick="genNext()">Next →</button>
+      <button class="btn primary" id="genNextBtn" onclick="genStepAction()">Next →</button>
     </div>
   </div>
 </div>
@@ -1536,6 +1536,9 @@ let genState = {
 };
 
 /* ── OPEN / CLOSE ── */
+function openAboutModal(){ document.getElementById('aboutModal').classList.add('active'); }
+function closeAboutModal(){ document.getElementById('aboutModal').classList.remove('active'); }
+
 function openGenerateModal(){
   genState.step=0; genState.equipment=new Set(); genState.goal=null;
   genState.bias=null; genState.duration=null; genState.energy='normal';
@@ -1579,7 +1582,6 @@ function renderGenStep(step){
   document.getElementById('genBackBtn').style.visibility = step>0 ? 'visible' : 'hidden';
   const nextBtn = document.getElementById('genNextBtn');
   nextBtn.textContent = step<2 ? 'Next →' : '⚡ Build Workout';
-  nextBtn.onclick = step<2 ? genNext : genBuild;
   if(step===0) renderEquipStep();
   if(step===1) renderSessionStep();
   if(step===2) renderConstraintsStep();
@@ -1711,6 +1713,7 @@ function toggleConstraint(key){
   renderConstraintsStep();
 }
 
+function genStepAction(){ if(genState.step < 2) genNext(); else genBuild(); }
 function genBack(){ if(genState.step>0) renderGenStep(genState.step-1); }
 function genNext(){
   const err = document.getElementById('genError');
