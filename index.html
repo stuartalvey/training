@@ -1771,7 +1771,6 @@ async function genBuild(){
     err.textContent = 'Something went wrong building the workout. Try different selections.';
     err.classList.add('active');
     console.error('buildWorkout error:', e);
-    alert('BUILD ERROR: ' + e.message + '\n\nStack: ' + (e.stack||'').slice(0,200));
     return;
   }
   if(!workout){
@@ -1781,6 +1780,15 @@ async function genBuild(){
   closeGenerateModal();
   try { localStorage.setItem(WORKOUT_KEY, JSON.stringify(workout)); } catch(e){}
   renderWorkout(workout);
+}
+
+function makeDetail(ex, sets, cfg, duration){
+  const reps = ex.type === 'compound' ? cfg.compReps : cfg.isoReps;
+  if(ex.timed){
+    const secs = duration <= 10 ? 20 : duration <= 20 ? 30 : duration <= 30 ? 40 : 45;
+    return ex.unilateral ? `${sets} x ${secs} sec / side` : `${sets} x ${secs} sec`;
+  }
+  return ex.unilateral ? `${sets} x ${reps} / side` : `${sets} x ${reps}`;
 }
 
 function buildWorkout(vault, equipment, goal, bias, duration, energy, constraints){
