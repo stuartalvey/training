@@ -343,6 +343,39 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 .gen-nav-back:active{ color:var(--text); }
 .gen-section-label{ font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-bottom:2px; }
 
+
+/* ============ EXERCISE ACTION BUTTONS ============ */
+.ex-actions{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+.ex-action-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border:none;border-radius:999px;
+  background:var(--card);color:var(--text);font-size:16px;
+  cursor:pointer;flex:0 0 auto;
+  transition:background .15s ease, transform .06s ease;
+}
+.ex-action-btn:active{transform:scale(.88);background:var(--line)}
+.ex-note-preview{
+  font-size:12px;color:var(--muted);letter-spacing:-0.01em;
+  margin-top:6px;padding:6px 8px;border-radius:var(--radius-sm);
+  background:var(--card);line-height:1.4;display:none;
+  border-left:2px solid var(--accent);
+}
+.ex-note-preview.has-note{display:block}
+
+/* SHARE CHOICE BUTTONS */
+.share-choice-btn{
+  width:100%;padding:16px;border-radius:var(--radius);
+  border:1px solid var(--line);background:var(--card2);color:var(--text);
+  font-size:15px;font-weight:600;letter-spacing:-0.02em;
+  cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;
+  transition:background .15s ease, transform .06s ease
+}
+.share-choice-btn:active{transform:scale(.98);background:var(--line)}
+.share-choice-icon{font-size:22px;flex:0 0 auto}
+.share-choice-text{display:flex;flex-direction:column;gap:2px}
+.share-choice-label{font-size:15px;font-weight:600}
+.share-choice-sub{font-size:12px;color:var(--muted);font-weight:400;letter-spacing:-0.01em}
+
 </style>
 </head>
 <body>
@@ -374,7 +407,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
         <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>
       </svg>
     </button>
-    <button class="icon-btn" onclick="shareWorkout()" aria-label="Share workout" title="Share workout">
+    <button class="icon-btn" onclick="openShareChoiceModal()" aria-label="Share workout" title="Share workout">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 3v13"/><polyline points="7 8 12 3 17 8"/>
         <path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>
@@ -411,7 +444,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 <div id="blocksContainer"></div>
 
 <!-- NOTES -->
-<div class="section" id="notesSection">
+<div class="section" id="notesSection" style="display:none">
   <div class="section-head collapsed" onclick="toggleCollapsible('notesBody', this)">
     <h2>📝 Notes</h2>
     <div class="meta">tap to expand</div>
@@ -425,7 +458,6 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 
 <!-- FOOTER ACTIONS -->
 <div id="footerActions" class="footer-row">
-  <button class="btn footer-btn" onclick="copyWorkout()" id="copyBtn">Copy Workout</button>
   <button class="btn footer-btn danger" onclick="resetAll()">Reset Workout</button>
   <button class="btn footer-btn danger" onclick="unloadWorkout()">Exit Workout</button>
 </div>
@@ -639,6 +671,7 @@ function extractJsonObject(raw){
 
 function renderWorkout(workout){
   WORKOUT = workout;
+  exNotes = {};
   const footer = document.getElementById('footerActions');
   const notesSection = document.getElementById('notesSection');
   if(!workout){
@@ -687,16 +720,25 @@ function renderWorkout(workout){
         const r = i + 1;
         return `<label class="cb"><input type="checkbox" id="cb-${exerciseIndex}-${r}" data-item="1">R${r}</label>`;
       }).join('');
-      return `<div class="exercise">
+      const isGenerated = WORKOUT && WORKOUT._generated;
+      const swapBtnHtml = isGenerated
+        ? `<button class="ex-action-btn" onclick="swapExercise(${exerciseIndex})" title="Swap exercise">🔄</button>`
+        : '';
+      return `<div class="exercise" data-ex-idx="${exerciseIndex}">
         <div class="ex-top">
           <div style="min-width:0;flex:1">
             <div class="ex-name">${escapeHtml(ex.name)}</div>
             <div class="ex-detail">${escapeHtml(ex.detail || '')}</div>
           </div>
-          <a class="play" href="https://www.youtube.com/results?search_query=${urlEncodeQuery(query)}" target="_blank" rel="noopener noreferrer" aria-label="Watch form">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          </a>
+          <div class="ex-actions">
+            ${swapBtnHtml}
+            <button class="ex-action-btn" onclick="openExNoteModal(${exerciseIndex})" title="Add note">✏️</button>
+            <a class="play" href="https://www.youtube.com/results?search_query=${urlEncodeQuery(query)}" target="_blank" rel="noopener noreferrer" aria-label="Watch form">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </a>
+          </div>
         </div>
+        <div class="ex-note-preview" id="ex-note-preview-${exerciseIndex}"></div>
         <div class="round-row">
           <div class="round-label">Rounds</div>
           <div class="checks">${roundsHtml}</div>
@@ -725,7 +767,7 @@ function renderWorkout(workout){
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto">
         <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
       </svg>
-      <div style="flex:1;min-width:0">Tap a round <span class="first-hint-round" aria-hidden="true">R</span> to mark as complete. Tap <span class="first-hint-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> to watch proper form videos.</div>
+      <div style="flex:1;min-width:0">Tap <span class="first-hint-round">R</span> to log a set. Tap ✏️ to add exercise notes. Tap 🔄 to swap an exercise (generated workouts). Tap <span class="first-hint-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> for form videos. These tips disappear after first use.</div>
     </div>`;
   }
 
@@ -897,24 +939,53 @@ function validateWorkout(w){
 }
 
 function buildShareText(w){
-  return `PROTEIN SOCIAL WORKOUT\n"${w.headerTitle || 'Workout'}"${w.date ? ' — ' + w.date : ''}\n\nTo use:\n1. Go to https://app.proteinsocial.com\n2. Tap Import\n3. Paste this entire file\n\n` + JSON.stringify(w, null, 2) + '\n';
+  // Strip internal _generated flags before sharing template
+  const clean = {};
+  Object.keys(w).filter(k => !k.startsWith('_')).forEach(k => clean[k] = w[k]);
+  clean.blocks = (w.blocks || []).map(b => ({
+    ...b,
+    exercises: (b.exercises || []).map(ex => {
+      const r = {}; Object.keys(ex).filter(k => !k.startsWith('_')).forEach(k => r[k] = ex[k]); return r;
+    })
+  }));
+  return 'PROTEIN SOCIAL WORKOUT\n"' + (w.headerTitle || 'Workout') + '"' + (w.date ? ' \u2014 ' + w.date : '') + '\n\nTo use:\n1. Go to https://app.proteinsocial.com\n2. Tap Import\n3. Paste this entire file\n\n' + JSON.stringify(clean, null, 2) + '\n';
 }
 function buildShareFilename(w){
-  return `protein-social-${w.date ? w.date + '-' : ''}${(w.slug || 'workout')}.txt`;
+  return 'protein-social-' + (w.date ? w.date + '-' : '') + (w.slug || 'workout') + '.txt';
 }
-async function shareWorkout(){
-  if(!WORKOUT){ alert('No workout loaded.'); return; }
-  const text = buildShareText(WORKOUT), filename = buildShareFilename(WORKOUT), title = WORKOUT.headerTitle || 'Protein Social Workout';
+function openShareChoiceModal(){
+  if(!WORKOUT) return;
+  document.getElementById('shareChoiceModal').classList.add('active');
+}
+function closeShareChoiceModal(){
+  document.getElementById('shareChoiceModal').classList.remove('active');
+}
+async function shareTemplate(){
+  closeShareChoiceModal();
+  const text = buildShareText(WORKOUT);
+  const filename = buildShareFilename(WORKOUT);
+  const title = WORKOUT.headerTitle || 'Protein Social Workout';
+  await doShare(text, filename, title);
+}
+async function shareSummary(){
+  closeShareChoiceModal();
+  const text = buildSummaryText();
+  const filename = 'protein-social-results-' + (WORKOUT.date || 'workout') + '.txt';
+  const title = (WORKOUT.headerTitle || 'Workout') + ' \u2014 My Results';
+  await doShare(text, filename, title);
+}
+async function doShare(text, filename, title){
+  const appUrl = 'https://app.proteinsocial.com';
   if(navigator.share && typeof File !== 'undefined'){
     try {
       const file = new File([text], filename, { type: 'text/plain' });
-      if(!navigator.canShare || navigator.canShare({ files: [file] })){ await navigator.share({ title, files: [file] }); return; }
+      if(!navigator.canShare || navigator.canShare({ files: [file] })){ await navigator.share({ title, files: [file], url: appUrl }); return; }
     } catch(e){ if(e && e.name === 'AbortError') return; }
   }
   if(navigator.share){
-    try { await navigator.share({ title, text }); return; } catch(e){ if(e && e.name === 'AbortError') return; }
+    try { await navigator.share({ title, text, url: appUrl }); return; } catch(e){ if(e && e.name === 'AbortError') return; }
   }
-  openShareModal(text);
+  openShareModal(text + '\n\n' + appUrl);
 }
 function openShareModal(text){
   document.getElementById('shareTextarea').value = text;
@@ -1153,7 +1224,7 @@ function updateProgress(){
 function saveState(){
   if(!STORAGE_KEY){ updateProgress(); updateExpandIcon(); return; }
   updateProgress(); updateExpandIcon();
-  const state = { checks:{}, notes: document.getElementById('notes').value, collapsed:{} };
+  const state = { checks:{}, notes: document.getElementById('notes').value, collapsed:{}, exNotes:{...exNotes} };
   allChecks().forEach(c => state.checks[c.id] = c.checked);
   allCollapsibles().forEach(el => { state.collapsed[el.id] = el.classList.contains('hidden'); });
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
@@ -1170,6 +1241,10 @@ function loadWorkoutProgress(){
       if(state.collapsed && state.collapsed[el.id]){ el.classList.add('hidden'); const h = el.previousElementSibling; if(h) h.classList.add('collapsed'); }
       else { el.classList.remove('hidden'); const h = el.previousElementSibling; if(h) h.classList.remove('collapsed'); }
     });
+    if(state.exNotes && typeof state.exNotes === 'object'){
+      exNotes = state.exNotes;
+      Object.entries(exNotes).forEach(([idx, note]) => updateExNotePreview(parseInt(idx), note));
+    }
   } catch(e){}
 }
 
@@ -1197,29 +1272,29 @@ async function unloadWorkout(){
   releaseWakeLock(); renderWorkout(null);
 }
 
-function copyWorkout(){
-  if(!WORKOUT){ alert('No workout loaded.'); return; }
+function buildSummaryText(){
+  if(!WORKOUT) return '';
   const lines = [`${WORKOUT.headerTitle} \u2014 ${WORKOUT.date || ''}`.trim(), ''];
   document.querySelectorAll('.block').forEach(block => {
     const title = block.querySelector('.block-head-title')?.innerText || '';
     const meta = block.querySelector('.block-head-meta')?.innerText || '';
     lines.push(`${title} \u2014 ${meta}`.trim());
     block.querySelectorAll('.exercise').forEach(ex => {
-      const name = ex.querySelector('.ex-name')?.innerText || '', detail = ex.querySelector('.ex-detail')?.innerText || '';
+      const name = ex.querySelector('.ex-name')?.innerText || '';
+      const detail = ex.querySelector('.ex-detail')?.innerText || '';
       const done = [...ex.querySelectorAll('input[type="checkbox"]')].filter(c => c.checked).length;
       const total = ex.querySelectorAll('input[type="checkbox"]').length;
       lines.push(`- ${name} \u2014 ${detail}  [${done}/${total}]`);
+      const exIdx = ex.dataset.exIdx;
+      const note = exNotes[exIdx];
+      if(note) lines.push(`  Note: ${note}`);
     });
     const rest = block.querySelector('.rest')?.innerText; if(rest) lines.push(`  ${rest}`);
     lines.push('');
   });
-  const notes = document.getElementById('notes').value.trim();
-  if(notes){ lines.push('Notes:'); lines.push(notes); }
-  const text = lines.join('\n');
-  const doFallback = () => { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} document.body.removeChild(ta); };
-  if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(text).catch(doFallback); } else { doFallback(); }
-  const btn = document.getElementById('copyBtn'), old = btn.textContent;
-  btn.textContent = 'Copied \u2713'; setTimeout(() => btn.textContent = old, 1200);
+  const globalNote = document.getElementById('notes').value.trim();
+  if(globalNote){ lines.push('Notes:'); lines.push(globalNote); }
+  return lines.join('\n');
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -1234,13 +1309,14 @@ window.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('notes').addEventListener('input', () => { clearTimeout(notesDebounce); notesDebounce = setTimeout(saveState, 300); });
   document.addEventListener('keydown', e => {
     if(e.key !== 'Escape') return;
-    const ids = ['confirmModal','helpModal','shareModal','importModal','generateModal','aboutModal'];
-    const fns = [confirmCancel, closeHelpModal, closeShareModal, closeImportModal, closeGenerateModal, closeAboutModal];
+    const ids = ['confirmModal','helpModal','shareModal','importModal','generateModal','aboutModal','exNoteModal','shareChoiceModal'];
+    const fns = [confirmCancel, closeHelpModal, closeShareModal, closeImportModal, closeGenerateModal, closeAboutModal, closeExNoteModal, closeShareChoiceModal];
     for(let i = 0; i < ids.length; i++){ if(document.getElementById(ids[i]).classList.contains('active')){ fns[i](); return; } }
   });
   requestAnimationFrame(syncHeaderHeight);
   window.addEventListener('resize', () => requestAnimationFrame(syncHeaderHeight));
   window.addEventListener('orientationchange', () => { setTimeout(syncHeaderHeight, 50); setTimeout(syncHeaderHeight, 300); });
+  if(window.ResizeObserver){ new ResizeObserver(() => requestAnimationFrame(syncHeaderHeight)).observe(document.querySelector('.header')); }
 });
 
 /* ================================================================
@@ -1506,6 +1582,15 @@ function genBuild(){
   renderWorkout(workout);
 }
 
+function makeDetail(ex, sets, cfg, duration){
+  const reps = ex.type === 'compound' ? cfg.compReps : cfg.isoReps;
+  if(ex.timed){
+    const secs = duration <= 15 ? 30 : duration <= 30 ? 40 : 45;
+    return ex.unilateral ? `${sets} x ${secs} sec / side` : `${sets} x ${secs} sec`;
+  }
+  return ex.unilateral ? `${sets} x ${reps} / side` : `${sets} x ${reps}`;
+}
+
 function buildWorkout(vault, equipment, muscles, duration){
   const cfg = DURATION_CONFIG[duration];
   const templates = BLOCK_TEMPLATES[duration];
@@ -1573,14 +1658,7 @@ function buildWorkout(vault, equipment, muscles, duration){
     return picked;
   }
 
-  function makeDetail(ex, sets, cfg){
-    const reps = ex.type === 'compound' ? cfg.compReps : cfg.isoReps;
-    if(ex.timed){
-      const secs = duration <= 15 ? 30 : duration <= 30 ? 40 : 45;
-      return ex.unilateral ? `${sets} x ${secs} sec / side` : `${sets} x ${secs} sec`;
-    }
-    return ex.unilateral ? `${sets} x ${reps} / side` : `${sets} x ${reps}`;
-  }
+  // makeDetail is defined outside buildWorkout — see below
 
   const blocks = [];
 
@@ -1644,9 +1722,10 @@ function buildWorkout(vault, equipment, muscles, duration){
 
     const blockExercises = exercises.map(ex => ({
       name: ex.name,
-      detail: makeDetail(ex, blockRounds, cfg),
+      detail: makeDetail(ex, blockRounds, cfg, duration),
       rounds: blockRounds,
       youtubeQuery: ex.youtubeQuery,
+      _vaultId: ex.id || null,
     }));
 
     blocks.push({
@@ -1672,6 +1751,10 @@ function buildWorkout(vault, equipment, muscles, duration){
     date: dateStr,
     duration: `~${duration} min`,
     slug: `generated-${slugDate}-${duration}min`,
+    _generated: true,
+    _equipment: equipment,
+    _muscles: muscles,
+    _duration: duration,
     parameters: [
       { label: 'Type', value: 'Auto-Generated' },
       { label: 'Equipment', value: equipment.map(e => EQUIP_META[e]?.label || e).join(', ') },
@@ -1684,6 +1767,120 @@ function buildWorkout(vault, equipment, muscles, duration){
 
 
 
+
+
+/* ================================================================
+   EXERCISE NOTES — per-exercise note storage and modal
+   ================================================================ */
+let exNotes = {};         // { exerciseIndex: "note text" }
+let currentExNoteIdx = null;
+
+function openExNoteModal(exIdx){
+  const exerciseEl = document.querySelector(`.exercise[data-ex-idx="${exIdx}"]`);
+  const name = exerciseEl?.querySelector('.ex-name')?.textContent || 'Exercise';
+  document.getElementById('exNoteTitle').textContent = name;
+  document.getElementById('exNoteTextarea').value = exNotes[exIdx] || '';
+  currentExNoteIdx = exIdx;
+  document.getElementById('exNoteModal').classList.add('active');
+  setTimeout(() => document.getElementById('exNoteTextarea').focus(), 50);
+  dismissFirstHint();
+}
+function closeExNoteModal(){
+  const idx = currentExNoteIdx;
+  if(idx !== null){
+    const val = document.getElementById('exNoteTextarea').value.trim();
+    if(val) exNotes[idx] = val;
+    else delete exNotes[idx];
+    updateExNotePreview(idx, val);
+    saveState();
+  }
+  document.getElementById('exNoteModal').classList.remove('active');
+  currentExNoteIdx = null;
+}
+function updateExNotePreview(exIdx, note){
+  const el = document.getElementById(`ex-note-preview-${exIdx}`);
+  if(!el) return;
+  el.textContent = note ? `✏️ ${note}` : '';
+  el.classList.toggle('has-note', !!note);
+}
+
+/* ================================================================
+   SWAP EXERCISE — replace an exercise from the vault
+   ================================================================ */
+function swapExercise(globalExIdx){
+  if(!genState.vault || !genState.vault.length){
+    loadVault().then(() => _doSwap(globalExIdx));
+    return;
+  }
+  _doSwap(globalExIdx);
+  dismissFirstHint();
+}
+
+function _doSwap(globalExIdx){
+  // Walk blocks to find the exercise by global index
+  let counter = 0, foundBlock = -1, foundEx = -1;
+  for(let bi = 0; bi < WORKOUT.blocks.length; bi++){
+    for(let ei = 0; ei < WORKOUT.blocks[bi].exercises.length; ei++){
+      counter++;
+      if(counter === globalExIdx){ foundBlock = bi; foundEx = ei; break; }
+    }
+    if(foundBlock >= 0) break;
+  }
+  if(foundBlock < 0) return;
+
+  const currentEx = WORKOUT.blocks[foundBlock].exercises[foundEx];
+  const rounds = currentEx.rounds || 1;
+  const dur = WORKOUT._duration || 45;
+  const cfg = DURATION_CONFIG[dur] || DURATION_CONFIG[45];
+
+  // All vault IDs currently in workout
+  const usedIds = new Set();
+  WORKOUT.blocks.forEach(b => b.exercises.forEach(e => { if(e._vaultId) usedIds.add(e._vaultId); }));
+
+  const equipSet = new Set(WORKOUT._equipment || []);
+  equipSet.add('bodyweight');
+  const muscleSet = new Set(WORKOUT._muscles || []);
+
+  const candidates = genState.vault.filter(ex => {
+    if(usedIds.has(ex.id)) return false;
+    if(!ex.equipment.every(e => equipSet.has(e))) return false;
+    return ex.muscles.some(m => muscleSet.has(m)) || ex.secondary.some(m => muscleSet.has(m));
+  });
+
+  if(candidates.length === 0){
+    // Flash the swap button briefly to indicate no options
+    const btn = document.querySelector(`.exercise[data-ex-idx="${globalExIdx}"] .ex-action-btn`);
+    if(btn){ btn.textContent = '❌'; setTimeout(() => btn.textContent = '🔄', 800); }
+    return;
+  }
+
+  const newVaultEx = candidates[Math.floor(Math.random() * candidates.length)];
+  const newEx = {
+    name: newVaultEx.name,
+    detail: makeDetail(newVaultEx, rounds, cfg, dur),
+    rounds: rounds,
+    youtubeQuery: newVaultEx.youtubeQuery || `${newVaultEx.name} proper form`,
+    _vaultId: newVaultEx.id,
+  };
+
+  // Update WORKOUT in memory
+  WORKOUT.blocks[foundBlock].exercises[foundEx] = newEx;
+  try { localStorage.setItem(WORKOUT_KEY, JSON.stringify(WORKOUT)); } catch(e){}
+
+  // Targeted DOM update — no full re-render, preserves checkbox state
+  const exerciseEl = document.querySelector(`.exercise[data-ex-idx="${globalExIdx}"]`);
+  if(exerciseEl){
+    exerciseEl.querySelector('.ex-name').textContent = newVaultEx.name;
+    exerciseEl.querySelector('.ex-detail').textContent = newEx.detail;
+    const playLink = exerciseEl.querySelector('.play');
+    if(playLink) playLink.href = `https://www.youtube.com/results?search_query=${urlEncodeQuery(newEx.youtubeQuery)}`;
+    // Brief flash animation
+    exerciseEl.style.transition = 'opacity .15s ease';
+    exerciseEl.style.opacity = '0.4';
+    setTimeout(() => { exerciseEl.style.opacity = '1'; setTimeout(() => exerciseEl.style.transition = '', 200); }, 150);
+  }
+}
+/* end exercise notes + swap */
 
 </script>
 </body>
