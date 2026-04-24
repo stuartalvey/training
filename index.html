@@ -808,7 +808,7 @@ function renderWorkout(workout){
       <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:5px">
           <div><span class="first-hint-round">R1</span> Tap to log a set</div>
           <div>✏️ &nbsp;Add notes to an exercise</div>
-          <div>🔄 &nbsp;Swap exercise (generated workouts)</div>
+          <div><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg> &nbsp;Swap exercise (generated workouts)</div>
           <div><span class="first-hint-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> &nbsp;Watch form video</div>
         </div>
     </div>`;
@@ -997,7 +997,10 @@ function buildShareFilename(w){
   return 'protein-social-' + (w.date ? w.date + '-' : '') + (w.slug || 'workout') + '.txt';
 }
 function openShareChoiceModal(){
-  if(!WORKOUT) return;
+  if(!WORKOUT){
+    askConfirm('No workout is loaded. Start by generating or importing a workout.', { title: 'Nothing to share', okLabel: 'Got it', danger: false });
+    return;
+  }
   document.getElementById('shareChoiceModal').classList.add('active');
 }
 function closeShareChoiceModal(){
@@ -1318,25 +1321,26 @@ async function unloadWorkout(){
 function buildSummaryText(){
   if(!WORKOUT) return '';
   const lines = [`${WORKOUT.headerTitle} \u2014 ${WORKOUT.date || ''}`.trim(), ''];
-  document.querySelectorAll('.block').forEach(block => {
-    const title = block.querySelector('.block-head-title')?.innerText || '';
-    const meta = block.querySelector('.block-head-meta')?.innerText || '';
-    lines.push(`${title} \u2014 ${meta}`.trim());
-    block.querySelectorAll('.exercise').forEach(ex => {
-      const name = ex.querySelector('.ex-name')?.innerText || '';
-      const detail = ex.querySelector('.ex-detail')?.innerText || '';
-      const done = [...ex.querySelectorAll('input[type="checkbox"]')].filter(c => c.checked).length;
-      const total = ex.querySelectorAll('input[type="checkbox"]').length;
-      lines.push(`- ${name} \u2014 ${detail}  [${done}/${total}]`);
-      const exIdx = ex.dataset.exIdx;
-      const note = exNotes[exIdx];
+  // Build from WORKOUT data directly — DOM-independent so collapsed blocks are included
+  let exCounter = 0;
+  (WORKOUT.blocks || []).forEach(block => {
+    lines.push(`${block.emoji || ''} ${block.name} \u2014 ${block.roundLabel || ''}`.trim());
+    (block.exercises || []).forEach(ex => {
+      exCounter++;
+      // Read checkbox state from DOM using the stable cb- IDs
+      const rounds = Math.max(1, parseInt(ex.rounds || 1, 10));
+      let done = 0;
+      for(let r = 1; r <= rounds; r++){
+        const cb = document.getElementById(`cb-${exCounter}-${r}`);
+        if(cb && cb.checked) done++;
+      }
+      lines.push(`- ${ex.name} \u2014 ${ex.detail || ''}  [${done}/${rounds}]`);
+      const note = exNotes[exCounter];
       if(note) lines.push(`  Note: ${note}`);
     });
-    const rest = block.querySelector('.rest')?.innerText; if(rest) lines.push(`  ${rest}`);
+    if(block.restCue) lines.push(`  ${block.restCue}`);
     lines.push('');
   });
-  const globalNote = document.getElementById('notes').value.trim();
-  if(globalNote){ lines.push('Notes:'); lines.push(globalNote); }
   return lines.join('\n');
 }
 
@@ -1822,10 +1826,13 @@ function openExNoteModal(exIdx){
   const exerciseEl = document.querySelector(`.exercise[data-ex-idx="${exIdx}"]`);
   const name = exerciseEl?.querySelector('.ex-name')?.textContent || 'Exercise';
   document.getElementById('exNoteTitle').textContent = name;
-  document.getElementById('exNoteTextarea').value = exNotes[exIdx] || '';
+  const textarea = document.getElementById('exNoteTextarea');
+  textarea.value = exNotes[exIdx] || '';
   currentExNoteIdx = exIdx;
   document.getElementById('exNoteModal').classList.add('active');
-  setTimeout(() => document.getElementById('exNoteTextarea').focus(), 50);
+  // Focus inline — iOS only opens keyboard when focus is called in the direct
+  // user-event call chain, without a setTimeout breaking that chain.
+  textarea.focus();
   dismissFirstHint();
 }
 function closeExNoteModal(){
