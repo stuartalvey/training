@@ -15,7 +15,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "push-up proper form"
+      "youtubeQuery": "push-up proper form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "pushup-wide",
@@ -31,7 +37,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "wide grip push-up form"
+      "youtubeQuery": "wide grip push-up form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "pushup-decline",
@@ -49,7 +61,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "decline push-up form"
+      "youtubeQuery": "decline push-up form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "pushup-diamond",
@@ -65,7 +84,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "diamond push-up form"
+      "youtubeQuery": "diamond push-up form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "db-bench-press",
@@ -83,7 +108,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell bench press form"
+      "youtubeQuery": "dumbbell bench press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "db-incline-press",
@@ -101,7 +131,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell incline bench press form"
+      "youtubeQuery": "dumbbell incline bench press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-fly",
@@ -116,7 +153,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell chest fly form"
+      "youtubeQuery": "dumbbell chest fly form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-floor-press",
@@ -132,7 +173,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell floor press form"
+      "youtubeQuery": "dumbbell floor press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-bench-press",
@@ -150,7 +196,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "barbell bench press form"
+      "youtubeQuery": "barbell bench press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-incline-press",
@@ -168,7 +219,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "barbell incline bench press form"
+      "youtubeQuery": "barbell incline bench press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "smith-bench-press",
@@ -186,7 +244,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "smith machine bench press form"
+      "youtubeQuery": "smith machine bench press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "cable-crossover",
@@ -200,7 +265,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "cable crossover chest fly form"
+      "youtubeQuery": "cable crossover chest fly form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-chest-fly-low",
@@ -216,7 +285,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "cable low to high chest fly form"
+      "youtubeQuery": "cable low to high chest fly form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "pullup",
@@ -233,7 +306,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "pull-up proper form"
+      "youtubeQuery": "pull-up proper form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "chinup",
@@ -250,7 +328,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "chin-up proper form"
+      "youtubeQuery": "chin-up proper form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "inverted-row",
@@ -267,7 +350,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "inverted row bodyweight form"
+      "youtubeQuery": "inverted row bodyweight form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "db-row",
@@ -284,7 +373,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "single arm dumbbell row form"
+      "youtubeQuery": "single arm dumbbell row form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "db-bent-row",
@@ -301,7 +395,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell bent over row form"
+      "youtubeQuery": "dumbbell bent over row form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "db-pullover",
@@ -318,7 +419,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell pullover form"
+      "youtubeQuery": "dumbbell pullover form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-row",
@@ -335,7 +440,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "barbell bent over row form"
+      "youtubeQuery": "barbell bent over row form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "deadlift",
@@ -352,7 +464,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "conventional deadlift form"
+      "youtubeQuery": "conventional deadlift form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "rdl-barbell",
@@ -369,7 +488,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "romanian deadlift form"
+      "youtubeQuery": "romanian deadlift form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "cable-seated-row",
@@ -385,7 +511,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "cable seated row form"
+      "youtubeQuery": "cable seated row form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-pulldown",
@@ -401,7 +532,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "lat pulldown form"
+      "youtubeQuery": "lat pulldown form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-straight-arm-pulldown",
@@ -415,7 +551,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "straight arm lat pulldown form"
+      "youtubeQuery": "straight arm lat pulldown form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "smith-row",
@@ -431,7 +571,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "smith machine bent over row form"
+      "youtubeQuery": "smith machine bent over row form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "pike-pushup",
@@ -447,7 +594,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "pike push-up form"
+      "youtubeQuery": "pike push-up form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-shoulder-press",
@@ -463,7 +618,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell shoulder press form"
+      "youtubeQuery": "dumbbell shoulder press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-lateral-raise",
@@ -477,7 +639,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell lateral raise form"
+      "youtubeQuery": "dumbbell lateral raise form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-front-raise",
@@ -491,7 +657,13 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell front raise form"
+      "youtubeQuery": "dumbbell front raise form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-rear-delt-fly",
@@ -507,7 +679,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell rear delt fly form"
+      "youtubeQuery": "dumbbell rear delt fly form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-arnold-press",
@@ -523,7 +699,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "arnold press form"
+      "youtubeQuery": "arnold press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "barbell-ohp",
@@ -540,7 +723,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "barbell overhead press form"
+      "youtubeQuery": "barbell overhead press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "cable-lateral-raise",
@@ -554,7 +744,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "cable lateral raise form"
+      "youtubeQuery": "cable lateral raise form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-face-pull",
@@ -570,7 +764,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "cable face pull form"
+      "youtubeQuery": "cable face pull form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "smith-ohp",
@@ -586,7 +784,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "smith machine shoulder press form"
+      "youtubeQuery": "smith machine shoulder press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "tricep-dip",
@@ -604,7 +809,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "tricep dip form bench"
+      "youtubeQuery": "tricep dip form bench",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "diamond-pushup-arms",
@@ -620,7 +832,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "close grip push-up triceps form"
+      "youtubeQuery": "close grip push-up triceps form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "db-curl",
@@ -634,7 +852,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "dumbbell bicep curl form"
+      "youtubeQuery": "dumbbell bicep curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-hammer-curl",
@@ -648,7 +870,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "hammer curl form"
+      "youtubeQuery": "hammer curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-incline-curl",
@@ -663,7 +889,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "incline dumbbell curl form"
+      "youtubeQuery": "incline dumbbell curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-overhead-tricep-ext",
@@ -677,7 +907,13 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell overhead tricep extension form"
+      "youtubeQuery": "dumbbell overhead tricep extension form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-tricep-kickback",
@@ -691,7 +927,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "dumbbell tricep kickback form"
+      "youtubeQuery": "dumbbell tricep kickback form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-concentration-curl",
@@ -705,7 +945,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "concentration curl form"
+      "youtubeQuery": "concentration curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-curl",
@@ -719,7 +963,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "barbell curl form"
+      "youtubeQuery": "barbell curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-skull-crusher",
@@ -734,7 +982,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "skull crusher form"
+      "youtubeQuery": "skull crusher form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-close-grip-press",
@@ -751,7 +1003,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "close grip bench press triceps form"
+      "youtubeQuery": "close grip bench press triceps form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-pushdown",
@@ -765,7 +1022,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "cable tricep pushdown form"
+      "youtubeQuery": "cable tricep pushdown form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-curl",
@@ -779,7 +1040,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "cable bicep curl form"
+      "youtubeQuery": "cable bicep curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-overhead-tricep",
@@ -793,7 +1058,13 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "cable overhead tricep extension form"
+      "youtubeQuery": "cable overhead tricep extension form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "bodyweight-squat",
@@ -809,7 +1080,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "bodyweight squat form"
+      "youtubeQuery": "bodyweight squat form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "jump-squat",
@@ -825,7 +1104,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "jump squat form"
+      "youtubeQuery": "jump squat form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "reverse-lunge",
@@ -841,7 +1128,15 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "reverse lunge form"
+      "youtubeQuery": "reverse lunge form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "walking-lunge-bw",
@@ -857,7 +1152,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "walking lunge form"
+      "youtubeQuery": "walking lunge form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "wall-sit",
@@ -871,7 +1174,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "wall sit form"
+      "youtubeQuery": "wall sit form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "step-up-bw",
@@ -888,7 +1196,14 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "step up exercise form"
+      "youtubeQuery": "step up exercise form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "db-goblet-squat",
@@ -905,7 +1220,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "goblet squat form"
+      "youtubeQuery": "goblet squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "db-walking-lunge",
@@ -921,7 +1243,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell walking lunge form"
+      "youtubeQuery": "dumbbell walking lunge form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "db-rdl",
@@ -938,7 +1267,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell romanian deadlift form"
+      "youtubeQuery": "dumbbell romanian deadlift form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "db-step-up",
@@ -955,7 +1291,14 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "dumbbell step up form"
+      "youtubeQuery": "dumbbell step up form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "db-leg-curl",
@@ -970,7 +1313,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell hamstring curl form"
+      "youtubeQuery": "dumbbell hamstring curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-squat",
@@ -987,7 +1334,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "barbell back squat form"
+      "youtubeQuery": "barbell back squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back",
+        "knee"
+      ]
     },
     {
       "id": "barbell-front-squat",
@@ -1003,7 +1358,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "barbell front squat form"
+      "youtubeQuery": "barbell front squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back",
+        "knee"
+      ]
     },
     {
       "id": "barbell-lunge",
@@ -1019,7 +1382,15 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "barbell lunge form"
+      "youtubeQuery": "barbell lunge form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back",
+        "knee"
+      ]
     },
     {
       "id": "leg-press",
@@ -1035,7 +1406,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "leg press machine form"
+      "youtubeQuery": "leg press machine form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "leg-press-narrow",
@@ -1049,7 +1427,14 @@
       "secondary": [],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "narrow stance leg press quad form"
+      "youtubeQuery": "narrow stance leg press quad form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "smith-squat",
@@ -1065,7 +1450,15 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "smith machine squat form"
+      "youtubeQuery": "smith machine squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back",
+        "knee"
+      ]
     },
     {
       "id": "smith-split-squat",
@@ -1081,7 +1474,14 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "smith machine split squat form"
+      "youtubeQuery": "smith machine split squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "cable-leg-extension",
@@ -1095,7 +1495,13 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "cable leg extension form"
+      "youtubeQuery": "cable leg extension form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "cable-hamstring-curl",
@@ -1109,7 +1515,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "cable hamstring curl form"
+      "youtubeQuery": "cable hamstring curl form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "glute-bridge",
@@ -1125,7 +1535,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "glute bridge form"
+      "youtubeQuery": "glute bridge form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "single-leg-glute-bridge",
@@ -1142,7 +1557,12 @@
       ],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "single leg glute bridge form"
+      "youtubeQuery": "single leg glute bridge form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "hip-thrust-bw",
@@ -1159,7 +1579,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "bodyweight hip thrust form"
+      "youtubeQuery": "bodyweight hip thrust form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "donkey-kick",
@@ -1173,7 +1597,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "donkey kick form"
+      "youtubeQuery": "donkey kick form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "fire-hydrant",
@@ -1187,7 +1616,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "fire hydrant exercise form"
+      "youtubeQuery": "fire hydrant exercise form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "db-hip-thrust",
@@ -1204,7 +1638,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell hip thrust form"
+      "youtubeQuery": "dumbbell hip thrust form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-sumo-squat",
@@ -1220,7 +1658,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell sumo squat form"
+      "youtubeQuery": "dumbbell sumo squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "db-curtsy-lunge",
@@ -1236,7 +1681,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "curtsy lunge form"
+      "youtubeQuery": "curtsy lunge form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "db-rdl-single",
@@ -1253,7 +1703,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "single leg romanian deadlift form"
+      "youtubeQuery": "single leg romanian deadlift form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-hip-thrust",
@@ -1270,7 +1725,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "barbell hip thrust form"
+      "youtubeQuery": "barbell hip thrust form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "barbell-sumo-deadlift",
@@ -1287,7 +1746,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "sumo deadlift form"
+      "youtubeQuery": "sumo deadlift form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "cable-kickback",
@@ -1301,7 +1767,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "youtubeQuery": "cable glute kickback form"
+      "youtubeQuery": "cable glute kickback form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-pull-through",
@@ -1318,7 +1788,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "cable pull through form"
+      "youtubeQuery": "cable pull through form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "smith-hip-thrust",
@@ -1335,7 +1810,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "smith machine hip thrust form"
+      "youtubeQuery": "smith machine hip thrust form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "leg-press-high-glute",
@@ -1351,7 +1830,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "high foot leg press glutes form"
+      "youtubeQuery": "high foot leg press glutes form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "plank",
@@ -1368,7 +1854,12 @@
       "type": "isolation",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "plank form"
+      "youtubeQuery": "plank form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "side-plank",
@@ -1383,7 +1874,12 @@
       "type": "isolation",
       "unilateral": true,
       "timed": true,
-      "youtubeQuery": "side plank form"
+      "youtubeQuery": "side plank form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "crunch",
@@ -1397,7 +1893,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "crunch form"
+      "youtubeQuery": "crunch form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "bicycle-crunch",
@@ -1411,7 +1912,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "bicycle crunch form"
+      "youtubeQuery": "bicycle crunch form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "leg-raise",
@@ -1425,7 +1931,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "lying leg raise form"
+      "youtubeQuery": "lying leg raise form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "mountain-climber",
@@ -1442,7 +1953,14 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "mountain climber form"
+      "youtubeQuery": "mountain climber form",
+      "goal": [
+        "strength",
+        "athletic",
+        "conditioning",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "dead-bug",
@@ -1456,7 +1974,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dead bug exercise form"
+      "youtubeQuery": "dead bug exercise form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "hollow-body",
@@ -1471,7 +1994,12 @@
       "type": "isolation",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "hollow body hold form"
+      "youtubeQuery": "hollow body hold form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "v-up",
@@ -1485,7 +2013,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "v-up exercise form"
+      "youtubeQuery": "v-up exercise form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "russian-twist-bw",
@@ -1499,7 +2032,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "russian twist form"
+      "youtubeQuery": "russian twist form",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "db-russian-twist",
@@ -1513,7 +2051,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "dumbbell russian twist form"
+      "youtubeQuery": "dumbbell russian twist form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "db-suitcase-carry",
@@ -1530,7 +2072,13 @@
       "type": "compound",
       "unilateral": true,
       "timed": true,
-      "youtubeQuery": "suitcase carry form"
+      "youtubeQuery": "suitcase carry form",
+      "goal": [
+        "strength",
+        "athletic",
+        "conditioning"
+      ],
+      "avoid": []
     },
     {
       "id": "db-woodchop",
@@ -1546,7 +2094,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "dumbbell woodchop form"
+      "youtubeQuery": "dumbbell woodchop form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "ab-wheel",
@@ -1563,7 +2116,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "ab wheel rollout form"
+      "youtubeQuery": "ab wheel rollout form",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-crunch",
@@ -1577,7 +2136,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "cable crunch form"
+      "youtubeQuery": "cable crunch form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "cable-woodchop",
@@ -1593,7 +2156,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "cable woodchop form"
+      "youtubeQuery": "cable woodchop form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "hanging-leg-raise",
@@ -1607,7 +2175,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "youtubeQuery": "hanging leg raise form"
+      "youtubeQuery": "hanging leg raise form",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
     },
     {
       "id": "burpee",
@@ -1625,7 +2197,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "burpee form"
+      "youtubeQuery": "burpee form",
+      "goal": [
+        "conditioning",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "jumping-jack",
@@ -1643,7 +2221,13 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "jumping jack form"
+      "youtubeQuery": "jumping jack form",
+      "goal": [
+        "conditioning",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "high-knees",
@@ -1661,7 +2245,13 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "high knees form"
+      "youtubeQuery": "high knees form",
+      "goal": [
+        "conditioning",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     },
     {
       "id": "box-jump",
@@ -1679,7 +2269,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "box jump form"
+      "youtubeQuery": "box jump form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "kb-swing",
@@ -1697,7 +2294,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "kettlebell swing form"
+      "youtubeQuery": "kettlebell swing form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "kb-goblet-squat",
@@ -1714,7 +2316,14 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "kettlebell goblet squat form"
+      "youtubeQuery": "kettlebell goblet squat form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "kb-clean-press",
@@ -1732,7 +2341,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "kettlebell clean and press form"
+      "youtubeQuery": "kettlebell clean and press form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "kb-turkish-getup",
@@ -1750,7 +2364,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "youtubeQuery": "turkish get-up form"
+      "youtubeQuery": "turkish get-up form",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "db-thruster",
@@ -1768,7 +2387,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "youtubeQuery": "dumbbell thruster form"
+      "youtubeQuery": "dumbbell thruster form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "battle-rope-waves",
@@ -1786,7 +2410,12 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "battle rope waves form"
+      "youtubeQuery": "battle rope waves form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "treadmill-walk-incline",
@@ -1804,7 +2433,12 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "incline treadmill walk form"
+      "youtubeQuery": "incline treadmill walk form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "treadmill-run",
@@ -1821,7 +2455,12 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "treadmill running form"
+      "youtubeQuery": "treadmill running form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "treadmill-hiit-sprint",
@@ -1839,7 +2478,12 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "treadmill sprint interval HIIT"
+      "youtubeQuery": "treadmill sprint interval HIIT",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "bike-steady",
@@ -1856,7 +2500,12 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "stationary bike steady state cardio"
+      "youtubeQuery": "stationary bike steady state cardio",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "bike-hiit",
@@ -1874,7 +2523,12 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "stationary bike HIIT sprint intervals"
+      "youtubeQuery": "stationary bike HIIT sprint intervals",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
     },
     {
       "id": "bike-resistance",
@@ -1892,7 +2546,1300 @@
       "type": "compound",
       "unilateral": false,
       "timed": true,
-      "youtubeQuery": "stationary bike high resistance climb"
+      "youtubeQuery": "stationary bike high resistance climb",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "row-steady",
+      "name": "Steady-State Row",
+      "equipment": [
+        "rower"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "back",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "rowing machine steady state form",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "row-sprint-interval",
+      "name": "Rowing Sprint Interval",
+      "equipment": [
+        "rower"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "back",
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "rowing machine sprint interval HIIT",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "row-pyramid",
+      "name": "Rowing Pyramid",
+      "equipment": [
+        "rower"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "back",
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "youtubeQuery": "rowing machine pyramid workout",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "row-500m",
+      "name": "500m Row",
+      "equipment": [
+        "rower"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "back",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": false,
+      "youtubeQuery": "rowing machine 500m technique",
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "band-pull-apart",
+      "name": "Band Pull-Apart",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "back"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "recovery",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "band pull apart exercise form"
+    },
+    {
+      "id": "banded-lateral-walk",
+      "name": "Banded Lateral Walk",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "banded lateral walk glutes form"
+    },
+    {
+      "id": "banded-glute-kickback",
+      "name": "Banded Glute Kickback",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "banded glute kickback form"
+    },
+    {
+      "id": "band-row",
+      "name": "Resistance Band Row",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "resistance band row form"
+    },
+    {
+      "id": "band-curl",
+      "name": "Resistance Band Curl",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "resistance band bicep curl form"
+    },
+    {
+      "id": "band-tricep-pushdown",
+      "name": "Resistance Band Tricep Pushdown",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "arms"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "resistance band tricep pushdown form"
+    },
+    {
+      "id": "band-face-pull",
+      "name": "Resistance Band Face Pull",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "back"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "recovery",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "resistance band face pull form"
+    },
+    {
+      "id": "band-squat",
+      "name": "Banded Squat",
+      "equipment": [
+        "resistance-bands"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "banded squat form"
+    },
+    {
+      "id": "landmine-press",
+      "name": "Landmine Press",
+      "equipment": [
+        "landmine",
+        "barbell-weights"
+      ],
+      "muscles": [
+        "shoulders"
+      ],
+      "secondary": [
+        "chest",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "landmine press form"
+    },
+    {
+      "id": "landmine-row",
+      "name": "Landmine Row",
+      "equipment": [
+        "landmine",
+        "barbell-weights"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ],
+      "youtubeQuery": "landmine row form"
+    },
+    {
+      "id": "landmine-squat",
+      "name": "Landmine Squat",
+      "equipment": [
+        "landmine",
+        "barbell-weights"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "landmine squat form"
+    },
+    {
+      "id": "landmine-rdl",
+      "name": "Landmine Romanian Deadlift",
+      "equipment": [
+        "landmine",
+        "barbell-weights"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "back",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ],
+      "youtubeQuery": "landmine romanian deadlift form"
+    },
+    {
+      "id": "landmine-rotation",
+      "name": "Landmine Rotation",
+      "equipment": [
+        "landmine",
+        "barbell-weights"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "athletic",
+        "conditioning"
+      ],
+      "avoid": [
+        "back"
+      ],
+      "youtubeQuery": "landmine rotation core form"
+    },
+    {
+      "id": "landmine-split-squat",
+      "name": "Landmine Split Squat",
+      "equipment": [
+        "landmine",
+        "barbell-weights"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "landmine split squat form"
+    },
+    {
+      "id": "med-ball-slam",
+      "name": "Medicine Ball Slam",
+      "equipment": [
+        "medicine-ball"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "core",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": [
+        "back"
+      ],
+      "timed": false,
+      "youtubeQuery": "medicine ball slam form"
+    },
+    {
+      "id": "med-ball-wall-ball",
+      "name": "Wall Ball",
+      "equipment": [
+        "medicine-ball"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": [
+        "knee",
+        "shoulder"
+      ],
+      "youtubeQuery": "wall ball exercise form"
+    },
+    {
+      "id": "med-ball-russian-twist",
+      "name": "Medicine Ball Russian Twist",
+      "equipment": [
+        "medicine-ball"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "medicine ball russian twist form"
+    },
+    {
+      "id": "med-ball-pushup",
+      "name": "Medicine Ball Push-Up",
+      "equipment": [
+        "medicine-ball",
+        "bodyweight"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ],
+      "youtubeQuery": "medicine ball push up form"
+    },
+    {
+      "id": "parallel-bar-dip",
+      "name": "Parallel Bar Dip",
+      "equipment": [
+        "dip-bars",
+        "bodyweight"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic",
+        "pump"
+      ],
+      "avoid": [
+        "shoulder"
+      ],
+      "youtubeQuery": "parallel bar dip form"
+    },
+    {
+      "id": "l-sit",
+      "name": "L-Sit Hold",
+      "equipment": [
+        "dip-bars",
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "arms"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "athletic",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "L-sit hold form"
+    },
+    {
+      "id": "ab-wheel-kneeling",
+      "name": "Kneeling Ab Wheel Rollout",
+      "equipment": [
+        "ab-roller",
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "back",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic",
+        "pump"
+      ],
+      "avoid": [
+        "back"
+      ],
+      "youtubeQuery": "ab wheel rollout form kneeling"
+    },
+    {
+      "id": "stability-ball-hamstring-curl",
+      "name": "Stability Ball Hamstring Curl",
+      "equipment": [
+        "stability-ball",
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "stability ball hamstring curl form"
+    },
+    {
+      "id": "stability-ball-plank",
+      "name": "Stability Ball Plank",
+      "equipment": [
+        "stability-ball",
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "athletic",
+        "recovery",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "stability ball plank form"
+    },
+    {
+      "id": "stability-ball-wall-squat",
+      "name": "Stability Ball Wall Squat",
+      "equipment": [
+        "stability-ball",
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "recovery",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "stability ball wall squat form"
+    },
+    {
+      "id": "stability-ball-pike",
+      "name": "Stability Ball Pike",
+      "equipment": [
+        "stability-ball",
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "athletic",
+        "pump"
+      ],
+      "avoid": [
+        "shoulder"
+      ],
+      "youtubeQuery": "stability ball pike form"
+    },
+    {
+      "id": "step-platform-stepup",
+      "name": "Step-Up",
+      "equipment": [
+        "step-platform",
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "step up exercise platform form"
+    },
+    {
+      "id": "lateral-step-up",
+      "name": "Lateral Step-Up",
+      "equipment": [
+        "step-platform",
+        "bodyweight"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "athletic",
+        "pump"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "lateral step up exercise form"
+    },
+    {
+      "id": "step-up-knee-drive",
+      "name": "Step-Up with Knee Drive",
+      "equipment": [
+        "step-platform",
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "athletic",
+        "conditioning"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "step up knee drive exercise form"
+    },
+    {
+      "id": "stair-climber-steady",
+      "name": "Stair Climber",
+      "equipment": [
+        "stair-climber"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "stair climber proper form"
+    },
+    {
+      "id": "stair-climber-intervals",
+      "name": "Stair Climber Intervals",
+      "equipment": [
+        "stair-climber"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "stair climber HIIT intervals"
+    },
+    {
+      "id": "elliptical-steady",
+      "name": "Steady-State Elliptical",
+      "equipment": [
+        "elliptical"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "conditioning",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "elliptical proper form technique"
+    },
+    {
+      "id": "elliptical-intervals",
+      "name": "Elliptical Intervals",
+      "equipment": [
+        "elliptical"
+      ],
+      "muscles": [
+        "cardio"
+      ],
+      "secondary": [
+        "legs",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "conditioning",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "elliptical interval training"
+    },
+    {
+      "id": "trx-row",
+      "name": "TRX Row",
+      "equipment": [
+        "suspension-trainer",
+        "bodyweight"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "TRX row form"
+    },
+    {
+      "id": "trx-pushup",
+      "name": "TRX Push-Up",
+      "equipment": [
+        "suspension-trainer",
+        "bodyweight"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [
+        "triceps",
+        "core"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "shoulder"
+      ],
+      "youtubeQuery": "TRX push up form"
+    },
+    {
+      "id": "trx-squat",
+      "name": "TRX Squat",
+      "equipment": [
+        "suspension-trainer",
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "TRX squat form"
+    },
+    {
+      "id": "trx-plank",
+      "name": "TRX Plank",
+      "equipment": [
+        "suspension-trainer",
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "athletic",
+        "recovery",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "TRX plank form"
+    },
+    {
+      "id": "trx-split-squat",
+      "name": "TRX Split Squat",
+      "equipment": [
+        "suspension-trainer",
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "TRX split squat form"
+    },
+    {
+      "id": "hack-squat-machine",
+      "name": "Hack Squat",
+      "equipment": [
+        "hack-squat"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "glutes"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "pump"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "hack squat machine form"
+    },
+    {
+      "id": "hack-squat-reverse",
+      "name": "Reverse Hack Squat",
+      "equipment": [
+        "hack-squat"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "pump"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "reverse hack squat form"
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": "Seated Leg Curl",
+      "equipment": [
+        "leg-curl-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "seated leg curl machine form"
+    },
+    {
+      "id": "lying-leg-curl",
+      "name": "Lying Leg Curl",
+      "equipment": [
+        "leg-curl-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "lying leg curl machine form"
+    },
+    {
+      "id": "leg-extension-machine",
+      "name": "Leg Extension",
+      "equipment": [
+        "leg-extension-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": [
+        "knee"
+      ],
+      "youtubeQuery": "leg extension machine form"
+    },
+    {
+      "id": "pec-deck-fly",
+      "name": "Pec Deck Fly",
+      "equipment": [
+        "pec-deck"
+      ],
+      "muscles": [
+        "chest"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "goal": [
+        "pump"
+      ],
+      "avoid": [
+        "shoulder"
+      ],
+      "youtubeQuery": "pec deck fly machine form"
+    },
+    {
+      "id": "seated-row-machine",
+      "name": "Seated Row Machine",
+      "equipment": [
+        "seated-row-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "seated row machine form"
+    },
+    {
+      "id": "wide-grip-seated-row",
+      "name": "Wide-Grip Seated Row",
+      "equipment": [
+        "seated-row-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "wide grip seated row form"
+    },
+    {
+      "id": "lat-pulldown-wide",
+      "name": "Wide-Grip Lat Pulldown",
+      "equipment": [
+        "lat-pulldown-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "wide grip lat pulldown form"
+    },
+    {
+      "id": "lat-pulldown-close",
+      "name": "Close-Grip Lat Pulldown",
+      "equipment": [
+        "lat-pulldown-machine"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps",
+        "arms"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "strength",
+        "pump"
+      ],
+      "avoid": [],
+      "youtubeQuery": "close grip lat pulldown form"
+    },
+    {
+      "id": "cat-cow",
+      "name": "Cat-Cow Stretch",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "back"
+      ],
+      "type": "isolation",
+      "unilateral": false,
+      "timed": true,
+      "goal": [
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "cat cow stretch form"
+    },
+    {
+      "id": "world-greatest-stretch",
+      "name": "World's Greatest Stretch",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [
+        "core",
+        "shoulders"
+      ],
+      "type": "compound",
+      "unilateral": true,
+      "timed": true,
+      "goal": [
+        "recovery",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "world's greatest stretch form"
+    },
+    {
+      "id": "bodyweight-thoracic-rotation",
+      "name": "Thoracic Rotation",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "core"
+      ],
+      "type": "isolation",
+      "unilateral": true,
+      "timed": true,
+      "goal": [
+        "recovery"
+      ],
+      "avoid": [],
+      "youtubeQuery": "thoracic rotation stretch form"
+    },
+    {
+      "id": "hip-90-90",
+      "name": "90/90 Hip Flow",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "glutes"
+      ],
+      "secondary": [
+        "legs"
+      ],
+      "type": "isolation",
+      "unilateral": true,
+      "timed": true,
+      "goal": [
+        "recovery",
+        "athletic"
+      ],
+      "avoid": [],
+      "youtubeQuery": "90 90 hip flow form"
+    },
+    {
+      "id": "inchworm",
+      "name": "Inchworm",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "core"
+      ],
+      "secondary": [
+        "shoulders",
+        "legs"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "goal": [
+        "recovery",
+        "athletic"
+      ],
+      "avoid": [
+        "back",
+        "shoulder"
+      ],
+      "youtubeQuery": "inchworm exercise form"
     }
   ]
 }
