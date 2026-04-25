@@ -1520,8 +1520,8 @@ const GOAL_BLOCK_NAMES = {
 };
 
 let genState = {
-  step:0, equipment:new Set(), goal:null, bias:null,
-  duration:null, energy:'normal', constraints:new Set(),
+  step:0, equipment:new Set(), goal:new Set(), bias:new Set(),
+  duration:null, energy:null, constraints:new Set(),
   vault:null, allEquipTags:[],
 };
 
@@ -1530,8 +1530,8 @@ function openAboutModal(){ document.getElementById('aboutModal').classList.add('
 function closeAboutModal(){ document.getElementById('aboutModal').classList.remove('active'); }
 
 function openGenerateModal(){
-  genState.step=0; genState.equipment=new Set(); genState.goal=null;
-  genState.bias=null; genState.duration=null; genState.energy='normal';
+  genState.step=0; genState.equipment=new Set(); genState.goal=new Set();
+  genState.bias=new Set(); genState.duration=null; genState.energy=null;
   genState.constraints=new Set();
   document.getElementById('genError').classList.remove('active');
   document.getElementById('genError').textContent='';
@@ -1648,26 +1648,40 @@ function syncSelectAllBtn(){
 
 /* ── SESSION STEP ── */
 function renderSessionStep(){
-  // Goal chips — same list format as equip items, with Surprise Me at bottom
+  // Goal chips — multi-select. Surprise Me at the bottom; selecting it clears all
+  // others, and selecting a regular goal while Surprise was on clears Surprise.
   const goalEntries = [...Object.entries(GOAL_META), ['surprise-goal', {label:'Surprise Me', icon:'🎲', sub:'Any goal — revealed after build'}]];
   document.getElementById('goalChips').innerHTML = goalEntries.map(([key,m]) =>
-    `<button class="gen-goal-chip ${genState.goal===key?'selected':''}" onclick="selectGoal('${key}')">
+    `<button class="gen-goal-chip ${genState.goal.has(key)?'selected':''}" onclick="selectGoal('${key}')">
       <span class="gen-goal-icon">${m.icon}</span>
       <span style="flex:1"><span style="display:block;font-size:14px;font-weight:700">${m.label}</span><span class="gen-goal-sub">${m.sub||''}</span></span>
-      ${genState.goal===key ? `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="2,8 6,12 14,4"/></svg>` : ''}
+      ${genState.goal.has(key) ? `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="2,8 6,12 14,4"/></svg>` : ''}
     </button>`
   ).join('');
-  // Bias chips with Surprise Me at end
+  // Bias chips — same multi-select treatment
   const biasEntries = [...Object.entries(BIAS_META), ['surprise-bias', {label:'Surprise Me', icon:'🎲'}]];
   document.getElementById('biasChips').innerHTML = biasEntries.map(([key,m]) =>
-    `<button class="gen-bias-chip ${genState.bias===key?'selected':''}" onclick="selectBias('${key}')">
+    `<button class="gen-bias-chip ${genState.bias.has(key)?'selected':''}" onclick="selectBias('${key}')">
       <span class="gen-goal-icon">${m.icon}</span>${m.label}
     </button>`
   ).join('');
 }
 
-function selectGoal(key){ genState.goal=key; renderSessionStep(); }
-function selectBias(key){ genState.bias=key; renderSessionStep(); }
+/* Multi-select toggle: clicking Surprise clears regular picks; clicking a regular
+   pick while Surprise is active removes Surprise first. Toggling the only-selected
+   item turns it off (empty state, validated in genNext). */
+function toggleSetWithSurprise(set, key, surpriseKey){
+  if(key === surpriseKey){
+    if(set.has(surpriseKey)) set.delete(surpriseKey);
+    else { set.clear(); set.add(surpriseKey); }
+    return;
+  }
+  if(set.has(surpriseKey)) set.delete(surpriseKey);
+  if(set.has(key)) set.delete(key);
+  else set.add(key);
+}
+function selectGoal(key){ toggleSetWithSurprise(genState.goal, key, 'surprise-goal'); renderSessionStep(); }
+function selectBias(key){ toggleSetWithSurprise(genState.bias, key, 'surprise-bias'); renderSessionStep(); }
 
 
 
@@ -1714,8 +1728,8 @@ function genNext(){
     err.textContent='Select at least one piece of equipment.'; err.classList.add('active'); return;
   }
   if(genState.step===1){
-    if(!genState.goal){ err.textContent='Choose a training goal.'; err.classList.add('active'); return; }
-    if(!genState.bias){ err.textContent='Choose a body focus.'; err.classList.add('active'); return; }
+    if(genState.goal.size===0){ err.textContent='Choose a training goal (or more than one).'; err.classList.add('active'); return; }
+    if(genState.bias.size===0){ err.textContent='Choose a body focus (or more than one).'; err.classList.add('active'); return; }
   }
   renderGenStep(genState.step+1);
 }
@@ -1747,25 +1761,37 @@ async function genBuild(){
       return;
     }
   }
-  // Resolve surprise
+  // Resolve surprise: if Surprise Me is selected, swap it for one random pick.
+  // For multi-select, the rest of the picks stay in.
   const goalKeys = Object.keys(GOAL_META);
   const biasKeys = Object.keys(BIAS_META);
-  const resolvedGoal = (genState.goal === 'surprise-goal' || !genState.goal)
-    ? goalKeys[Math.floor(Math.random()*goalKeys.length)]
-    : genState.goal;
-  const resolvedBias = (genState.bias === 'surprise-bias' || !genState.bias)
-    ? biasKeys[Math.floor(Math.random()*biasKeys.length)]
-    : genState.bias;
+  const resolveSurprise = (set, surpriseKey, allKeys) => {
+    const arr = [...set];
+    if(arr.includes(surpriseKey) || arr.length === 0){
+      const rest = arr.filter(k => k !== surpriseKey);
+      const candidates = allKeys.filter(k => !rest.includes(k));
+      const pick = candidates[Math.floor(Math.random() * candidates.length)];
+      return [...rest, pick];
+    }
+    return arr;
+  };
+  const resolvedGoals  = resolveSurprise(genState.goal,  'surprise-goal',  goalKeys);
+  const resolvedBiases = resolveSurprise(genState.bias,  'surprise-bias',  biasKeys);
+
+  if(!genState.energy){
+    err.textContent = 'Pick an energy level for today.';
+    err.classList.add('active'); return;
+  }
 
   let workout = null;
   try {
     workout = buildWorkout(
       genState.vault,
       [...genState.equipment],
-      resolvedGoal,
-      resolvedBias,
+      resolvedGoals,
+      resolvedBiases,
       genState.duration,
-      genState.energy || 'normal',
+      genState.energy,
       [...genState.constraints]
     );
   } catch(e){
@@ -1781,6 +1807,32 @@ async function genBuild(){
   closeGenerateModal();
   try { localStorage.setItem(WORKOUT_KEY, JSON.stringify(workout)); } catch(e){}
   renderWorkout(workout);
+}
+
+/* Goal-priority order. When the user selects multiple goals, the highest-priority
+   one drives block names and the rest cue. Sets and reps are blended (averaged).
+   Strength wins ties because its rep scheme is the most distinctive — if the user
+   asked for it at all, the workout should feel strength-flavored. */
+const GOAL_PRIORITY = ['strength','athletic','pump','conditioning','recovery'];
+
+function getPrimaryGoal(goals){
+  if(!goals || goals.length === 0) return 'athletic';
+  return GOAL_PRIORITY.find(g => goals.includes(g)) || goals[0];
+}
+
+function blendGoalConfig(goals){
+  if(!goals || goals.length === 0) return GOAL_CONFIG.athletic;
+  const cfgs = goals.map(g => GOAL_CONFIG[g]).filter(Boolean);
+  if(cfgs.length === 0) return GOAL_CONFIG.athletic;
+  if(cfgs.length === 1) return cfgs[0];
+  const primary = getPrimaryGoal(goals);
+  const avg = (k) => Math.round(cfgs.reduce((s,c) => s + c[k], 0) / cfgs.length);
+  return {
+    baseSets: avg('baseSets'),
+    compReps: avg('compReps'),
+    isoReps:  avg('isoReps'),
+    rest: GOAL_CONFIG[primary].rest,
+  };
 }
 
 function makeDetail(ex, sets, cfg, duration){
@@ -1799,17 +1851,20 @@ function makeDetail(ex, sets, cfg, duration){
   return ex.unilateral ? `${sets} x ${reps} / side` : `${sets} x ${reps}`;
 }
 
-function buildWorkout(vault, equipment, goal, bias, duration, energy, constraints){
-  const goalCfg     = GOAL_CONFIG[goal] || GOAL_CONFIG.athletic;
+function buildWorkout(vault, equipment, goals, biases, duration, energy, constraints){
+  // Multi-goal: blend sets/reps; primary goal drives block names + rest cue.
+  const primaryGoal = getPrimaryGoal(goals);
+  const goalCfg     = blendGoalConfig(goals);
   const energyMod   = ENERGY_MOD[energy] || ENERGY_MOD.normal;
   const durationAdj = DURATION_SETS_ADJUST[duration] || 0;
   const sets = Math.max(1, goalCfg.baseSets + energyMod.setsAdd + durationAdj);
   const templates = BLOCK_TEMPLATES[duration] || BLOCK_TEMPLATES[45];
-  const goalNames = GOAL_BLOCK_NAMES[goal] || GOAL_BLOCK_NAMES.athletic;
+  const goalNames = GOAL_BLOCK_NAMES[primaryGoal] || GOAL_BLOCK_NAMES.athletic;
 
   const equipSet = new Set(equipment);
   equipSet.add('bodyweight');
-  const muscles = (BIAS_META[bias] || BIAS_META['full-body']).muscles;
+  // Multi-bias: union all bias muscle groups into one set.
+  const muscles = [...new Set(biases.flatMap(b => (BIAS_META[b] || BIAS_META['full-body']).muscles))];
   const muscleSet = new Set(muscles);
   // Always include core
   muscleSet.add('core');
@@ -1822,7 +1877,9 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
   function canDo(ex){ return ex.equipment.every(e => equipSet.has(e)); }
   function matchesMuscle(ex){ return ex.muscles.some(m => muscleSet.has(m)) || ex.secondary.some(m => muscleSet.has(m)); }
   function isBlocked(ex){ return ex.avoid && ex.avoid.some(a => constraintSet.has(a)); }
-  function matchesGoal(ex){ return !ex.goal || ex.goal.includes(goal); }
+  // Multi-goal: an exercise matches if its goal list overlaps any selected goal.
+  // Untagged exercises (no `goal` field) match anything.
+  function matchesGoal(ex){ return !ex.goal || goals.some(g => ex.goal.includes(g)); }
   // Schema v2 helpers — fall back gracefully if vault hasn't been migrated
   function inPhase(ex, p){
     if(!ex.phase) return p === 'main'; // legacy vaults: treat untagged as main-only
@@ -1832,18 +1889,29 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
   // When the user is beat up, drop high-impact plyometrics from the pool entirely.
   const dropHighImpact = energy === 'beat';
 
-  // Primary pool: equipment + muscles + no constraint conflicts + goal match
+  // Primary pool: equipment + muscles + no constraint conflicts
   let pool = vault.filter(ex => canDo(ex) && matchesMuscle(ex) && !isBlocked(ex));
   if(dropHighImpact) pool = pool.filter(ex => impactOf(ex) !== 'high');
-  const goalPool = pool.filter(ex => matchesGoal(ex));
-  if(pool.length < 3) return null;
+
+  // Phase-restricted sub-pools — each phase is a SEALED bucket.
+  // An exercise tagged ["core"] only is never eligible for warmup or main.
+  const mainPool     = pool.filter(ex => inPhase(ex, 'main'));
+  const warmupPool   = pool.filter(ex => inPhase(ex, 'warmup'));
+  const corePool     = pool.filter(ex => inPhase(ex, 'core'));
+  const cooldownPool = pool.filter(ex => inPhase(ex, 'cooldown'));
+
+  // goalPool is now restricted to main-phase exercises (no russian twists in strength)
+  const goalPool = mainPool.filter(ex => matchesGoal(ex));
+  if(mainPool.length < 3) return null;
 
   function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
   const usedIds = new Set();
 
   function pick(n, typeFilter, mustMuscles, preferPool){
     const mustSet = mustMuscles ? new Set(mustMuscles) : null;
-    const src = (preferPool && preferPool.length >= n) ? preferPool : pool;
+    // Strength/main blocks should only ever pull from mainPool — never the full pool,
+    // which would let core-only or warmup-only exercises slip in as fallback.
+    const src = (preferPool && preferPool.length >= n) ? preferPool : mainPool;
     let cands = src.filter(ex => {
       if(usedIds.has(ex.id)) return false;
       if(typeFilter && ex.type !== typeFilter) return false;
@@ -1853,16 +1921,16 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
     cands = shuffle(cands);
     const compounds = cands.filter(e => e.type==='compound');
     const isos = cands.filter(e => e.type==='isolation');
-    const ordered = goal==='pump' ? [...isos,...compounds] : [...compounds,...isos];
+    const ordered = primaryGoal==='pump' ? [...isos,...compounds] : [...compounds,...isos];
     const picked = [];
     for(const ex of ordered){
       if(picked.length >= n) break;
       if(usedIds.has(ex.id)) continue;
       picked.push(ex); usedIds.add(ex.id);
     }
-    // fallback to full pool
+    // Last-resort fallback also restricted to mainPool — keeps core/warmup buckets sealed.
     if(picked.length < n){
-      for(const ex of shuffle(pool)){
+      for(const ex of shuffle(mainPool)){
         if(picked.length >= n) break;
         if(usedIds.has(ex.id)) continue;
         picked.push(ex); usedIds.add(ex.id);
@@ -1877,37 +1945,32 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
     let exs = [];
 
     if(tmpl.type==='warmup'){
-      // Schema v2: prefer exercises explicitly tagged for the warmup phase.
-      // Fallback (for un-migrated vaults) keeps the old heuristic so the app degrades gracefully.
-      let wp = pool.filter(ex => !usedIds.has(ex.id) && inPhase(ex, 'warmup'));
-      if(wp.length < tmpl.slots){
-        const fallback = pool.filter(ex => !usedIds.has(ex.id) && !ex.phase && (
-          ex.goal?.includes('recovery') || ex.goal?.includes('athletic') ||
-          ex.muscles.includes('cardio') || ex.muscles.includes('core') ||
-          (ex.equipment.every(e => e==='bodyweight'))
-        ));
-        wp = [...wp, ...fallback];
-      }
+      // Sealed bucket: only phase=warmup. No fallthrough to main exercises —
+      // we'd rather have a short warmup than land a landmine press in it.
+      const wp = warmupPool.filter(ex => !usedIds.has(ex.id));
       exs = shuffle(wp).slice(0, tmpl.slots);
       exs.forEach(ex => usedIds.add(ex.id));
-      if(exs.length < tmpl.slots) exs.push(...pick(tmpl.slots-exs.length, null, null, goalPool));
     } else if(tmpl.type==='cooldown'){
-      // Schema v2: cooldown block — phase-tagged stretches and easy aerobic flush.
-      const cd = pool.filter(ex => !usedIds.has(ex.id) && inPhase(ex, 'cooldown'));
+      // Sealed bucket: only phase=cooldown.
+      const cd = cooldownPool.filter(ex => !usedIds.has(ex.id));
       exs = shuffle(cd).slice(0, tmpl.slots);
       exs.forEach(ex => usedIds.add(ex.id));
     } else if(tmpl.type==='core'){
-      const cp = pool.filter(ex => !usedIds.has(ex.id) && ex.muscles.includes('core'));
+      // Sealed bucket: only phase=core. (Previously filtered by muscles=core,
+      // which let main-phase core-targeting moves in but didn't stop russian
+      // twists from being picked elsewhere.)
+      const cp = corePool.filter(ex => !usedIds.has(ex.id));
       exs = shuffle(cp).slice(0, tmpl.slots);
       exs.forEach(ex => usedIds.add(ex.id));
-      if(exs.length < tmpl.slots) exs.push(...pick(tmpl.slots-exs.length, null, null, goalPool));
     } else if(tmpl.type==='finisher'){
-      const fp = pool.filter(ex => !usedIds.has(ex.id) && (
-        ex.muscles.includes('cardio') || ex.muscles.includes('core') || ex.goal?.includes('conditioning')
+      // Finishers are main-phase work with cardio/conditioning character.
+      // Drawn from mainPool, never from corePool — no russian-twist finishers.
+      const fp = mainPool.filter(ex => !usedIds.has(ex.id) && (
+        ex.muscles.includes('cardio') || ex.goal?.includes('conditioning')
       ));
       exs = shuffle(fp).slice(0, tmpl.slots);
       exs.forEach(ex => usedIds.add(ex.id));
-      if(exs.length < tmpl.slots) exs.push(...pick(tmpl.slots-exs.length, null, null, pool));
+      if(exs.length < tmpl.slots) exs.push(...pick(tmpl.slots-exs.length, null, null, mainPool));
     } else {
       exs = pick(tmpl.slots, null, [...muscleSet], goalPool);
     }
@@ -1936,8 +1999,8 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
 
   if(blocks.length===0) return null;
 
-  const biasLabel = BIAS_META[bias]?.label || bias;
-  const goalLabel = GOAL_META[goal]?.label || goal;
+  const biasLabel = biases.map(b => BIAS_META[b]?.label || b).join(' + ');
+  const goalLabel = goals.map(g => GOAL_META[g]?.label || g).join(' + ');
   return {
     headerTitle: `${duration} Min — ${goalLabel} / ${biasLabel}`,
     date: dateStr,
@@ -1945,6 +2008,7 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
     slug: `generated-${slugDate}-${duration}min`,
     _generated: true, _equipment: equipment,
     _muscles: muscles, _duration: duration,
+    _goals: goals, _biases: biases, _primaryGoal: primaryGoal,
     parameters: [
       { label:'Goal',      value:goalLabel },
       { label:'Focus',     value:biasLabel },
@@ -2035,10 +2099,17 @@ function _doSwap(globalExIdx){
   const currentEx = WORKOUT.blocks[foundBlock].exercises[foundEx];
   const rounds = currentEx.rounds || 1;
   const dur = WORKOUT._duration || 45;
-  // Derive cfg from GOAL_CONFIG (DURATION_CONFIG no longer exists)
-  const goalKey = WORKOUT.parameters?.find(p => p.label === 'Goal')?.value;
-  const matchedGoal = Object.keys(GOAL_CONFIG).find(k => GOAL_META[k]?.label === goalKey) || 'athletic';
-  const goalCfg = GOAL_CONFIG[matchedGoal] || GOAL_CONFIG.athletic;
+  // Multi-goal: use stored _goals array via blend; fall back gracefully for old workouts
+  // that only stored a single Goal label parameter.
+  let goals = WORKOUT._goals;
+  if(!goals){
+    const goalLabel = WORKOUT.parameters?.find(p => p.label === 'Goal')?.value || '';
+    goals = goalLabel.split(' + ').map(lbl =>
+      Object.keys(GOAL_META).find(k => GOAL_META[k]?.label === lbl)
+    ).filter(Boolean);
+    if(goals.length === 0) goals = ['athletic'];
+  }
+  const goalCfg = blendGoalConfig(goals);
   const cfg = { compReps: goalCfg.compReps, isoReps: goalCfg.isoReps };
 
   // All vault IDs currently in workout
@@ -2049,10 +2120,18 @@ function _doSwap(globalExIdx){
   equipSet.add('bodyweight');
   const muscleSet = new Set(WORKOUT._muscles || []);
 
+  // Phase-aware swap: replacement must share at least one phase with the original.
+  // (A russian twist swap shouldn't pull a landmine press; a warmup mobility move
+  // shouldn't be replaced by a barbell squat.)
+  const currentVaultEx = genState.vault.find(e => e.id === currentEx._vaultId);
+  const currentPhases = currentVaultEx?.phase || ['main'];
+
   const candidates = genState.vault.filter(ex => {
     if(usedIds.has(ex.id)) return false;
     if(!ex.equipment.every(e => equipSet.has(e))) return false;
-    return ex.muscles.some(m => muscleSet.has(m)) || ex.secondary.some(m => muscleSet.has(m));
+    if(!(ex.muscles.some(m => muscleSet.has(m)) || ex.secondary.some(m => muscleSet.has(m)))) return false;
+    const exPhases = ex.phase || ['main'];
+    return exPhases.some(p => currentPhases.includes(p));
   });
 
   if(candidates.length === 0){
