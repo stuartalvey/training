@@ -1831,8 +1831,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -1858,8 +1857,7 @@
       "type": "isolation",
       "unilateral": true,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -1907,8 +1905,7 @@
       "type": "isolation",
       "unilateral": true,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -1931,8 +1928,7 @@
       "type": "isolation",
       "unilateral": true,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2218,7 +2214,8 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "warmup",
+        "core"
       ],
       "load_type": "timed",
       "impact": "low",
@@ -2241,7 +2238,8 @@
       "type": "isolation",
       "unilateral": true,
       "phase": [
-        "main"
+        "warmup",
+        "core"
       ],
       "load_type": "timed",
       "impact": "low",
@@ -2264,7 +2262,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2287,7 +2285,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2310,7 +2308,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2364,7 +2362,7 @@
       "unilateral": false,
       "phase": [
         "warmup",
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2387,7 +2385,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "timed",
       "impact": "low",
@@ -2410,7 +2408,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2435,7 +2433,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2460,7 +2458,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "moderate",
@@ -2486,6 +2484,7 @@
       "type": "compound",
       "unilateral": true,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "timed",
@@ -2512,6 +2511,7 @@
       "type": "compound",
       "unilateral": true,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -2540,6 +2540,7 @@
       "type": "compound",
       "unilateral": false,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -2565,7 +2566,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2589,6 +2590,7 @@
       "type": "compound",
       "unilateral": true,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -2614,7 +2616,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -2844,6 +2846,7 @@
       "type": "compound",
       "unilateral": true,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -3204,8 +3207,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -3231,8 +3233,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -3258,8 +3259,7 @@
       "type": "isolation",
       "unilateral": true,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -3356,8 +3356,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "warmup",
-        "main"
+        "warmup"
       ],
       "load_type": "reps",
       "impact": "low",
@@ -3525,6 +3524,7 @@
       "type": "compound",
       "unilateral": true,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -3635,7 +3635,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "core"
       ],
       "load_type": "reps",
       "impact": "moderate",
@@ -3722,6 +3722,7 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "timed",
@@ -3749,6 +3750,7 @@
       "type": "compound",
       "unilateral": false,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -3805,7 +3807,8 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "warmup",
+        "core"
       ],
       "load_type": "timed",
       "impact": "low",
@@ -3861,6 +3864,7 @@
       "type": "compound",
       "unilateral": false,
       "phase": [
+        "core",
         "main"
       ],
       "load_type": "reps",
@@ -4170,7 +4174,8 @@
       "type": "isolation",
       "unilateral": false,
       "phase": [
-        "main"
+        "warmup",
+        "core"
       ],
       "load_type": "timed",
       "impact": "low",
@@ -4748,7 +4753,6 @@
       "type": "compound",
       "unilateral": false,
       "phase": [
-        "warmup",
         "main"
       ],
       "load_type": "reps",
