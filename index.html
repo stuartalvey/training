@@ -1420,6 +1420,7 @@ const GYM_PRESETS = {
 const EQUIP_META = {
   'ab-roller':            { label:'Ab Roller',            icon:'🔄' },
   'barbell-weights':      { label:'Barbell & Weights',    icon:'🏋️' },
+  'battle-ropes':         { label:'Battle Ropes',         icon:'🪢' },
   'bench':                { label:'Bench',                icon:'🪑' },
   'bike':                 { label:'Assault Bike',         icon:'🚴' },
   'bodyweight':           { label:'Bodyweight',           icon:'🤸' },
@@ -1506,7 +1507,7 @@ const BLOCK_TEMPLATES = {
   20:[ { name:'Warmup', emoji:'🔥', slots:2, type:'warmup', rounds:1 }, { name:'Main Work', emoji:'💪', slots:3, type:'strength' }, { name:'Core', emoji:'🎯', slots:2, type:'core', rounds:2 } ],
   30:[ { name:'Warmup', emoji:'🔥', slots:2, type:'warmup', rounds:1 }, { name:'Main Work', emoji:'💪', slots:4, type:'strength' }, { name:'Core', emoji:'🎯', slots:3, type:'core', rounds:2 } ],
   45:[ { name:'Warmup', emoji:'🔥', slots:3, type:'warmup', rounds:1 }, { name:'Block A', emoji:'💪', slots:3, type:'strength' }, { name:'Block B', emoji:'🧱', slots:3, type:'strength' }, { name:'Core', emoji:'🎯', slots:3, type:'core', rounds:2 } ],
-  60:[ { name:'Warmup', emoji:'🔥', slots:3, type:'warmup', rounds:1 }, { name:'Block A', emoji:'💪', slots:4, type:'strength' }, { name:'Block B', emoji:'🧱', slots:4, type:'strength' }, { name:'Block C', emoji:'⚡', slots:3, type:'strength' }, { name:'Core & Finisher', emoji:'🎯', slots:3, type:'core', rounds:2 } ],
+  60:[ { name:'Warmup', emoji:'🔥', slots:3, type:'warmup', rounds:1 }, { name:'Block A', emoji:'💪', slots:4, type:'strength' }, { name:'Block B', emoji:'🧱', slots:4, type:'strength' }, { name:'Block C', emoji:'⚡', slots:3, type:'strength' }, { name:'Core & Finisher', emoji:'🎯', slots:3, type:'core', rounds:2 }, { name:'Cooldown', emoji:'🌿', slots:2, type:'cooldown', rounds:1 } ],
 };
 
 /* Goal-specific block name overrides */
@@ -1784,9 +1785,16 @@ async function genBuild(){
 
 function makeDetail(ex, sets, cfg, duration){
   const reps = ex.type === 'compound' ? cfg.compReps : cfg.isoReps;
-  if(ex.timed){
+  // Schema v2: load_type is "reps" | "timed" | "distance"
+  // Fall back to legacy `timed` boolean for backward compatibility with old vaults
+  const loadType = ex.load_type || (ex.timed ? 'timed' : 'reps');
+  if(loadType === 'timed'){
     const secs = duration <= 10 ? 20 : duration <= 20 ? 30 : duration <= 30 ? 40 : 45;
     return ex.unilateral ? `${sets} x ${secs} sec / side` : `${sets} x ${secs} sec`;
+  }
+  if(loadType === 'distance'){
+    // Currently the only distance-loaded exercise is the 500m row; show the work as one effort per set.
+    return `${sets} x effort`;
   }
   return ex.unilateral ? `${sets} x ${reps} / side` : `${sets} x ${reps}`;
 }
@@ -1815,9 +1823,18 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
   function matchesMuscle(ex){ return ex.muscles.some(m => muscleSet.has(m)) || ex.secondary.some(m => muscleSet.has(m)); }
   function isBlocked(ex){ return ex.avoid && ex.avoid.some(a => constraintSet.has(a)); }
   function matchesGoal(ex){ return !ex.goal || ex.goal.includes(goal); }
+  // Schema v2 helpers — fall back gracefully if vault hasn't been migrated
+  function inPhase(ex, p){
+    if(!ex.phase) return p === 'main'; // legacy vaults: treat untagged as main-only
+    return ex.phase.includes(p);
+  }
+  function impactOf(ex){ return ex.impact || 'low'; }
+  // When the user is beat up, drop high-impact plyometrics from the pool entirely.
+  const dropHighImpact = energy === 'beat';
 
   // Primary pool: equipment + muscles + no constraint conflicts + goal match
-  const pool = vault.filter(ex => canDo(ex) && matchesMuscle(ex) && !isBlocked(ex));
+  let pool = vault.filter(ex => canDo(ex) && matchesMuscle(ex) && !isBlocked(ex));
+  if(dropHighImpact) pool = pool.filter(ex => impactOf(ex) !== 'high');
   const goalPool = pool.filter(ex => matchesGoal(ex));
   if(pool.length < 3) return null;
 
@@ -1860,14 +1877,25 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
     let exs = [];
 
     if(tmpl.type==='warmup'){
-      const wp = pool.filter(ex => !usedIds.has(ex.id) && (
-        ex.goal?.includes('recovery') || ex.goal?.includes('athletic') ||
-        ex.muscles.includes('cardio') || ex.muscles.includes('core') ||
-        (ex.equipment.every(e => e==='bodyweight'))
-      ));
+      // Schema v2: prefer exercises explicitly tagged for the warmup phase.
+      // Fallback (for un-migrated vaults) keeps the old heuristic so the app degrades gracefully.
+      let wp = pool.filter(ex => !usedIds.has(ex.id) && inPhase(ex, 'warmup'));
+      if(wp.length < tmpl.slots){
+        const fallback = pool.filter(ex => !usedIds.has(ex.id) && !ex.phase && (
+          ex.goal?.includes('recovery') || ex.goal?.includes('athletic') ||
+          ex.muscles.includes('cardio') || ex.muscles.includes('core') ||
+          (ex.equipment.every(e => e==='bodyweight'))
+        ));
+        wp = [...wp, ...fallback];
+      }
       exs = shuffle(wp).slice(0, tmpl.slots);
       exs.forEach(ex => usedIds.add(ex.id));
       if(exs.length < tmpl.slots) exs.push(...pick(tmpl.slots-exs.length, null, null, goalPool));
+    } else if(tmpl.type==='cooldown'){
+      // Schema v2: cooldown block — phase-tagged stretches and easy aerobic flush.
+      const cd = pool.filter(ex => !usedIds.has(ex.id) && inPhase(ex, 'cooldown'));
+      exs = shuffle(cd).slice(0, tmpl.slots);
+      exs.forEach(ex => usedIds.add(ex.id));
     } else if(tmpl.type==='core'){
       const cp = pool.filter(ex => !usedIds.has(ex.id) && ex.muscles.includes('core'));
       exs = shuffle(cp).slice(0, tmpl.slots);
@@ -1893,7 +1921,9 @@ function buildWorkout(vault, equipment, goal, bias, duration, energy, constraint
       emoji: tmpl.emoji,
       name: blockName,
       roundLabel: blockRounds===1 ? '1 round' : `${blockRounds} rounds`,
-      restCue: tmpl.type==='warmup' ? 'Comfortable pace, no rush' : goalCfg.rest,
+      restCue: tmpl.type==='warmup' ? 'Comfortable pace, no rush'
+             : tmpl.type==='cooldown' ? 'Slow breathing, hold each position'
+             : goalCfg.rest,
       exercises: exs.map(ex => ({
         name: ex.name,
         detail: makeDetail(ex, blockRounds, {compReps:goalCfg.compReps, isoReps:goalCfg.isoReps}, duration),
