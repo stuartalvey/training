@@ -15,6 +15,12 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -36,6 +42,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -59,6 +70,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -81,6 +97,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -104,6 +125,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -126,6 +152,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -147,10 +178,17 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-floor-press",
@@ -166,6 +204,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -188,11 +231,18 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "barbell-incline-press",
@@ -210,6 +260,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -234,6 +289,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -254,10 +314,17 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "cable-chest-fly-low",
@@ -273,10 +340,17 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "pullup",
@@ -293,6 +367,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -314,6 +393,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -335,6 +419,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -357,6 +446,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -378,6 +472,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -401,10 +500,17 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "barbell-row",
@@ -421,6 +527,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -444,6 +555,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -467,6 +583,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -489,6 +610,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -509,6 +635,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -527,6 +658,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -546,6 +682,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -568,6 +709,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -591,6 +737,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -611,6 +762,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -628,6 +784,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -649,6 +810,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -668,6 +834,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -691,6 +862,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -711,6 +887,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -730,6 +911,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -749,6 +936,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -773,6 +965,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -795,6 +992,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -814,6 +1016,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -831,6 +1038,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -849,6 +1061,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -866,6 +1083,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -885,6 +1107,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -902,6 +1129,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -919,6 +1151,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -937,6 +1174,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -957,6 +1199,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -975,6 +1222,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -992,6 +1244,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1009,6 +1266,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1030,6 +1292,12 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -1053,6 +1321,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "strength",
         "athletic",
@@ -1076,6 +1349,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -1099,6 +1377,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -1120,11 +1403,18 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "step-up-bw",
@@ -1141,6 +1431,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1164,6 +1459,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1186,6 +1486,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1209,6 +1514,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1232,6 +1542,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1253,6 +1568,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1273,6 +1593,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1296,6 +1621,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1319,6 +1649,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1342,6 +1677,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1362,6 +1702,11 @@
       "secondary": [],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1384,6 +1729,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1407,6 +1757,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1427,6 +1782,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1446,6 +1806,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1465,6 +1830,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1486,6 +1857,12 @@
       ],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1507,6 +1884,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1524,6 +1906,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1542,6 +1930,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1563,6 +1957,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1582,6 +1981,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1604,11 +2008,18 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "db-rdl-single",
@@ -1625,11 +2036,18 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "barbell-hip-thrust",
@@ -1646,6 +2064,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "pump"
       ],
@@ -1666,12 +2089,18 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
       "avoid": [
-        "knee"
+        "knee",
+        "back"
       ]
     },
     {
@@ -1686,6 +2115,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -1706,6 +2140,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1727,6 +2166,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "pump"
       ],
@@ -1746,6 +2190,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -1768,7 +2217,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1787,7 +2240,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1806,6 +2263,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1824,6 +2286,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1842,11 +2309,18 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "mountain-climber",
@@ -1862,7 +2336,12 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "high",
       "goal": [
         "strength",
         "athletic",
@@ -1883,6 +2362,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1901,7 +2386,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -1920,11 +2409,18 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "russian-twist-bw",
@@ -1938,11 +2434,18 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "db-russian-twist",
@@ -1956,10 +2459,17 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "pump"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "db-suitcase-carry",
@@ -1975,7 +2485,11 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -1997,11 +2511,18 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "ab-wheel",
@@ -2018,12 +2539,18 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
-        "athletic",
-        "recovery"
+        "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "cable-crunch",
@@ -2037,6 +2564,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -2056,11 +2588,18 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "hanging-leg-raise",
@@ -2074,10 +2613,17 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "burpee",
@@ -2095,12 +2641,18 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "conditioning",
-        "athletic",
-        "recovery"
+        "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "jumping-jack",
@@ -2117,13 +2669,20 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic",
         "recovery"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "high-knees",
@@ -2140,13 +2699,20 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic",
         "recovery"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "box-jump",
@@ -2164,6 +2730,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
@@ -2179,15 +2750,20 @@
         "kettlebells"
       ],
       "muscles": [
-        "cardio"
+        "glutes"
       ],
       "secondary": [
-        "glutes",
         "back",
-        "legs"
+        "legs",
+        "cardio"
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
@@ -2209,6 +2785,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2233,11 +2814,18 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "kb-turkish-getup",
@@ -2255,11 +2843,18 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "shoulder"
+      ]
     },
     {
       "id": "db-thruster",
@@ -2268,15 +2863,20 @@
         "dumbbells"
       ],
       "muscles": [
-        "cardio"
+        "legs"
       ],
       "secondary": [
-        "legs",
         "shoulders",
-        "glutes"
+        "glutes",
+        "cardio"
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
@@ -2287,7 +2887,7 @@
       "id": "battle-rope-waves",
       "name": "Battle Rope Waves",
       "equipment": [
-        "cable-machine"
+        "battle-ropes"
       ],
       "muscles": [
         "cardio"
@@ -2298,7 +2898,11 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
@@ -2320,7 +2924,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
@@ -2341,12 +2951,18 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "treadmill-hiit-sprint",
@@ -2363,12 +2979,18 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "bike-steady",
@@ -2384,7 +3006,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
@@ -2406,7 +3034,11 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
@@ -2428,12 +3060,18 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "knee"
+      ]
     },
     {
       "id": "row-steady",
@@ -2450,12 +3088,20 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "row-sprint-interval",
@@ -2473,12 +3119,18 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "row-pyramid",
@@ -2496,12 +3148,18 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "row-500m",
@@ -2518,12 +3176,18 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "distance",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "band-pull-apart",
@@ -2539,6 +3203,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery",
@@ -2560,6 +3230,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "athletic",
@@ -2581,6 +3257,12 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -2601,6 +3283,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -2620,6 +3307,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -2638,6 +3330,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -2658,6 +3355,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery",
@@ -2679,6 +3382,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "athletic",
@@ -2704,6 +3412,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2725,6 +3438,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2749,6 +3467,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2773,6 +3496,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2796,6 +3524,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "athletic",
         "conditioning"
@@ -2819,6 +3552,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2842,14 +3580,18 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
       ],
       "avoid": [
         "back"
-      ],
-      "timed": false
+      ]
     },
     {
       "id": "med-ball-wall-ball",
@@ -2866,6 +3608,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "conditioning",
         "athletic"
@@ -2887,11 +3634,18 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "pump",
         "athletic"
       ],
-      "avoid": []
+      "avoid": [
+        "back"
+      ]
     },
     {
       "id": "med-ball-pushup",
@@ -2909,6 +3663,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -2933,6 +3692,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -2957,7 +3721,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "athletic",
         "pump"
@@ -2980,6 +3748,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -3004,6 +3777,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "athletic",
@@ -3026,7 +3804,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "athletic",
         "recovery",
@@ -3049,6 +3831,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "strength",
         "recovery",
@@ -3073,6 +3860,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "athletic",
         "pump"
@@ -3096,6 +3888,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -3120,6 +3917,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "athletic",
         "pump"
@@ -3144,6 +3946,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "high",
       "goal": [
         "athletic",
         "conditioning"
@@ -3167,7 +3974,11 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
@@ -3191,7 +4002,11 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
@@ -3214,7 +4029,13 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "main",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "conditioning",
         "recovery"
@@ -3236,7 +4057,11 @@
       ],
       "type": "compound",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "moderate",
       "goal": [
         "conditioning",
         "athletic"
@@ -3259,6 +4084,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -3282,6 +4112,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -3305,6 +4140,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic",
@@ -3329,7 +4169,11 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "athletic",
         "recovery",
@@ -3352,6 +4196,11 @@
       ],
       "type": "compound",
       "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "athletic"
@@ -3374,6 +4223,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "pump"
@@ -3396,6 +4250,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "pump"
@@ -3416,6 +4275,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -3434,6 +4298,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -3452,6 +4321,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump",
         "recovery"
@@ -3472,6 +4346,11 @@
       "secondary": [],
       "type": "isolation",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "pump"
       ],
@@ -3493,6 +4372,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "pump"
@@ -3513,6 +4397,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "pump"
@@ -3533,6 +4422,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "pump"
@@ -3554,6 +4448,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
       "goal": [
         "strength",
         "pump"
@@ -3574,7 +4473,12 @@
       ],
       "type": "isolation",
       "unilateral": false,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "recovery"
       ],
@@ -3595,7 +4499,12 @@
       ],
       "type": "compound",
       "unilateral": true,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "recovery",
         "athletic"
@@ -3616,7 +4525,12 @@
       ],
       "type": "isolation",
       "unilateral": true,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "recovery"
       ],
@@ -3636,7 +4550,12 @@
       ],
       "type": "isolation",
       "unilateral": true,
-      "timed": true,
+      "phase": [
+        "warmup",
+        "cooldown"
+      ],
+      "load_type": "timed",
+      "impact": "low",
       "goal": [
         "recovery",
         "athletic"
@@ -3658,6 +4577,11 @@
       ],
       "type": "compound",
       "unilateral": false,
+      "phase": [
+        "warmup"
+      ],
+      "load_type": "reps",
+      "impact": "low",
       "goal": [
         "recovery",
         "athletic"
@@ -3666,6 +4590,175 @@
         "back",
         "shoulder"
       ]
+    },
+    {
+      "id": "standing-calf-raise-bw",
+      "name": "Standing Calf Raise",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
+      "goal": [
+        "pump",
+        "recovery"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "db-calf-raise",
+      "name": "Dumbbell Calf Raise",
+      "equipment": [
+        "dumbbells"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
+      "goal": [
+        "pump"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "single-leg-calf-raise",
+      "name": "Single-Leg Calf Raise",
+      "equipment": [
+        "bodyweight"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": true,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "low",
+      "goal": [
+        "pump",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "smith-calf-raise",
+      "name": "Smith Machine Calf Raise",
+      "equipment": [
+        "smith-machine"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
+      "goal": [
+        "pump",
+        "strength"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "leg-press-calf-raise",
+      "name": "Leg Press Calf Raise",
+      "equipment": [
+        "leg-press"
+      ],
+      "muscles": [
+        "legs"
+      ],
+      "secondary": [],
+      "type": "isolation",
+      "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
+      "goal": [
+        "pump",
+        "strength"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "negative-pullup",
+      "name": "Negative Pull-Up",
+      "equipment": [
+        "pullup-bar",
+        "bodyweight"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "phase": [
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
+      "goal": [
+        "strength",
+        "athletic"
+      ],
+      "avoid": []
+    },
+    {
+      "id": "banded-pullup",
+      "name": "Band-Assisted Pull-Up",
+      "equipment": [
+        "pullup-bar",
+        "resistance-bands",
+        "bodyweight"
+      ],
+      "muscles": [
+        "back"
+      ],
+      "secondary": [
+        "biceps"
+      ],
+      "type": "compound",
+      "unilateral": false,
+      "phase": [
+        "warmup",
+        "main"
+      ],
+      "load_type": "reps",
+      "impact": "moderate",
+      "goal": [
+        "strength",
+        "athletic",
+        "recovery"
+      ],
+      "avoid": []
     }
   ]
 }
