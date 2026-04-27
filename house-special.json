@@ -1,0 +1,62 @@
+{
+  "headerTitle": "House Opening: Full-Body 45",
+  "date": "2026-04-27",
+  "duration": "~45 min",
+  "slug": "house-opening-full-body-45",
+  "parameters": [
+    { "label": "Goal", "value": "Strength + athletic" },
+    { "label": "Focus", "value": "Full body" },
+    { "label": "Equipment", "value": "Dumbbells, bench" }
+  ],
+  "biohackerTips": [
+    { "label": "Pre", "value": "Eat 25-30g protein 60-90 min before. Hydrate." },
+    { "label": "During", "value": "Sip water between sets. Take the rest you need." },
+    { "label": "Post", "value": "30-40g protein within 30 min of finishing." }
+  ],
+  "blocks": [
+    {
+      "emoji": "🔥",
+      "name": "Warmup",
+      "roundLabel": "1 round",
+      "restCue": "Comfortable pace, no rush",
+      "exercises": [
+        { "name": "World's Greatest Stretch", "detail": "5 / side", "rounds": 1 },
+        { "name": "Glute Bridge", "detail": "12 reps", "rounds": 1 },
+        { "name": "Band Pull-Apart", "detail": "15 reps", "rounds": 1 }
+      ]
+    },
+    {
+      "emoji": "💪",
+      "name": "Block A — Posterior Chain",
+      "roundLabel": "3 rounds",
+      "restCue": "Rest 60-90 sec between rounds",
+      "exercises": [
+        { "name": "Dumbbell Romanian Deadlift", "detail": "3 x 8 reps", "rounds": 3 },
+        { "name": "Dumbbell Single-Arm Row", "detail": "3 x 10 / side", "rounds": 3 },
+        { "name": "Single-Leg Glute Bridge", "detail": "3 x 10 / side", "rounds": 3 }
+      ]
+    },
+    {
+      "emoji": "🧱",
+      "name": "Block B — Push & Squat",
+      "roundLabel": "3 rounds",
+      "restCue": "Rest 60-90 sec between rounds",
+      "exercises": [
+        { "name": "Goblet Squat", "detail": "3 x 10 reps", "rounds": 3 },
+        { "name": "Dumbbell Bench Press", "detail": "3 x 8 reps", "rounds": 3 },
+        { "name": "Dumbbell Shoulder Press", "detail": "3 x 10 reps", "rounds": 3 }
+      ]
+    },
+    {
+      "emoji": "🎯",
+      "name": "Core Finisher",
+      "roundLabel": "2 rounds",
+      "restCue": "Rest 30 sec between rounds",
+      "exercises": [
+        { "name": "Plank", "detail": "2 x 45 sec", "rounds": 2 },
+        { "name": "Bicycle Crunch", "detail": "2 x 20 / side", "rounds": 2 },
+        { "name": "Hollow Body Hold", "detail": "2 x 30 sec", "rounds": 2 }
+      ]
+    }
+  ]
+}
