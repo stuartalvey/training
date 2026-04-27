@@ -913,24 +913,32 @@ function renderEmptyState(){
   document.getElementById('blocksContainer').innerHTML = renderEmptyStateHtml();
 }
 function renderEmptyStateHtml(){
+  const houseCard = HOUSE_SPECIAL ? `
+      <button class="empty-action-btn" onclick="loadHouseSpecialWorkout()">
+        <span class="ea-icon">🥩</span>
+        <span class="ea-text">
+          <span class="ea-label">House Special</span>
+          <span class="ea-sub">Hit the latest featured workout, built by Protein Social</span>
+        </span>
+      </button>` : '';
   return `<div class="empty-state">
     <div class="empty-logo">
       <div class="empty-logo-mark"><img src="/icon-192.png" alt="Protein Social"></div>
     </div>
     <div class="empty-tagline">Build. Train. Share.</div>
-    <div class="empty-state-actions">
-      <button class="empty-action-btn" onclick="openGenerateModal()">
-        <span class="ea-icon">⚡</span>
-        <span class="ea-text">
-          <span class="ea-label">Generate in App</span>
-          <span class="ea-sub">Pick equipment, muscles &amp; duration</span>
-        </span>
-      </button>
+    <div class="empty-state-actions">${houseCard}
       <button class="empty-action-btn" onclick="openHelpModal()">
         <span class="ea-icon">🤖</span>
         <span class="ea-text">
           <span class="ea-label">Build with AI</span>
           <span class="ea-sub">Copy a prompt into any AI chat</span>
+        </span>
+      </button>
+      <button class="empty-action-btn" onclick="openGenerateModal()">
+        <span class="ea-icon">⚡</span>
+        <span class="ea-text">
+          <span class="ea-label">Generate in App</span>
+          <span class="ea-sub">Pick equipment, muscles &amp; duration</span>
         </span>
       </button>
       <button class="empty-action-btn" onclick="openImportModal()">
@@ -1489,6 +1497,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   let restored = null;
   try { const raw = localStorage.getItem(WORKOUT_KEY); if(raw){ const p = JSON.parse(raw); if(validateWorkout(p) === true) restored = p; } } catch(e){}
   renderWorkout(restored);
+  // House Special: fetch in background, then refresh the empty state if that's
+  // what's still showing — don't block boot or override an active workout.
+  loadHouseSpecial().then(() => {
+    if(!WORKOUT && HOUSE_SPECIAL) renderEmptyState();
+  });
   let notesDebounce = null;
   document.getElementById('notes').addEventListener('input', () => { clearTimeout(notesDebounce); notesDebounce = setTimeout(saveState, 300); });
   document.addEventListener('keydown', e => {
@@ -1661,6 +1674,53 @@ async function loadVault(){
     genState.allEquipTags = Object.keys(EQUIP_META);
     GYM_PRESETS.commercial.equipment = genState.allEquipTags;
   }
+}
+
+/* ── HOUSE SPECIAL ──
+   The featured workout is just a JSON workout file in the repo. Same schema
+   as anything imported through the Import button — no special metadata, just
+   swap the file to swap the workout. Goes through the same flexible
+   extractJsonObject + validateWorkout pipeline as Import, so a JSON file with
+   a stray code fence or surrounding whitespace still works. Silently absent
+   if the fetch or parse fails — the empty-state card just doesn't render. */
+let HOUSE_SPECIAL = null;
+async function loadHouseSpecial(){
+  try {
+    console.log('[HouseSpecial] Fetching /house-special.json...');
+    const res = await fetch('/house-special.json');
+    if(!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    const text = await res.text();
+    const extracted = extractJsonObject(text);
+    if(!extracted) throw new Error('No JSON object found in file');
+    const parsed = JSON.parse(extracted);
+    const validation = validateWorkout(parsed);
+    if(validation !== true) throw new Error('Validation failed: ' + validation);
+    HOUSE_SPECIAL = parsed;
+    console.log('[HouseSpecial] Loaded:', parsed.headerTitle);
+  } catch(e){
+    console.warn('[HouseSpecial] Not loaded:', e.message);
+    HOUSE_SPECIAL = null;
+  }
+}
+
+async function loadHouseSpecialWorkout(){
+  // Re-fetch on click in case it failed at boot or has been updated since.
+  if(!HOUSE_SPECIAL) await loadHouseSpecial();
+  if(!HOUSE_SPECIAL){
+    askConfirm("Couldn't load the House Special. Try again later, or generate a workout instead.", { title: 'House Special unavailable', okLabel: 'Got it', danger: false });
+    return;
+  }
+  const anyChecked = allChecks().some(c => c.checked);
+  if(anyChecked){
+    const ok = await askConfirm('You have progress on the current workout. Discard it and load the House Special?', { title: 'Discard progress?', okLabel: 'Discard & Load' });
+    if(!ok) return;
+  }
+  try { localStorage.setItem(WORKOUT_KEY, JSON.stringify(HOUSE_SPECIAL)); } catch(e){}
+  if(HOUSE_SPECIAL.theme === 'dark' || HOUSE_SPECIAL.theme === 'light'){
+    applyTheme(HOUSE_SPECIAL.theme);
+    try { localStorage.setItem(THEME_KEY, HOUSE_SPECIAL.theme); } catch(e){}
+  }
+  renderWorkout(HOUSE_SPECIAL);
 }
 
 /* ── STEP RENDERING ── */
