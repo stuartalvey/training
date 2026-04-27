@@ -286,6 +286,7 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   padding:11px 13px;line-height:1.5;letter-spacing:-0.01em}
 .modal-help code{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
   background:var(--card);padding:1px 6px;border-radius:5px;font-size:12px;color:var(--text)}
+.modal-help .inline-icon{width:1.1em;height:1.1em;vertical-align:-0.22em;margin:0 2px;color:var(--text)}
 
 @media (min-width:740px){body{max-width:780px;margin:0 auto}}
 
@@ -649,9 +650,9 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 <div class="modal-backdrop" id="shareModal" onclick="if(event.target===this) closeShareModal()">
   <div class="modal">
     <div class="modal-head">
-      <h3>Share Workout</h3>
+      <h3 id="shareModalTitle">Share Workout</h3>
     </div>
-    <div class="modal-help">Copy this text and send it to someone. They can paste it into Protein Social using the Import icon.</div>
+    <div class="modal-help" id="shareModalHelp">Send this text to a friend. They can press <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Import"><path d="M12 3v13"/><polyline points="7 11 12 16 17 11"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg> in the Protein Social header and paste to load the workout.</div>
     <textarea id="shareTextarea" readonly></textarea>
     <div class="modal-actions">
       <button class="btn" onclick="closeShareModal()">Close</button>
@@ -668,9 +669,9 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
     </div>
     <div class="modal-help">
       <strong>1.</strong> Copy the prompt below.<br>
-      <strong>2.</strong> Paste it into ChatGPT, Claude, Gemini, or any AI chat.<br>
-      <strong>3.</strong> Edit the last line to describe the workout you want.<br>
-      <strong>4.</strong> Copy the AI's JSON response and tap <em>Import</em> here.
+      <strong>2.</strong> Paste it into ChatGPT, Claude, Gemini, or any AI chat. The AI will greet you and ask what kind of workout you want.<br>
+      <strong>3.</strong> Reply with your details — equipment, time available, target muscles, anything sore. Be as vague or specific as you like.<br>
+      <strong>4.</strong> The AI replies with a JSON code block. Copy it, then press <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Import"><path d="M12 3v13"/><polyline points="7 11 12 16 17 11"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg> in the Protein Social header and paste to import the workout.
     </div>
     <textarea id="helpPromptTextarea" readonly></textarea>
     <div class="modal-actions">
@@ -1029,14 +1030,75 @@ function buildShareText(w){
       const r = {}; Object.keys(ex).filter(k => !k.startsWith('_')).forEach(k => r[k] = ex[k]); return r;
     })
   }));
-  return 'PROTEIN SOCIAL WORKOUT\n"' + (w.headerTitle || 'Workout') + '"' + (w.date ? ' \u2014 ' + w.date : '') + '\n\nTo use:\n1. Go to https://app.proteinsocial.com\n2. Tap Import\n3. Paste this entire file\n\n' + JSON.stringify(clean, null, 2) + '\n';
+  return 'PROTEIN SOCIAL WORKOUT\n"' + (w.headerTitle || 'Workout') + '"' + (w.date ? ' \u2014 ' + w.date : '') + '\n\nTo load this workout:\n1. Go to https://app.proteinsocial.com\n2. Press the \u2193 button in the header\n3. Paste this entire file and tap Load Workout\n\n' + JSON.stringify(clean, null, 2) + '\n';
 }
 function buildShareFilename(w){
   return 'protein-social-' + (w.date ? w.date + '-' : '') + (w.slug || 'workout') + '.txt';
 }
+/* ── Cross-platform clipboard + share helpers ──
+   Web Share API works great on iOS/Android but on desktop Chrome it pops a
+   limited OS share sheet that confuses people. Detect mobile and prefer the
+   in-app textarea modal (with a Copy button) on desktop. */
+const isLikelyMobile = (() => {
+  if(typeof navigator === 'undefined') return false;
+  if(navigator.userAgentData?.mobile === true) return true;
+  if(navigator.userAgentData?.mobile === false) return false;
+  const hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints || 0) > 0;
+  const isCoarsePointer = window.matchMedia?.('(pointer: coarse)')?.matches;
+  return hasTouch && !!isCoarsePointer;
+})();
+
+/* Copy text to clipboard. Returns true on success, false otherwise.
+   Tries Clipboard API first, then falls back to execCommand on a passed-in
+   textarea, then to a temporary textarea as a last resort. The async/await
+   shape lets callers gate UI feedback on actual success. */
+async function copyTextToClipboard(text, sourceTextarea){
+  if(navigator.clipboard && window.isSecureContext){
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch(e){ /* fall through to legacy path */ }
+  }
+  if(sourceTextarea){
+    try {
+      sourceTextarea.focus();
+      sourceTextarea.select();
+      sourceTextarea.setSelectionRange(0, text.length);
+      if(document.execCommand('copy')) return true;
+    } catch(e){ /* fall through */ }
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed'; ta.style.left = '-9999px'; ta.style.top = '0';
+  ta.setAttribute('readonly', '');
+  document.body.appendChild(ta);
+  let ok = false;
+  try {
+    ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+    ok = document.execCommand('copy');
+  } catch(e){}
+  document.body.removeChild(ta);
+  return ok;
+}
+
+/* ── Share modal copy ──
+   The share modal is reused for two contexts: sharing a workout JSON, and
+   sharing the app itself when no workout is loaded. Each gets its own title
+   + help line so the recipient knows what they're looking at. */
+const IMPORT_ICON_HTML = '<svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Import"><path d="M12 3v13"/><polyline points="7 11 12 16 17 11"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
+const SHARE_MODAL_COPY = {
+  workout: {
+    title: 'Share Workout',
+    help: `Send this text to a friend. They can press ${IMPORT_ICON_HTML} in the Protein Social header and paste to load the workout.`,
+  },
+  app: {
+    title: 'Share Protein Social',
+    help: 'Send this to anyone you think would like a low-friction workout tracker that works with their go-to AI.',
+  },
+};
+
 function openShareChoiceModal(){
   if(!WORKOUT){
-    askConfirm('No workout is loaded. Start by generating or importing a workout.', { title: 'Nothing to share', okLabel: 'Got it', danger: false });
+    // No workout? Share the app link itself instead of a dead-end alert.
+    shareAppLink();
     return;
   }
   document.getElementById('shareChoiceModal').classList.add('active');
@@ -1044,54 +1106,93 @@ function openShareChoiceModal(){
 function closeShareChoiceModal(){
   document.getElementById('shareChoiceModal').classList.remove('active');
 }
+async function shareAppLink(){
+  const title = 'Protein Social';
+  const text = "Protein Social — a low-friction workout tracker that pairs with your go-to AI.\n\n"
+             + "Generate workouts in ChatGPT, Claude, Gemini, or any AI chat, then track them, time your circuits, and watch form videos in the app.\n\n"
+             + "https://app.proteinsocial.com";
+  await doShare(text, 'protein-social.txt', title, SHARE_MODAL_COPY.app);
+}
 async function shareTemplate(){
   closeShareChoiceModal();
   const text = buildShareText(WORKOUT);
   const filename = buildShareFilename(WORKOUT);
   const title = WORKOUT.headerTitle || 'Protein Social Workout';
-  await doShare(text, filename, title);
+  await doShare(text, filename, title, SHARE_MODAL_COPY.workout);
 }
 async function shareSummary(){
   closeShareChoiceModal();
   const text = buildSummaryText();
   const filename = 'protein-social-results-' + (WORKOUT.date || 'workout') + '.txt';
   const title = (WORKOUT.headerTitle || 'Workout') + ' \u2014 My Results';
-  await doShare(text, filename, title);
+  await doShare(text, filename, title, SHARE_MODAL_COPY.workout);
 }
-async function doShare(text, filename, title){
+async function doShare(text, filename, title, modalCopy){
   const appUrl = 'https://app.proteinsocial.com';
-  if(navigator.share && typeof File !== 'undefined'){
+  // On desktop, Web Share API opens an awkward OS share sheet. Skip it and
+  // jump straight to the in-app modal, which has a real Copy Text button.
+  if(isLikelyMobile && navigator.share){
+    if(typeof File !== 'undefined'){
+      try {
+        const file = new File([text], filename, { type: 'text/plain' });
+        if(!navigator.canShare || navigator.canShare({ files: [file] })){
+          await navigator.share({ title, files: [file], url: appUrl });
+          return;
+        }
+      } catch(e){
+        if(e && e.name === 'AbortError') return;
+        // any other error → fall through
+      }
+    }
     try {
-      const file = new File([text], filename, { type: 'text/plain' });
-      if(!navigator.canShare || navigator.canShare({ files: [file] })){ await navigator.share({ title, files: [file], url: appUrl }); return; }
-    } catch(e){ if(e && e.name === 'AbortError') return; }
+      await navigator.share({ title, text, url: appUrl });
+      return;
+    } catch(e){
+      if(e && e.name === 'AbortError') return;
+      // any other error → fall through to in-app modal
+    }
   }
-  if(navigator.share){
-    try { await navigator.share({ title, text, url: appUrl }); return; } catch(e){ if(e && e.name === 'AbortError') return; }
-  }
-  openShareModal(text + '\n\n' + appUrl);
+  // Each caller's text is complete-on-its-own (URL embedded where appropriate),
+  // so DON'T append the URL again here — that's what was doubling it.
+  openShareModal(text, modalCopy || SHARE_MODAL_COPY.workout);
 }
-function openShareModal(text){
+function openShareModal(text, modalCopy){
+  const copy = modalCopy || SHARE_MODAL_COPY.workout;
+  document.getElementById('shareModalTitle').textContent = copy.title;
+  document.getElementById('shareModalHelp').innerHTML = copy.help;
   document.getElementById('shareTextarea').value = text;
   document.getElementById('shareModal').classList.add('active');
   setTimeout(() => { const t = document.getElementById('shareTextarea'); t.focus(); t.select(); }, 50);
 }
 function closeShareModal(){ document.getElementById('shareModal').classList.remove('active'); }
-function copyShareLink(){
+async function copyShareLink(){
   const textarea = document.getElementById('shareTextarea');
-  const doFallback = () => { textarea.select(); try { document.execCommand('copy'); } catch(e){} };
-  if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(textarea.value).catch(doFallback); } else { doFallback(); }
+  const ok = await copyTextToClipboard(textarea.value, textarea);
   const btn = document.getElementById('shareCopyBtn'), old = btn.textContent;
-  btn.textContent = 'Copied \u2713'; setTimeout(() => btn.textContent = old, 1200);
+  btn.textContent = ok ? 'Copied \u2713' : 'Press Ctrl+C';
+  setTimeout(() => btn.textContent = old, 1500);
 }
 
-const LLM_PROMPT = `You are helping me build a workout for Protein Social, a mobile workout tracker.
+const LLM_PROMPT = `You are helping me build a personalized workout for Protein Social, a workout tracker. The app lives at https://app.proteinsocial.com.
 
-OUTPUT FORMAT — READ CAREFULLY:
-You must reply with EXACTLY ONE JSON object wrapped in a \`\`\`json code block.
+═══ CONVERSATION FLOW — TWO STEPS, DO NOT SKIP ═══
+
+STEP 1 (your very first reply, right now):
+Send a short, warm greeting that asks me about my setup and what I want to train today. Do NOT generate any workout yet. Use roughly this wording — adapt the voice, but keep it brief and keep the link:
+
+> Hi! Thanks for using Protein Social. Let's build you a customized workout. Tell me about your setup and what kind of session you want to hit today — equipment available, time you have, muscles or goals you're chasing, anything sore. You can be as vague or as detailed as you like. Once I know, I'll generate the JSON for you to copy and import back into https://app.proteinsocial.com.
+
+Then STOP. Wait for my reply.
+
+STEP 2 (only after I reply with my details):
+Generate the workout as a JSON code block following the format and schema below. No preamble, no follow-up — just the code block.
+
+═══ JSON OUTPUT FORMAT (STEP 2 ONLY) ═══
+
+Reply with EXACTLY ONE JSON object wrapped in a \`\`\`json code block.
 The code block is mandatory — it gives me a copy button in the chat UI.
 
-Format your entire response like this:
+Format your entire reply like this:
 
 \`\`\`json
 {
@@ -1146,11 +1247,9 @@ CONTENT RULES:
 - Pick varied, specific exercises. Don't repeat the same exercise within a workout.
 - Include realistic prescriptions in "detail" (reps, tempo, time, distance).
 - Keep slug short, lowercase, hyphenated. Example: "full-body-lower-bias".
+- Use today's date for "date" unless I specified otherwise.
 
-NOW BUILD:
-Generate a workout for: [replace this line with your request, e.g. "a 45-minute full-body session biased toward glutes and posture, about 4 blocks"]
-
-REMINDER: Your entire reply is exactly one \`\`\`json … \`\`\` code block. No prose before or after.`;
+REMINDER: Step 1 is a greeting only. Step 2 is exactly one \`\`\`json … \`\`\` code block. Nothing else, ever.`;
 
 function openHelpModal(){
   document.getElementById('helpPromptTextarea').value = LLM_PROMPT;
@@ -1159,12 +1258,12 @@ function openHelpModal(){
 }
 function openHelpModalFromImport(ev){ if(ev) ev.preventDefault(); closeImportModal(); openHelpModal(); }
 function closeHelpModal(){ document.getElementById('helpModal').classList.remove('active'); }
-function copyHelpPrompt(){
+async function copyHelpPrompt(){
   const textarea = document.getElementById('helpPromptTextarea');
-  const doFallback = () => { textarea.select(); try { document.execCommand('copy'); } catch(e){} };
-  if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(textarea.value).catch(doFallback); } else { doFallback(); }
+  const ok = await copyTextToClipboard(textarea.value, textarea);
   const btn = document.getElementById('helpCopyBtn'), old = btn.textContent;
-  btn.textContent = 'Copied \u2713'; setTimeout(() => btn.textContent = old, 1200);
+  btn.textContent = ok ? 'Copied \u2713' : 'Press Ctrl+C';
+  setTimeout(() => btn.textContent = old, 1500);
 }
 
 const SUN_SVG = '<path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/><circle cx="12" cy="12" r="4"/>';
