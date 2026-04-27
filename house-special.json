@@ -1,61 +1,87 @@
 {
-  "headerTitle": "House Opening: Full-Body 45",
+  "headerTitle": "House Special: The Tasting Menu",
   "date": "2026-04-27",
-  "duration": "~45 min",
-  "slug": "house-opening-full-body-45",
+  "duration": "~60 min",
+  "slug": "house-special-tasting-menu",
   "parameters": [
     { "label": "Goal", "value": "Strength + athletic" },
-    { "label": "Focus", "value": "Full body" },
-    { "label": "Equipment", "value": "Dumbbells, bench" }
+    { "label": "Focus", "value": "Full body, six courses" },
+    { "label": "Service", "value": "60 min, paced like a real meal" },
+    { "label": "Kitchen", "value": "Alvey Gym — the Protein Social house" }
   ],
   "biohackerTips": [
-    { "label": "Pre", "value": "Eat 25-30g protein 60-90 min before. Hydrate." },
-    { "label": "During", "value": "Sip water between sets. Take the rest you need." },
-    { "label": "Post", "value": "30-40g protein within 30 min of finishing." }
+    { "label": "Pre-Service", "value": "25-30g protein 60-90 min before. Hydrate. Show up curious — every course matters." },
+    { "label": "During Service", "value": "Sip water between rounds. Rest cues are suggestions; if a course needs more time, take it." },
+    { "label": "Post-Meal", "value": "30-40g protein within 30 min. Walk for 10. Note what you'd order again." }
   ],
   "blocks": [
     {
-      "emoji": "🔥",
-      "name": "Warmup",
-      "roundLabel": "1 round",
-      "restCue": "Comfortable pace, no rush",
+      "emoji": "🥄",
+      "name": "Amuse-Bouche",
+      "roundLabel": "1 round, one bite each",
+      "restCue": "No pause — flow straight through",
       "exercises": [
-        { "name": "World's Greatest Stretch", "detail": "5 / side", "rounds": 1 },
-        { "name": "Glute Bridge", "detail": "12 reps", "rounds": 1 },
-        { "name": "Band Pull-Apart", "detail": "15 reps", "rounds": 1 }
+        { "name": "Cat-Cow Flow", "detail": "8 slow reps", "rounds": 1, "youtubeQuery": "cat cow stretch yoga" },
+        { "name": "World's Greatest Stretch", "detail": "4 / side", "rounds": 1 },
+        { "name": "Scapular Pull-Aparts", "detail": "12 reps with light band", "rounds": 1, "youtubeQuery": "band scapular pull aparts" }
       ]
     },
     {
-      "emoji": "💪",
-      "name": "Block A — Posterior Chain",
-      "roundLabel": "3 rounds",
-      "restCue": "Rest 60-90 sec between rounds",
-      "exercises": [
-        { "name": "Dumbbell Romanian Deadlift", "detail": "3 x 8 reps", "rounds": 3 },
-        { "name": "Dumbbell Single-Arm Row", "detail": "3 x 10 / side", "rounds": 3 },
-        { "name": "Single-Leg Glute Bridge", "detail": "3 x 10 / side", "rounds": 3 }
-      ]
-    },
-    {
-      "emoji": "🧱",
-      "name": "Block B — Push & Squat",
-      "roundLabel": "3 rounds",
-      "restCue": "Rest 60-90 sec between rounds",
-      "exercises": [
-        { "name": "Goblet Squat", "detail": "3 x 10 reps", "rounds": 3 },
-        { "name": "Dumbbell Bench Press", "detail": "3 x 8 reps", "rounds": 3 },
-        { "name": "Dumbbell Shoulder Press", "detail": "3 x 10 reps", "rounds": 3 }
-      ]
-    },
-    {
-      "emoji": "🎯",
-      "name": "Core Finisher",
+      "emoji": "🥗",
+      "name": "Appetizer — Activation Salad",
       "roundLabel": "2 rounds",
-      "restCue": "Rest 30 sec between rounds",
+      "restCue": "Light pace, 15 sec between movements",
       "exercises": [
-        { "name": "Plank", "detail": "2 x 45 sec", "rounds": 2 },
-        { "name": "Bicycle Crunch", "detail": "2 x 20 / side", "rounds": 2 },
-        { "name": "Hollow Body Hold", "detail": "2 x 30 sec", "rounds": 2 }
+        { "name": "Glute Bridge", "detail": "2 x 12 reps", "rounds": 2 },
+        { "name": "Banded Lateral Walk", "detail": "2 x 10 / side", "rounds": 2 },
+        { "name": "Dead Bug", "detail": "2 x 8 / side", "rounds": 2 },
+        { "name": "Band Pull-Apart", "detail": "2 x 15 reps", "rounds": 2 }
+      ]
+    },
+    {
+      "emoji": "🍖",
+      "name": "Main Course — The Centerpiece",
+      "roundLabel": "4 rounds, A1/A2 superset",
+      "restCue": "Course is paced, not rushed — 90 sec between rounds",
+      "exercises": [
+        { "name": "Goblet Squat to Press", "detail": "4 x 8 reps, kettlebell or dumbbell", "rounds": 4, "youtubeQuery": "goblet squat to press kettlebell" },
+        { "name": "Pendlay Row", "detail": "4 x 6 reps, barbell from the floor each rep", "rounds": 4, "youtubeQuery": "pendlay row form" }
+      ]
+    },
+    {
+      "emoji": "🥕",
+      "name": "The Sides — Three Small Plates",
+      "roundLabel": "3 rounds",
+      "restCue": "60 sec between rounds, plate to plate is brisk",
+      "exercises": [
+        { "name": "Bulgarian Split Squat", "detail": "3 x 8 / side, dumbbells in hand", "rounds": 3, "youtubeQuery": "bulgarian split squat dumbbell" },
+        { "name": "Half-Kneeling Single-Arm Landmine Press", "detail": "3 x 8 / side", "rounds": 3, "youtubeQuery": "half kneeling landmine press" },
+        { "name": "Pallof Press", "detail": "3 x 10 / side, cable or band", "rounds": 3, "youtubeQuery": "pallof press cable" }
+      ]
+    },
+    {
+      "emoji": "🍰",
+      "name": "Dessert — The 5-Minute Buffet",
+      "roundLabel": "5-min finisher · 40 on / 20 off",
+      "restCue": "Sweet but you earned it — keep moving the whole 5",
+      "exercises": [
+        { "name": "Kettlebell Swing", "detail": "0:40 work / 0:20 rest", "rounds": 1, "youtubeQuery": "kettlebell swing form" },
+        { "name": "Push-Up", "detail": "0:40 work / 0:20 rest", "rounds": 1 },
+        { "name": "Mountain Climber", "detail": "0:40 work / 0:20 rest", "rounds": 1 },
+        { "name": "Goblet Squat Pulse", "detail": "0:40 work / 0:20 rest, light kettlebell", "rounds": 1, "youtubeQuery": "goblet squat pulse" },
+        { "name": "Plank Reach", "detail": "0:40 work, hold to finish", "rounds": 1, "youtubeQuery": "plank shoulder reach" }
+      ]
+    },
+    {
+      "emoji": "☕",
+      "name": "Digestif — Settle the Meal",
+      "roundLabel": "Slow, no count — breathe",
+      "restCue": "Long exhales, no rush",
+      "exercises": [
+        { "name": "Couch Stretch", "detail": "60 sec / side", "rounds": 1, "youtubeQuery": "couch stretch hip flexor" },
+        { "name": "Thread the Needle", "detail": "30 sec / side", "rounds": 1, "youtubeQuery": "thread the needle stretch" },
+        { "name": "90/90 Hip Flow", "detail": "8 slow transitions", "rounds": 1 },
+        { "name": "Child's Pose with Reach", "detail": "60 sec, breathe deep", "rounds": 1, "youtubeQuery": "childs pose reach stretch" }
       ]
     }
   ]
