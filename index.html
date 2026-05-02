@@ -78,6 +78,16 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 .btn.danger{color:var(--danger);border-color:var(--line)}
 .footer-row{display:flex;flex-direction:row;gap:8px;width:100%;margin:14px 0 0 0;align-items:stretch}
 .footer-btn{flex:1 1 0 !important;min-width:0;width:100%;padding:10px 6px;font-size:13px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Subtle refresh glyph shown only on the empty state. Sits centered below the
+   About/copyright line as the very last thing on the page — low-contrast,
+   reads as "tap if something's stuck" rather than a primary action. */
+.empty-refresh-btn{display:none;margin:0 auto 20px;background:none;border:none;padding:10px;
+  cursor:pointer;color:var(--muted);opacity:.45;transition:opacity .15s ease, color .15s ease;
+  -webkit-tap-highlight-color:transparent;border-radius:50%}
+.empty-refresh-btn:hover{opacity:.9;color:var(--text)}
+.empty-refresh-btn:active{opacity:1;transform:scale(.92)}
+.empty-refresh-btn svg{width:18px;height:18px;display:block}
+.empty-refresh-btn.show{display:block}
 
 /* PROGRESS BAR */
 .progress-wrap{margin-top:10px}
@@ -506,6 +516,17 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
   &nbsp;&middot;&nbsp;
   &copy; Alvey Health &middot; Protein Social
 </div>
+<!-- Empty-state refresh: a subtle glyph button used as a cache-nuke escape hatch when no workout is loaded.
+     Hidden by default; renderWorkout() shows it only on the empty state. Lives below the About/copyright
+     line so it sits at the very bottom of the empty state without pushing other content out of view. -->
+<button id="emptyRefreshBtn" class="empty-refresh-btn" onclick="unloadWorkout()" title="Refresh the app and clear all saved data" aria-label="Refresh app">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="23 4 23 10 17 10"/>
+    <polyline points="1 20 1 14 7 14"/>
+    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/>
+    <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/>
+  </svg>
+</button>
 
 
 <!-- ABOUT MODAL -->
@@ -749,17 +770,16 @@ function renderWorkout(workout){
   const footer = document.getElementById('footerActions');
   const resetBtn = document.getElementById('resetWorkoutBtn');
   const exitBtn = document.getElementById('exitWorkoutBtn');
+  const emptyRefresh = document.getElementById('emptyRefreshBtn');
   const notesSection = document.getElementById('notesSection');
   if(!workout){
     renderEmptyState();
     STORAGE_KEY = null;
     document.getElementById('headerTitle').textContent = 'Workout';
-    // Footer stays visible so the cache-nuke button is reachable from the
-    // empty state. Reset Workout has nothing to reset; "Exit Workout" reads
-    // wrong when there's nothing to exit, so we relabel it.
-    if(footer) footer.style.display = '';
-    if(resetBtn) resetBtn.style.display = 'none';
-    if(exitBtn) exitBtn.textContent = 'Refresh App';
+    // Empty state gets a subtle refresh glyph instead of the danger-styled footer —
+    // less alarming when there's nothing to exit, still gives a cache-nuke escape hatch.
+    if(footer) footer.style.display = 'none';
+    if(emptyRefresh) emptyRefresh.classList.add('show');
     if(notesSection) notesSection.style.display = 'none';
     updateProgress();
     return;
@@ -767,6 +787,7 @@ function renderWorkout(workout){
   if(footer) footer.style.display = '';
   if(resetBtn) resetBtn.style.display = '';
   if(exitBtn) exitBtn.textContent = 'Exit Workout';
+  if(emptyRefresh) emptyRefresh.classList.remove('show');
   STORAGE_KEY = `protein-social-${workout.date}-${workout.slug}`;
   document.getElementById('headerTitle').textContent = workout.headerTitle || 'Workout';
 
