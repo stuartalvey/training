@@ -497,8 +497,8 @@ button{font:inherit;letter-spacing:-0.01em;user-select:none;-webkit-user-select:
 
 <!-- FOOTER ACTIONS -->
 <div id="footerActions" class="footer-row">
-  <button class="btn footer-btn danger" onclick="resetAll()">Reset Workout</button>
-  <button class="btn footer-btn danger" onclick="unloadWorkout()">Exit Workout</button>
+  <button id="resetWorkoutBtn" class="btn footer-btn danger" onclick="resetAll()">Reset Workout</button>
+  <button id="exitWorkoutBtn" class="btn footer-btn danger" onclick="unloadWorkout()">Exit Workout</button>
 </div>
 <div class="footer-space"></div>
 <div style="text-align:center;font-size:11px;color:var(--muted);letter-spacing:-0.01em;padding:4px 0 16px 0">
@@ -747,17 +747,26 @@ function renderWorkout(workout){
   WORKOUT = workout;
   exNotes = {};
   const footer = document.getElementById('footerActions');
+  const resetBtn = document.getElementById('resetWorkoutBtn');
+  const exitBtn = document.getElementById('exitWorkoutBtn');
   const notesSection = document.getElementById('notesSection');
   if(!workout){
     renderEmptyState();
     STORAGE_KEY = null;
     document.getElementById('headerTitle').textContent = 'Workout';
-    if(footer) footer.style.display = 'none';
+    // Footer stays visible so the cache-nuke button is reachable from the
+    // empty state. Reset Workout has nothing to reset; "Exit Workout" reads
+    // wrong when there's nothing to exit, so we relabel it.
+    if(footer) footer.style.display = '';
+    if(resetBtn) resetBtn.style.display = 'none';
+    if(exitBtn) exitBtn.textContent = 'Refresh App';
     if(notesSection) notesSection.style.display = 'none';
     updateProgress();
     return;
   }
   if(footer) footer.style.display = '';
+  if(resetBtn) resetBtn.style.display = '';
+  if(exitBtn) exitBtn.textContent = 'Exit Workout';
   STORAGE_KEY = `protein-social-${workout.date}-${workout.slug}`;
   document.getElementById('headerTitle').textContent = workout.headerTitle || 'Workout';
 
@@ -1289,13 +1298,14 @@ function toggleTheme(){
   try { localStorage.setItem(THEME_KEY, next); } catch(e){}
 }
 function loadTheme(){
-  let theme = 'dark';
-  try { theme = localStorage.getItem(THEME_KEY) || null; } catch(e){}
-  // If no saved preference, follow the system setting
-  if(!theme){
-    theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
-      ? 'light' : 'dark';
-  }
+  // Dark is the default. Honor an explicit user choice if there is one;
+  // otherwise stay dark unless the user is on a system in dark mode (in which
+  // case we'd be dark anyway). Previous logic flipped to light if the system
+  // didn't explicitly prefer dark — that meant most light-mode-OS users got
+  // light despite the intended dark default.
+  let saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch(e){}
+  const theme = (saved === 'dark' || saved === 'light') ? saved : 'dark';
   applyTheme(theme);
 }
 
@@ -1454,13 +1464,47 @@ async function resetAll(){
 }
 
 async function unloadWorkout(){
-  if(!WORKOUT) return;
-  const ok = await askConfirm('Exit this workout? Progress and notes will be cleared.', { title: 'Exit workout?', okLabel: 'Exit' });
+  const hasWorkout = !!WORKOUT;
+  const message = hasWorkout
+    ? 'Exit this workout, clear all saved progress, and reload the app from scratch? Use this if updates aren\u2019t showing up.'
+    : 'Refresh the app from scratch and clear all saved data? Use this if the latest workout or update isn\u2019t showing up.';
+  const ok = await askConfirm(message, {
+    title: hasWorkout ? 'Exit workout?' : 'Refresh app?',
+    okLabel: hasWorkout ? 'Exit & Reload' : 'Refresh',
+    danger: true,
+  });
   if(!ok) return;
-  if(STORAGE_KEY) try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
-  try { localStorage.removeItem(WORKOUT_KEY); } catch(e){}
-  try { localStorage.removeItem(HINT_SEEN_KEY); } catch(e){}
-  releaseWakeLock(); renderWorkout(null);
+  // Wipe our entire localStorage namespace — this is also the cache nuke,
+  // so we go beyond just the current workout's keys.
+  try {
+    const keysToClear = [];
+    for(let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if(k && k.startsWith('protein-social-')) keysToClear.push(k);
+    }
+    keysToClear.forEach(k => { try { localStorage.removeItem(k); } catch(e){} });
+  } catch(e){}
+  try { sessionStorage.clear(); } catch(e){}
+  // Defensive: clear Cache Storage and unregister any service workers if either
+  // is ever added later. No-op today.
+  try {
+    if(window.caches){
+      const keys = await caches.keys();
+      await Promise.all(keys.map(k => caches.delete(k)));
+    }
+  } catch(e){}
+  try {
+    if(navigator.serviceWorker){
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r => r.unregister()));
+    }
+  } catch(e){}
+  releaseWakeLock();
+  // Hard reload with a cache-buster on the URL — only way to nudge iOS to
+  // refetch the HTML shell on standalone home-screen launches.
+  const sep = location.href.includes('?') ? '&' : '?';
+  const target = location.href.split('#')[0] + sep + '_r=' + Date.now();
+  location.replace(target);
 }
 
 function buildSummaryText(){
@@ -1655,8 +1699,11 @@ function closeGenerateModal(){ document.getElementById('generateModal').classLis
 
 async function loadVault(){
   try {
-    console.log('[Vault] Fetching /vault.json...');
-    const res = await fetch('/vault.json');
+    // Cache-bust: iOS standalone PWA caches sub-resources aggressively. A
+    // per-load timestamp forces iOS to hit the network so updates ship.
+    const url = '/vault.json?v=' + Date.now();
+    console.log('[Vault] Fetching', url);
+    const res = await fetch(url, { cache: 'no-store' });
     console.log('[Vault] Response status:', res.status, res.statusText);
     if(!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     const data = await res.json();
@@ -1686,8 +1733,10 @@ async function loadVault(){
 let HOUSE_SPECIAL = null;
 async function loadHouseSpecial(){
   try {
-    console.log('[HouseSpecial] Fetching /house-special.json...');
-    const res = await fetch('/house-special.json');
+    // Cache-bust same as vault — iOS standalone caches need a fresh URL.
+    const url = '/house-special.json?v=' + Date.now();
+    console.log('[HouseSpecial] Fetching', url);
+    const res = await fetch(url, { cache: 'no-store' });
     if(!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
     const text = await res.text();
     const extracted = extractJsonObject(text);
