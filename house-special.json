@@ -1,87 +1,129 @@
 {
-  "headerTitle": "House Special: The Tasting Menu",
-  "date": "2026-04-27",
-  "duration": "~60 min",
-  "slug": "house-special-tasting-menu",
+  "headerTitle": "🐎 Kentucky Derby — Run for the Roses",
+  "date": "2026-05-02",
+  "duration": "~45 min",
+  "slug": "kentucky-derby-run-for-the-roses",
+  "theme": "dark",
   "parameters": [
-    { "label": "Goal", "value": "Strength + athletic" },
-    { "label": "Focus", "value": "Full body, six courses" },
-    { "label": "Service", "value": "60 min, paced like a real meal" },
-    { "label": "Kitchen", "value": "Alvey Gym — the Protein Social house" }
+    {
+      "label": "Goal",
+      "value": "Full-body movement, decompress low back, stay athletic and energized"
+    },
+    {
+      "label": "Bias",
+      "value": "Core stability, glutes, upper push/pull without spinal irritation"
+    }
   ],
   "biohackerTips": [
-    { "label": "Pre-Service", "value": "25-30g protein 60-90 min before. Hydrate. Show up curious — every course matters." },
-    { "label": "During Service", "value": "Sip water between rounds. Rest cues are suggestions; if a course needs more time, take it." },
-    { "label": "Post-Meal", "value": "30-40g protein within 30 min. Walk for 10. Note what you'd order again." }
+    {
+      "label": "Pre",
+      "value": "2–3 min nasal breathing + light spinal decompression hang before starting"
+    },
+    {
+      "label": "During",
+      "value": "Keep ribs down, slight brace on every rep — avoid lazy lumbar extension"
+    },
+    {
+      "label": "Post",
+      "value": "5–10 min easy walk + optional sauna, then gentle hip flexor stretch"
+    }
   ],
   "blocks": [
     {
-      "emoji": "🥄",
-      "name": "Amuse-Bouche",
-      "roundLabel": "1 round, one bite each",
-      "restCue": "No pause — flow straight through",
-      "exercises": [
-        { "name": "Cat-Cow Flow", "detail": "8 slow reps", "rounds": 1, "youtubeQuery": "cat cow stretch yoga" },
-        { "name": "World's Greatest Stretch", "detail": "4 / side", "rounds": 1 },
-        { "name": "Scapular Pull-Aparts", "detail": "12 reps with light band", "rounds": 1, "youtubeQuery": "band scapular pull aparts" }
-      ]
-    },
-    {
-      "emoji": "🥗",
-      "name": "Appetizer — Activation Salad",
+      "emoji": "🏇",
+      "name": "Paddock Prep — Loosen the Horse",
       "roundLabel": "2 rounds",
-      "restCue": "Light pace, 15 sec between movements",
+      "restCue": "Keep moving. No standing.",
       "exercises": [
-        { "name": "Glute Bridge", "detail": "2 x 12 reps", "rounds": 2 },
-        { "name": "Banded Lateral Walk", "detail": "2 x 10 / side", "rounds": 2 },
-        { "name": "Dead Bug", "detail": "2 x 8 / side", "rounds": 2 },
-        { "name": "Band Pull-Apart", "detail": "2 x 15 reps", "rounds": 2 }
+        {
+          "name": "Mini Trampoline Bounce",
+          "detail": "0:45 light bounce + twist",
+          "rounds": 2
+        },
+        {
+          "name": "90/90 Hip Flow",
+          "detail": "0:45 / side slow",
+          "rounds": 2
+        },
+        {
+          "name": "Cat-Camel",
+          "detail": "10 slow reps",
+          "rounds": 2
+        },
+        {
+          "name": "Dead Hang (Pull-up Bar)",
+          "detail": "0:30 relaxed",
+          "rounds": 2
+        }
       ]
     },
     {
-      "emoji": "🍖",
-      "name": "Main Course — The Centerpiece",
-      "roundLabel": "4 rounds, A1/A2 superset",
-      "restCue": "Course is paced, not rushed — 90 sec between rounds",
-      "exercises": [
-        { "name": "Goblet Squat to Press", "detail": "4 x 8 reps, kettlebell or dumbbell", "rounds": 4, "youtubeQuery": "goblet squat to press kettlebell" },
-        { "name": "Pendlay Row", "detail": "4 x 6 reps, barbell from the floor each rep", "rounds": 4, "youtubeQuery": "pendlay row form" }
-      ]
-    },
-    {
-      "emoji": "🥕",
-      "name": "The Sides — Three Small Plates",
+      "emoji": "💪",
+      "name": "Main Race — Smooth Power",
       "roundLabel": "3 rounds",
-      "restCue": "60 sec between rounds, plate to plate is brisk",
+      "restCue": "Minimal rest. Stay in same area.",
       "exercises": [
-        { "name": "Bulgarian Split Squat", "detail": "3 x 8 / side, dumbbells in hand", "rounds": 3, "youtubeQuery": "bulgarian split squat dumbbell" },
-        { "name": "Half-Kneeling Single-Arm Landmine Press", "detail": "3 x 8 / side", "rounds": 3, "youtubeQuery": "half kneeling landmine press" },
-        { "name": "Pallof Press", "detail": "3 x 10 / side, cable or band", "rounds": 3, "youtubeQuery": "pallof press cable" }
+        {
+          "name": "Incline Dumbbell Press",
+          "detail": "8–10 reps smooth",
+          "rounds": 3
+        },
+        {
+          "name": "Seated Cable Row (Neutral Grip)",
+          "detail": "10–12 reps controlled",
+          "rounds": 3
+        },
+        {
+          "name": "Cable Split Squat",
+          "detail": "8 / side slow, upright torso",
+          "rounds": 3
+        }
       ]
     },
     {
-      "emoji": "🍰",
-      "name": "Dessert — The 5-Minute Buffet",
-      "roundLabel": "5-min finisher · 40 on / 20 off",
-      "restCue": "Sweet but you earned it — keep moving the whole 5",
+      "emoji": "🎽",
+      "name": "Backstretch Flow — Stay Light",
+      "roundLabel": "3 rounds",
+      "restCue": "Light, bouncy, not exhausting",
       "exercises": [
-        { "name": "Kettlebell Swing", "detail": "0:40 work / 0:20 rest", "rounds": 1, "youtubeQuery": "kettlebell swing form" },
-        { "name": "Push-Up", "detail": "0:40 work / 0:20 rest", "rounds": 1 },
-        { "name": "Mountain Climber", "detail": "0:40 work / 0:20 rest", "rounds": 1 },
-        { "name": "Goblet Squat Pulse", "detail": "0:40 work / 0:20 rest, light kettlebell", "rounds": 1, "youtubeQuery": "goblet squat pulse" },
-        { "name": "Plank Reach", "detail": "0:40 work, hold to finish", "rounds": 1, "youtubeQuery": "plank shoulder reach" }
+        {
+          "name": "Backward Treadmill Walk",
+          "detail": "1:00 steady sled-style",
+          "rounds": 3
+        },
+        {
+          "name": "Med Ball Rotational Toss",
+          "detail": "8 / side controlled",
+          "rounds": 3
+        },
+        {
+          "name": "Bear Crawl",
+          "detail": "20 steps total",
+          "rounds": 3
+        }
       ]
     },
     {
-      "emoji": "☕",
-      "name": "Digestif — Settle the Meal",
-      "roundLabel": "Slow, no count — breathe",
-      "restCue": "Long exhales, no rush",
+      "emoji": "🧱",
+      "name": "Photo Finish — Core Lock-In",
+      "roundLabel": "2 rounds",
+      "restCue": "Slow + controlled",
       "exercises": [
-        { "name": "Couch Stretch", "detail": "60 sec / side", "rounds": 1, "youtubeQuery": "couch stretch hip flexor" },
-        { "name": "Thread the Needle", "detail": "30 sec / side", "rounds": 1, "youtubeQuery": "thread the needle stretch" },
-        { "name": "90/90 Hip Flow", "detail": "8 slow transitions", "rounds": 1 },
-        { "name": "Child's Pose with Reach", "detail": "60 sec, breathe deep", "rounds": 1, "youtubeQuery": "childs pose reach stretch" }
+        {
+          "name": "Dead Bug",
+          "detail": "8 / side slow",
+          "rounds": 2
+        },
+        {
+          "name": "Cable Pallof Press",
+          "detail": "10 / side hold 1 sec",
+          "rounds": 2
+        },
+        {
+          "name": "Ab Roller (Short Range)",
+          "detail": "6–8 reps controlled",
+          "rounds": 2
+        }
       ]
     }
   ]
