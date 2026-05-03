@@ -1,127 +1,118 @@
 {
-  "headerTitle": "🐎 Kentucky Derby — Run for the Roses",
-  "date": "2026-05-02",
+  "headerTitle": "Indy 500 — House Special",
+  "date": "2026-05-03",
   "duration": "~45 min",
-  "slug": "kentucky-derby-run-for-the-roses",
+  "slug": "indy-500-house-special",
   "theme": "dark",
   "parameters": [
     {
       "label": "Goal",
-      "value": "Full-body movement, decompress low back, stay athletic and energized"
+      "value": "Full-body athletic strength with low back awareness and efficient flow"
     },
     {
       "label": "Bias",
-      "value": "Core stability, glutes, upper push/pull without spinal irritation"
+      "value": "Glutes, upper balance, trunk stability, minimal setup"
     }
   ],
   "biohackerTips": [
     {
       "label": "Pre",
-      "value": "2–3 min nasal breathing + light spinal decompression hang before starting"
-    },
-    {
-      "label": "During",
-      "value": "Keep ribs down, slight brace on every rep — avoid lazy lumbar extension"
+      "value": "Hydrate early and keep nasal breathing during warmup to stay relaxed"
     },
     {
       "label": "Post",
-      "value": "5–10 min easy walk + optional sauna, then gentle hip flexor stretch"
+      "value": "5-10 min walk + light hip flexor stretch to keep low back calm"
     }
   ],
   "blocks": [
     {
-      "emoji": "🏇",
-      "name": "Paddock Prep — Loosen the Horse",
-      "roundLabel": "2 rounds",
+      "emoji": "🏁",
+      "name": "Formation Lap — Warmup",
+      "roundLabel": "1 round",
       "restCue": "Keep moving. No standing.",
       "exercises": [
         {
-          "name": "Mini Trampoline Bounce",
-          "detail": "0:45 light bounce + twist",
-          "rounds": 2
+          "name": "Incline Treadmill Walk",
+          "detail": "5 min brisk",
+          "rounds": 1
         },
         {
           "name": "90/90 Hip Flow",
-          "detail": "0:45 / side slow",
-          "rounds": 2
+          "detail": "0:45 / side",
+          "rounds": 1
         },
         {
-          "name": "Cat-Camel",
-          "detail": "10 slow reps",
-          "rounds": 2
+          "name": "Mini Trampoline Bounce",
+          "detail": "0:60 light + rotational",
+          "rounds": 1
         },
         {
-          "name": "Dead Hang (Pull-up Bar)",
-          "detail": "0:30 relaxed",
-          "rounds": 2
+          "name": "Cable External Rotation",
+          "detail": "10 / side light",
+          "rounds": 1
         }
       ]
     },
     {
-      "emoji": "💪",
-      "name": "Main Race — Smooth Power",
+      "emoji": "🏎️",
+      "name": "Race Pace — Strength",
       "roundLabel": "3 rounds",
-      "restCue": "Minimal rest. Stay in same area.",
+      "restCue": "60-75 sec between movements",
       "exercises": [
         {
-          "name": "Incline Dumbbell Press",
-          "detail": "8–10 reps smooth",
+          "name": "Smith Incline Press",
+          "detail": "8 reps controlled",
           "rounds": 3
         },
         {
-          "name": "Seated Cable Row (Neutral Grip)",
-          "detail": "10–12 reps controlled",
+          "name": "Vertical Leg Press",
+          "detail": "10 reps smooth tempo",
           "rounds": 3
         },
         {
-          "name": "Cable Split Squat",
-          "detail": "8 / side slow, upright torso",
+          "name": "Neutral Grip Pull-Ups",
+          "detail": "5-8 reps",
           "rounds": 3
         }
       ]
     },
     {
-      "emoji": "🎽",
-      "name": "Backstretch Flow — Stay Light",
+      "emoji": "🔧",
+      "name": "Pit Crew — Accessories",
       "roundLabel": "3 rounds",
-      "restCue": "Light, bouncy, not exhausting",
+      "restCue": "Minimal transition, stay in station",
       "exercises": [
         {
-          "name": "Backward Treadmill Walk",
-          "detail": "1:00 steady sled-style",
+          "name": "Smith Hip Thrust",
+          "detail": "10 reps, 2-sec squeeze",
           "rounds": 3
         },
         {
-          "name": "Med Ball Rotational Toss",
-          "detail": "8 / side controlled",
+          "name": "Single Arm Cable Row",
+          "detail": "10 / side",
           "rounds": 3
         },
         {
-          "name": "Bear Crawl",
-          "detail": "20 steps total",
+          "name": "Cable Lateral Raise",
+          "detail": "12 / side",
           "rounds": 3
         }
       ]
     },
     {
       "emoji": "🧱",
-      "name": "Photo Finish — Core Lock-In",
+      "name": "Final Lap — Core",
       "roundLabel": "2 rounds",
-      "restCue": "Slow + controlled",
+      "restCue": "Short rest, clean reps",
       "exercises": [
         {
+          "name": "Ab Roller",
+          "detail": "8-10 reps",
+          "rounds": 2
+        },
+        {
           "name": "Dead Bug",
-          "detail": "8 / side slow",
-          "rounds": 2
-        },
-        {
-          "name": "Cable Pallof Press",
-          "detail": "10 / side hold 1 sec",
-          "rounds": 2
-        },
-        {
-          "name": "Ab Roller (Short Range)",
-          "detail": "6–8 reps controlled",
+          "detail": "8 / side",
           "rounds": 2
         }
       ]
