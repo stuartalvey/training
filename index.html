@@ -1490,8 +1490,8 @@ async function unloadWorkout(){
   // The active-workout path keeps it because there's checkbox/note state at risk.
   if(hasWorkout){
     const ok = await askConfirm(
-      'Exit this workout, clear all saved progress, and reload the app from scratch? Use this if updates aren\u2019t showing up.',
-      { title: 'Exit workout?', okLabel: 'Exit & Reload', danger: true }
+      'Exit this workout? Progress and notes will be cleared.',
+      { title: 'Exit workout?', okLabel: 'Exit', danger: true }
     );
     if(!ok) return;
   }
